@@ -1,5 +1,7 @@
+import { useLoadInterstitialAds } from "@/components/admob/intersitialAd";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+    useLoadInterstitialAds();
+    return <Stack />;
 }
