@@ -1,3 +1,4 @@
+import { RNText } from "@/components/ui/text";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 
@@ -8,17 +9,34 @@ export default function Index() {
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
-                gap: 20,
+                gap: 8,
             }}
         >
-            <Link href="/tab1">
-                <Text>Go to Tab 1</Text>
+            <RNText size="xl" variant="title">
+                Welcome to OUI IMPACT
+            </RNText>
+            <Link href={"/status"}>
+                <RNText variant="accent" size="md">
+                    Go to Status Screens
+                </RNText>
             </Link>
-            <Link href="/profile/screen1">
-                <Text>Go to Profile Screen 1</Text>
+
+            <Link href={"/onboarding/first"}>
+                <RNText variant="accent" size="md">
+                    Go to Onboarding Screens
+                </RNText>
             </Link>
-            <Link href="/profile/screen2">
-                <Text>Go to Profile Screen 2</Text>
+
+            <Link href={"/onboarding/first"}>
+                <RNText variant="accent" size="md">
+                    Go to Onboarding Screens
+                </RNText>
+            </Link>
+
+            <Link href={"/public/reset-password"}>
+                <RNText variant="accent" size="md">
+                    Go to Reset Password Screen
+                </RNText>
             </Link>
         </View>
     );
