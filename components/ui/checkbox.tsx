@@ -2,7 +2,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
-import { RNText } from "./text";
+import { RNText, RNTextProps } from "./text";
 import { COLORS } from "@/constants";
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
     onChange?: (checked: boolean) => void;
     value?: boolean;
     disableExternalToggle?: boolean;
+    size?: RNTextProps["size"];
 } & ViewProps;
 
 export function RNCheckbox({
@@ -17,6 +18,7 @@ export function RNCheckbox({
     onChange,
     label,
     style,
+    size = "md",
     disableExternalToggle,
 }: Props) {
     const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -37,6 +39,8 @@ export function RNCheckbox({
         }
     };
 
+    const checkBoxSize = size === "sm" ? 14 : size === "lg" ? 22 : 18;
+
     return (
         <View
             style={[{ flexDirection: "row", alignItems: "center", gap: 6 }, style]}
@@ -44,8 +48,8 @@ export function RNCheckbox({
         >
             <View
                 style={{
-                    width: 18,
-                    height: 18,
+                    width: checkBoxSize,
+                    height: checkBoxSize,
                     borderWidth: 1,
                     borderColor: COLORS.muted,
                     borderRadius: "50%",
@@ -55,10 +59,16 @@ export function RNCheckbox({
                 }}
             >
                 {isChecked && (
-                    <Entypo name="check" size={14} color={COLORS.background} />
+                    <Entypo
+                        name="check"
+                        size={checkBoxSize - 4}
+                        color={COLORS.background}
+                    />
                 )}
             </View>
-            <RNText variant="secondary">{label}</RNText>
+            <RNText variant="secondary" size={size}>
+                {label}
+            </RNText>
         </View>
     );
 }

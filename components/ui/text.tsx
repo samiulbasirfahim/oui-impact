@@ -19,7 +19,7 @@ const variants = {
     secondary: { color: COLORS.secondaryText },
 };
 
-type Props = TextProps & {
+export type RNTextProps = TextProps & {
     size?: keyof typeof sizes;
     variant?: keyof typeof variants;
     children: ReactNode;
@@ -31,7 +31,7 @@ export function RNText({
     children,
     style,
     ...props
-}: Props) {
+}: RNTextProps) {
     return (
         <Text style={[sizes[size], variants[variant], style]} {...props}>
             {children}

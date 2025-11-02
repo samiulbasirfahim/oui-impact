@@ -4,6 +4,8 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 
 export default function RootLayout() {
     // useLoadInterstitialAds();
+
+
     return (
         <KeyboardProvider>
             <Stack

@@ -22,6 +22,13 @@ export function Layout({ children, style, ...props }: Props) {
             <KeyboardAwareScrollView
                 keyboardDismissMode="interactive"
                 bottomOffset={20}
+                contentContainerStyle={[
+                    style,
+                    {
+                        flexGrow: 1,
+                        gap: 8,
+                    },
+                ]}
             >
                 {children}
             </KeyboardAwareScrollView>

@@ -1,8 +1,9 @@
 import { RNText } from "@/components/ui/text";
-import { Link } from "expo-router";
+import { Link, Redirect } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function Index() {
+    return <Redirect href={"/public/auth/register/user-info"} />;
     return (
         <View
             style={{
@@ -36,6 +37,12 @@ export default function Index() {
             <Link href={"/public/auth/login"}>
                 <RNText variant="accent" size="md">
                     Go to Login Screen
+                </RNText>
+            </Link>
+
+            <Link href={"/public/auth/register"}>
+                <RNText variant="accent" size="md">
+                    Go to Register Screen
                 </RNText>
             </Link>
         </View>
