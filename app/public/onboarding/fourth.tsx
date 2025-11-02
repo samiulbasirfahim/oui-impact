@@ -1,10 +1,19 @@
-import { BlurBG } from "@/components/ui/blur-bg";
-import { RNText } from "@/components/ui/text";
+import Illustration from "@/assets/images/onboarding-4.png";
+import { OnboardingScreen } from "@/components/common/onboarding-screen";
+import { router } from "expo-router";
 
-export default function FirstOnboardingScreen() {
+export default function FourthOnboardingScreen() {
     return (
-        <BlurBG>
-            <RNText>First Onboarding Screen</RNText>
-        </BlurBG>
+        <OnboardingScreen
+            imageSource={Illustration}
+            subtitle="Ready to Begin ?"
+            description="Manage your rewards, track your impact, and join a community making tech a force for good."
+            skipAction={() => {
+                router.push("/public/login");
+            }}
+            nextAction={() => {
+                router.push("/public/login");
+            }}
+        />
     );
 }

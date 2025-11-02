@@ -1,5 +1,5 @@
 import Entypo from "@expo/vector-icons/Entypo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import { RNText } from "./text";
@@ -19,8 +19,13 @@ export function RNCheckbox({
     style,
     disableExternalToggle,
 }: Props) {
-    const [isChecked, setIsChecked] = useState<boolean>(value || false);
+    const [isChecked, setIsChecked] = useState<boolean>(false);
 
+    useEffect(() => {
+        if (typeof value === "boolean") {
+            setIsChecked(value);
+        }
+    }, [value]);
     const toggleCheckbox = () => {
         if (disableExternalToggle) {
             return;

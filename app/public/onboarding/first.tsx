@@ -1,10 +1,23 @@
-import { BlurBG } from "@/components/ui/blur-bg";
-import { RNText } from "@/components/ui/text";
+import Illustration from "@/assets/images/onboarding-1.png";
+import { OnboardingScreen } from "@/components/common/onboarding-screen";
+import { router } from "expo-router";
 
 export default function FirstOnboardingScreen() {
     return (
-        <BlurBG>
-            <RNText>First Onboarding Screen</RNText>
-        </BlurBG>
+        <OnboardingScreen
+            imageSource={Illustration}
+            title="Welcome"
+            subtitle="Welcome to OUI IMPACT"
+            description="Your AI Assistant for Rewards and Impact"
+            caption="Chat, learn and make a difference every day."
+            tatalSteps={3}
+            currentStep={1}
+            skipAction={() => {
+                router.push("/public/login");
+            }}
+            nextAction={() => {
+                router.push("/public/onboarding/second");
+            }}
+        />
     );
 }

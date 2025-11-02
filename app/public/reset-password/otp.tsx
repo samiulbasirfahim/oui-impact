@@ -12,11 +12,12 @@ export default function OTPScreen() {
                 Enter The Code
             </RNText>
 
+            <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
+                We just sent 5-digit code to your email address. Please enter the code
+            </RNText>
+
             <OTPFields
                 label="Verify Code"
-                style={{
-                    marginTop: 36,
-                }}
                 numberOfDigits={5}
                 onChange={(v) => {
                     console.log("OTP Code:", v);

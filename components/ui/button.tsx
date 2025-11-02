@@ -70,6 +70,7 @@ type Props = TouchableOpacityProps & {
     children: ReactNode;
     loading?: boolean;
     disabled?: boolean;
+    nowrap?: boolean;
 };
 
 export function RNButton({
@@ -78,6 +79,7 @@ export function RNButton({
     children,
     loading = false,
     disabled = false,
+    nowrap = false,
     style,
     ...props
 }: Props) {
@@ -105,6 +107,8 @@ export function RNButton({
                     color={textColors[variant]}
                     size={size === "sm" ? "small" : "large"}
                 />
+            ) : nowrap ? (
+                <>{children}</>
             ) : (
                 <RNText
                     size={textSizes[size]}

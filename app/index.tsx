@@ -21,13 +21,7 @@ export default function Index() {
                 </RNText>
             </Link>
 
-            <Link href={"/onboarding/first"}>
-                <RNText variant="accent" size="md">
-                    Go to Onboarding Screens
-                </RNText>
-            </Link>
-
-            <Link href={"/onboarding/first"}>
+            <Link href={"/public/onboarding/first"}>
                 <RNText variant="accent" size="md">
                     Go to Onboarding Screens
                 </RNText>

@@ -1,10 +1,10 @@
 import { RNButton } from "@/components/ui/button";
 import { RNCheckbox } from "@/components/ui/checkbox";
+import { RNInput } from "@/components/ui/input";
 import { Layout } from "@/components/ui/layout";
-import { RNPInput } from "@/components/ui/password-input";
 import { RNText } from "@/components/ui/text";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { View } from "react-native";
 
 type FormData = {
@@ -22,25 +22,39 @@ export default function EmailScreen() {
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
+    const passwordStatus = useMemo(() => {
+        const status = {
+            length: formData.password.length >= 8,
+            uppercaseLowercase:
+                /[a-z]/.test(formData.password) && /[A-Z]/.test(formData.password),
+            numbersSymbols:
+                /[0-9]/.test(formData.password) ||
+                /[^A-Za-z0-9]/.test(formData.password),
+            missMatch: formData.password === formData.confirmPassword,
+        };
+        return status;
+    }, [formData.password]);
+
     return (
         <Layout>
             <RNText size="2xl" variant="title">
                 Create a new password
             </RNText>
             <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                We just sent 5-digit to Set up your password to complete your account
-                setup
+                Your new password must be different from previous used passwords.
             </RNText>
 
-            <RNPInput
-                onChangeText={(t) => handleChange("password", t)}
+            <RNInput
                 label="Enter a new Password"
-                placeholder="Enter password"
+                secureTextEntry
+                value={formData.password}
+                onChangeText={(text) => handleChange("password", text)}
             />
-            <RNPInput
-                onChangeText={(t) => handleChange("password", t)}
+            <RNInput
                 label="Confirm Password"
-                placeholder="Enter password"
+                secureTextEntry
+                value={formData.confirmPassword}
+                onChangeText={(text) => handleChange("confirmPassword", text)}
             />
 
             <View
@@ -49,18 +63,35 @@ export default function EmailScreen() {
                     gap: 6,
                 }}
             >
-                <RNCheckbox label="8 charecters minimum" value={true} />
-                <RNCheckbox label="use both uppercase and lowercase" />
-                <RNCheckbox label="combination of numbers and symbols" />
+                <RNCheckbox
+                    label="8 charecters minimum"
+                    value={passwordStatus.length}
+                    disableExternalToggle
+                />
+                <RNCheckbox
+                    label="use both uppercase and lowercase"
+                    disableExternalToggle
+                    value={passwordStatus.uppercaseLowercase}
+                />
+                <RNCheckbox
+                    label="combination of numbers and symbols"
+                    disableExternalToggle
+                    value={passwordStatus.numbersSymbols}
+                />
+                <RNCheckbox
+                    label="Passwords match"
+                    disableExternalToggle
+                    value={passwordStatus.missMatch}
+                />
             </View>
 
             <RNButton
                 onPress={() => {
-                    router.push("/public/reset-password/otp");
+                    router.push("/public/login");
                 }}
                 style={{ marginTop: 12 }}
             >
-                Continue
+                Save
             </RNButton>
         </Layout>
     );

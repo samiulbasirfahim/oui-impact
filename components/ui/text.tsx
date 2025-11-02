@@ -3,10 +3,10 @@ import { Text, TextProps } from "react-native";
 import { COLORS } from "@/constants";
 
 const sizes = {
-    sm: { fontSize: 12, lineHeight: 16 },
-    md: { fontSize: 14, lineHeight: 20 },
-    lg: { fontSize: 16, lineHeight: 24 },
-    xl: { fontSize: 20, lineHeight: 28 },
+    sm: { fontSize: 14, lineHeight: 18 },
+    md: { fontSize: 16, lineHeight: 22 },
+    lg: { fontSize: 18, lineHeight: 26 },
+    xl: { fontSize: 22, lineHeight: 28 },
     "2xl": { fontSize: 24, lineHeight: 32 },
 };
 

@@ -1,6 +1,6 @@
 import { RNButton } from "@/components/ui/button";
 import { RNText } from "@/components/ui/text";
-import SessionExpired from "@/assets/svgs/session-expired.svg";
+import RewardExpired from "@/assets/svgs/reward.svg";
 import { BlurBG } from "@/components/ui/blur-bg";
 
 export default function NoChatScreen() {
@@ -12,8 +12,7 @@ export default function NoChatScreen() {
             }}
             centered
         >
-
-            <SessionExpired height={100} />
+            <RewardExpired height={100} />
             <RNText size="xl" variant="title">
                 No Rewards Yet
             </RNText>

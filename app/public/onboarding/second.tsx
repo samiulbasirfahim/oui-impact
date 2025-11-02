@@ -1,10 +1,23 @@
-import { BlurBG } from "@/components/ui/blur-bg";
-import { RNText } from "@/components/ui/text";
+import Illustration from "@/assets/images/onboarding-2.png";
+import { OnboardingScreen } from "@/components/common/onboarding-screen";
+import { router } from "expo-router";
 
-export default function FirstOnboardingScreen() {
+export default function SecondOnboardingScreen() {
     return (
-        <BlurBG>
-            <RNText>First Onboarding Screen</RNText>
-        </BlurBG>
+        <OnboardingScreen
+            imageSource={Illustration}
+            title="Welcome"
+            subtitle="Earn Rewards Effortlessly"
+            description="Use AI assistant daily"
+            caption="Every action earns OUI Points and supports good causes."
+            tatalSteps={3}
+            currentStep={2}
+            skipAction={() => {
+                router.push("/public/login");
+            }}
+            nextAction={() => {
+                router.push("/public/onboarding/third");
+            }}
+        />
     );
 }

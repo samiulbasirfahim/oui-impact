@@ -1,6 +1,6 @@
 import { RNButton } from "@/components/ui/button";
 import { RNText } from "@/components/ui/text";
-import SessionExpired from "@/assets/svgs/session-expired.svg";
+import NoChat from "@/assets/svgs/chat.svg";
 import { BlurBG } from "@/components/ui/blur-bg";
 
 export default function NoChatScreen() {
@@ -12,7 +12,7 @@ export default function NoChatScreen() {
             }}
             centered
         >
-            <SessionExpired height={100} />
+            <NoChat height={100} />
             <RNText size="xl" variant="title">
                 No Chats Yet
             </RNText>

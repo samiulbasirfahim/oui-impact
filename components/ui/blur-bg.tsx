@@ -16,6 +16,7 @@ export function BlurBG({
                     backgroundColor: COLORS.background,
                     justifyContent: centered ? "center" : "flex-start",
                     alignItems: centered ? "center" : "stretch",
+                    padding: 16,
                 },
                 style,
             ]}
