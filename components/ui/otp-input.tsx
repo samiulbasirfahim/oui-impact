@@ -9,6 +9,7 @@ type Props = {
     numberOfDigits: number;
     label?: string;
     gap?: number;
+    height?: number;
     onChange: (otp: string) => void;
     style?: ViewProps["style"];
 } & OtpInputProps;
@@ -17,7 +18,8 @@ export const OTPFields = ({
     numberOfDigits = 4,
     onChange,
     style,
-    gap = 8,
+    gap = 10,
+    height = 50,
     label,
     ...props
 }: Props) => {
@@ -37,7 +39,9 @@ export const OTPFields = ({
                 style,
             ]}
         >
-            <RNText size="lg">{label}</RNText>
+            <RNText variant="secondary" size="lg">
+                {label}
+            </RNText>
 
             <OtpInput
                 numberOfDigits={numberOfDigits}
@@ -55,7 +59,7 @@ export const OTPFields = ({
                         borderColor: COLORS.secondaryText,
                         width:
                             (containerWidth - (numberOfDigits - 1) * gap) / numberOfDigits,
-                        height: 40,
+                        height,
                     },
                     pinCodeTextStyle: {
                         color: COLORS.text,
@@ -67,7 +71,7 @@ export const OTPFields = ({
                     },
                     focusStickStyle: {
                         backgroundColor: COLORS.primary,
-                        width: 2,
+                        width: 1,
                     },
                 }}
                 {...props}

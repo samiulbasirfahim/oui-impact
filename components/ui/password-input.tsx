@@ -1,14 +1,23 @@
-import { TextInput, TextInputProps, View } from "react-native";
+import {
+    TextInput,
+    TextInputProps,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
 import { RNText } from "./text";
 import { COLORS } from "@/constants";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
+import { useState } from "react";
 
 type Props = {
     label?: string;
     style?: ViewProps["style"];
 } & TextInputProps;
 
-export function RNInput({ style, label, placeholder, ...props }: Props) {
+export function RNPInput({ style, label, placeholder, ...props }: Props) {
+    const [visible, setVisible] = useState(false);
+
     return (
         <View style={[{ marginTop: 16 }, style]}>
             <RNText
@@ -39,7 +48,24 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
                         fontSize: 16,
                     },
                 ]}
+                secureTextEntry={!visible}
             />
+            <TouchableOpacity
+                style={{
+                    position: "absolute",
+                    right: 16,
+                    top: "50%",
+                    transform: [{ translateY: "-50%" }],
+                }}
+                onPress={() => setVisible(!visible)}
+                activeOpacity={0.7}
+            >
+                <Entypo
+                    name={!visible ? "eye-with-line" : "eye"}
+                    size={18}
+                    color={COLORS.muted}
+                />
+            </TouchableOpacity>
         </View>
     );
 }

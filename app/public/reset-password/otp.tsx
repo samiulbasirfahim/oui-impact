@@ -24,11 +24,11 @@ export default function OTPScreen() {
             />
             <RNButton
                 onPress={() => {
-                    router.push("/public/reset-password/otp");
+                    router.push("/public/reset-password/new-password");
                 }}
                 style={{ marginTop: 12 }}
             >
-                Continue
+                Submit
             </RNButton>
 
             <RNButton variant="ghost">Send Code Again</RNButton>

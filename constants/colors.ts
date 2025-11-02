@@ -5,4 +5,5 @@ export const COLORS = {
     background: "#FFFFFF",
     text: "#051532",
     secondaryText: "#6B7280",
+    muted: "#929292",
 };
