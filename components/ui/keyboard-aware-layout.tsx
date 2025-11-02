@@ -1,14 +1,24 @@
 import { COLORS } from "@/constants";
 import { ReactNode } from "react";
-import { ScrollView, ScrollViewProps } from "react-native";
+import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
+import {
+    KeyboardAwareScrollView,
+    KeyboardAwareScrollViewProps,
+} from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = {
     children?: ReactNode;
     edges?: ("top" | "bottom" | "left" | "right")[];
-} & ScrollViewProps;
+} & KeyboardAwareScrollViewProps &
+    ViewProps;
 
-export function ScrollableLayout({ children, style, edges, ...props }: Props) {
+export function KeyboardAwareScrollableLayout({
+    children,
+    style,
+    edges,
+    ...props
+}: Props) {
     const { top, bottom, left, right } = useSafeAreaInsets();
     const padding = 12;
 
@@ -20,7 +30,7 @@ export function ScrollableLayout({ children, style, edges, ...props }: Props) {
     };
 
     return (
-        <ScrollView
+        <KeyboardAwareScrollView
             {...props}
             contentContainerStyle={[
                 style,
@@ -29,8 +39,11 @@ export function ScrollableLayout({ children, style, edges, ...props }: Props) {
                     ...paddingStyle,
                 },
             ]}
+            keyboardShouldPersistTaps="handled"
+            enableAutomaticScroll
+            showsVerticalScrollIndicator={false}
         >
             {children}
-        </ScrollView>
+        </KeyboardAwareScrollView>
     );
 }

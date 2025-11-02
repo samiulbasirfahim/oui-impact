@@ -9,10 +9,10 @@ export default function FourthOnboardingScreen() {
             subtitle="Ready to Begin ?"
             description="Manage your rewards, track your impact, and join a community making tech a force for good."
             skipAction={() => {
-                router.push("/public/login");
+                router.push("/public/auth");
             }}
             nextAction={() => {
-                router.push("/public/login");
+                router.push("/public/auth");
             }}
         />
     );

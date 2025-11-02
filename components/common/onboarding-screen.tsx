@@ -129,7 +129,14 @@ export function OnboardingScreen({
                         }}
                     >
                         {skipAction && (
-                            <RNButton size="lg" variant="ghost" onPress={skipAction}>
+                            <RNButton
+                                style={{
+                                    paddingHorizontal: 8,
+                                }}
+                                size="lg"
+                                variant="ghost"
+                                onPress={skipAction}
+                            >
                                 Skip
                             </RNButton>
                         )}

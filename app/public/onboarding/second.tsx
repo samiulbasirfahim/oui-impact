@@ -13,7 +13,7 @@ export default function SecondOnboardingScreen() {
             tatalSteps={3}
             currentStep={2}
             skipAction={() => {
-                router.push("/public/login");
+                router.push("/public/auth");
             }}
             nextAction={() => {
                 router.push("/public/onboarding/third");

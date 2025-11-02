@@ -27,7 +27,7 @@ export default function Index() {
                 </RNText>
             </Link>
 
-            <Link href={"/public/reset-password"}>
+            <Link href={"/public/auth/reset-password"}>
                 <RNText variant="accent" size="md">
                     Go to Reset Password Screen
                 </RNText>

@@ -91,7 +91,7 @@ export function RNButton({
             activeOpacity={0.7}
             style={[
                 {
-                    borderRadius: 8,
+                    borderRadius: 12,
                     justifyContent: "center",
                     alignItems: "center",
                     opacity: isDisabled ? 0.5 : 1,
