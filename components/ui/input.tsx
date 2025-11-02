@@ -4,6 +4,7 @@ import {
     TextInputProps,
     TouchableOpacity,
     View,
+    LayoutChangeEvent,
 } from "react-native";
 import Animated, {
     useAnimatedStyle,
@@ -29,6 +30,7 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
     );
 
     const [value, setValue] = useState(props.value || "");
+    const [inputHeight, setInputHeight] = useState(0);
 
     const onChangeText = (text: string) => {
         setValue(text);
@@ -61,9 +63,16 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
         };
     });
 
+    const handleInputLayout = (event: LayoutChangeEvent) => {
+        const { height } = event.nativeEvent.layout;
+        setInputHeight(height);
+    };
+
+    const eyeIconTopOffset = inputHeight > 0 ? inputHeight / 2 : "50%";
+
     return (
         <View
-            style={[{ marginTop: 24, position: "relative" }, style]}
+            style={[{ marginTop: 12, position: "relative" }, style]}
             pointerEvents="box-none"
         >
             {label && (
@@ -93,6 +102,7 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
                 {...props}
                 value={value}
                 onChangeText={onChangeText}
+                onLayout={handleInputLayout}
                 placeholder={isFocusedState ? "" : placeholder}
                 placeholderTextColor={COLORS.muted}
                 onFocus={() => {
@@ -124,8 +134,8 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
                     style={{
                         position: "absolute",
                         right: 16,
-                        top: "50%",
-                        transform: [{ translateY: "-50%" }],
+                        top: eyeIconTopOffset,
+                        transform: [{ translateY: -9 }],
                     }}
                     onPress={() => setShowPassword((prev) => !prev)}
                     activeOpacity={0.7}

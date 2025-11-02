@@ -1,5 +1,4 @@
 import { RNButton } from "@/components/ui/button";
-import { RNInput } from "@/components/ui/input";
 import { Layout } from "@/components/ui/layout";
 import { OTPFields } from "@/components/ui/otp-input";
 import { RNText } from "@/components/ui/text";
@@ -25,7 +24,7 @@ export default function OTPScreen() {
             />
             <RNButton
                 onPress={() => {
-                    router.push("/public/reset-password/new-password");
+                    router.push("/public/auth/reset-password/new-password");
                 }}
                 style={{ marginTop: 12 }}
             >

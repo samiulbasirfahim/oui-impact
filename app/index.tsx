@@ -32,6 +32,12 @@ export default function Index() {
                     Go to Reset Password Screen
                 </RNText>
             </Link>
+
+            <Link href={"/public/auth/login"}>
+                <RNText variant="accent" size="md">
+                    Go to Login Screen
+                </RNText>
+            </Link>
         </View>
     );
 }

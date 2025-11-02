@@ -1,5 +1,5 @@
-import { Stack } from "expo-router";
+import { RNPublicStack } from "@/components/ui/public-stack";
 
 export default function LoginLayout() {
-    return <Stack />;
+    return <RNPublicStack />;
 }

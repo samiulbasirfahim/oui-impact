@@ -1,39 +1,38 @@
 import { COLORS } from "@/constants";
 import { ReactNode } from "react";
-import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
+import { ScrollView, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import {
+    SafeAreaView,
+    SafeAreaViewProps,
+    useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 type Props = {
     children?: ReactNode;
-    edges?: ("top" | "bottom" | "left" | "right")[];
-} & ViewProps;
+} & SafeAreaViewProps;
 
 export function Layout({ children, style, ...props }: Props) {
     const { top, bottom, left, right } = useSafeAreaInsets();
 
     const padding = 12;
 
-    const paddingStyle = {
-        paddingTop: top + padding,
-        paddingBottom: bottom + padding,
-        paddingLeft: left + padding,
-        paddingRight: right + padding,
-    };
-
     return (
-        <View
-            style={[
-                style,
-                {
-                    backgroundColor: COLORS.background,
-                    flex: 1,
-                    ...paddingStyle,
-                },
-            ]}
+        <SafeAreaView
+            edges={props.edges || []}
+            style={[style, { flex: 1 }]}
             {...props}
         >
-            {children}
-        </View>
+            <KeyboardAwareScrollView
+                contentContainerStyle={{
+                    backgroundColor: COLORS.background,
+                    flex: 1,
+                    gap: 8,
+                    padding,
+                }}
+            >
+                {children}
+            </KeyboardAwareScrollView>
+        </SafeAreaView>
     );
 }

@@ -30,7 +30,9 @@ export default function EmailScreen() {
             numbersSymbols:
                 /[0-9]/.test(formData.password) ||
                 /[^A-Za-z0-9]/.test(formData.password),
-            missMatch: formData.password === formData.confirmPassword,
+            missMatch:
+                formData.password === formData.confirmPassword &&
+                formData.password.length > 0,
         };
         return status;
     }, [formData.password]);
@@ -87,7 +89,7 @@ export default function EmailScreen() {
 
             <RNButton
                 onPress={() => {
-                    router.push("/public/login");
+                    router.push("/public/auth/login");
                 }}
                 style={{ marginTop: 12 }}
             >

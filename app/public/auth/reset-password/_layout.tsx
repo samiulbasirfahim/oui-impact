@@ -1,16 +1,5 @@
-import { COLORS } from "@/constants";
-import { Stack } from "expo-router";
+import { RNPublicStack } from "@/components/ui/public-stack";
 
 export default function ResetPasswordLayout() {
-    return (
-        <Stack
-            screenOptions={{
-                headerShadowVisible: false,
-                headerTitle: "",
-                headerStyle: {
-                    backgroundColor: COLORS.background,
-                },
-            }}
-        />
-    );
+    return <RNPublicStack />;
 }

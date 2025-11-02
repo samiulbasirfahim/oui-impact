@@ -18,7 +18,7 @@ export default function EmailScreen() {
             <RNInput label="Email Address" keyboardType="email-address" />
             <RNButton
                 onPress={() => {
-                    router.push("/public/reset-password/otp");
+                    router.push("/public/auth/reset-password/otp");
                 }}
                 style={{ marginTop: 12 }}
             >
