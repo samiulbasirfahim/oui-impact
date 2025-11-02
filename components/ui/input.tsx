@@ -45,7 +45,7 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
 
     useEffect(() => {
         labelPosition.value = withTiming(isFocusedState || hasText ? 1 : 0, {
-            duration: 150,
+            duration: 200,
         });
     }, [hasText, isFocusedState]);
 
