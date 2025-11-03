@@ -106,8 +106,10 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                     width: "100%",
                     position: "relative",
                 }}
+                pointerEvents="box-only"
             >
                 <RNInput
+                    pointerEvents="none"
                     label={label}
                     value={value}
                     editable={false}
@@ -121,7 +123,7 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                         top: 10 + marginTop,
                         padding: 4,
                     }}
-                    name="down"
+                    name="caret-down"
                     size={20}
                     color={COLORS.muted}
                 />
@@ -213,9 +215,9 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                             data={items}
                             keyExtractor={(item, index) => `${item}-${index}`}
                             renderItem={renderItem}
-                            style={{ marginBottom: 20, marginTop: 12 }}
+                            style={{ marginTop: 12 }}
                             contentContainerStyle={{
-                                paddingBottom: bottom + 20,
+                                paddingBottom: bottom,
                             }}
                             ItemSeparatorComponent={() => (
                                 <View

@@ -17,12 +17,14 @@ import Entypo from "@expo/vector-icons/Entypo";
 
 type Props = {
     label?: string;
+    prefix?: string;
     marginTop?: number;
     style?: ViewProps["style"];
 } & TextInputProps;
 
 export function RNInput({
     style,
+    prefix,
     label,
     placeholder,
     marginTop = 8,
@@ -57,7 +59,7 @@ export function RNInput({
 
     const animatedLabelStyle = useAnimatedStyle(() => {
         const translateY = labelPosition.value === 1 ? -10 : 12;
-        const translateX = labelPosition.value === 1 ? 8 : 10;
+        const translateX = labelPosition.value === 1 ? 8 : 6;
         const fontSize = labelPosition.value === 1 ? 12 : 16;
 
         return {
@@ -90,6 +92,7 @@ export function RNInput({
                             zIndex: 10,
                             backgroundColor: COLORS.background,
                             paddingHorizontal: 8,
+                            color: COLORS.secondaryText,
                         },
                         animatedLabelStyle,
                     ]}
@@ -98,55 +101,79 @@ export function RNInput({
                 </Animated.Text>
             )}
 
-            <TextInput
-                {...props}
-                value={value}
-                onChangeText={onChangeText}
-                onLayout={handleInputLayout}
-                placeholder={isFocusedState ? "" : placeholder}
-                placeholderTextColor={COLORS.muted}
-                onFocus={() => {
-                    isFocused.value = true;
-                    setIsFocusedState(true);
-                    labelPosition.value = withTiming(1, { duration: 200 });
+            <View
+                style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    borderWidth: 1,
+                    borderColor: isFocusedState ? COLORS.primary : COLORS.secondaryText,
+                    borderRadius: 8,
+                    paddingRight: props.secureTextEntry ? 32 : 0,
                 }}
-                onBlur={() => {
-                    isFocused.value = false;
-                    setIsFocusedState(false);
-                    if (!hasText) labelPosition.value = withTiming(0, { duration: 200 });
-                }}
-                secureTextEntry={showPassword}
-                autoComplete={props.secureTextEntry ? "off" : props.autoComplete}
-                autoCapitalize={props.secureTextEntry ? "none" : props.autoCapitalize}
-                style={[
-                    {
-                        borderWidth: 1,
-                        borderColor: COLORS.secondaryText,
-                        color: COLORS.text,
-                        padding: 10,
-                        borderRadius: 8,
-                        fontSize: 16,
-                    },
-                ]}
-            />
-            {props.secureTextEntry && (
-                <TouchableOpacity
-                    style={{
-                        position: "absolute",
-                        right: 16,
-                        top: eyeIconTopOffset,
-                        transform: [{ translateY: -9 }],
+            >
+                {prefix && (
+                    <Animated.Text
+                        style={{
+                            color: COLORS.muted,
+                            marginLeft: 10,
+                            fontSize: 16,
+                        }}
+                    >
+                        {prefix}
+                    </Animated.Text>
+                )}
+                <TextInput
+                    {...props}
+                    value={value}
+                    onChangeText={onChangeText}
+                    onLayout={handleInputLayout}
+                    placeholder={isFocusedState ? "" : placeholder}
+                    placeholderTextColor={COLORS.muted}
+                    onFocus={() => {
+                        isFocused.value = true;
+                        setIsFocusedState(true);
+                        labelPosition.value = withTiming(1, { duration: 200 });
                     }}
-                    onPress={() => setShowPassword((prev) => !prev)}
-                    activeOpacity={0.7}
-                >
-                    <Entypo
-                        name={!showPassword ? "eye-with-line" : "eye"}
-                        size={18}
-                        color={COLORS.muted}
-                    />
-                </TouchableOpacity>
-            )}
+                    onBlur={() => {
+                        isFocused.value = false;
+                        setIsFocusedState(false);
+                        if (!hasText)
+                            labelPosition.value = withTiming(0, { duration: 200 });
+                    }}
+                    secureTextEntry={showPassword}
+                    autoComplete={props.secureTextEntry ? "off" : props.autoComplete}
+                    autoCapitalize={props.secureTextEntry ? "none" : props.autoCapitalize}
+                    style={[
+                        {
+                            flex: 1,
+                            // borderWidth: 1,
+                            // borderColor: COLORS.secondaryText,
+                            color: COLORS.text,
+                            padding: 10,
+                            borderRadius: 8,
+                            fontSize: 16,
+                        },
+                    ]}
+                />
+                {props.secureTextEntry && (
+                    <TouchableOpacity
+                        style={{
+                            position: "absolute",
+                            right: 16,
+                            top: eyeIconTopOffset,
+                            transform: [{ translateY: -9 }],
+                        }}
+                        onPress={() => setShowPassword((prev) => !prev)}
+                        activeOpacity={0.7}
+                    >
+                        <Entypo
+                            name={!showPassword ? "eye-with-line" : "eye"}
+                            size={18}
+                            color={COLORS.muted}
+                        />
+                    </TouchableOpacity>
+                )}
+            </View>
         </View>
     );
 }

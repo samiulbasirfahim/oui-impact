@@ -20,6 +20,8 @@ export function Layout({ children, style, ...props }: Props) {
             {...props}
         >
             <KeyboardAwareScrollView
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
                 keyboardDismissMode="interactive"
                 bottomOffset={20}
                 contentContainerStyle={[

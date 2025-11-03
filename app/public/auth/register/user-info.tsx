@@ -1,26 +1,29 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
 import { RNCountryPicker } from "@/components/common/country-picker";
+import AVATAR from "@/assets/svgs/avatar.svg";
+import EDIT from "@/assets/svgs/edit.svg";
 import { RNButton } from "@/components/ui/button";
 import { RNInput } from "@/components/ui/input";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
-import { ReactNode, useState } from "react";
-import { Pressable } from "react-native";
-import { COLORS } from "@/constants";
+import { useState } from "react";
 import { RNPicker } from "@/components/common/picker";
+import { RNDatePicker } from "@/components/common/date-picker";
+import { Image, Pressable, View } from "react-native";
+import { imagePicker } from "@/lib/imagePicker";
+import { COLORS } from "@/constants";
 
 type FormData = {
     fullName?: string;
     country?: string;
-    countryFlag?: ReactNode;
+    countryFlag?: string;
+    countryCode?: string;
     phoneNumber?: string;
     gender?: "male" | "female";
     dateOfBirth?: Date;
+    avatarUri?: string;
 };
 
 export default function UserInfoScreen() {
-    const [showCountryPicker, setShowCountryPicker] = useState(false);
-
     const [formData, setFormData] = useState<FormData>({});
 
     const handleInputChange = (field: keyof FormData, value: any) => {
@@ -52,37 +55,83 @@ export default function UserInfoScreen() {
                 data. No one else will be able to see it. Or yor can skip it for now.
             </RNText>
 
+            <Pressable
+                onPress={() => {
+                    imagePicker((uri) => {
+                        if (uri) {
+                            handleInputChange("avatarUri", uri);
+                        }
+                    });
+                }}
+                style={{
+                    alignSelf: "center",
+                    width: 100,
+                    height: 100,
+                    outlineWidth: 3,
+                    outlineColor: COLORS.primary,
+                    borderRadius: 50,
+                }}
+            >
+                {formData.avatarUri ? (
+                    <Image
+                        source={{
+                            uri: formData.avatarUri,
+                        }}
+                        style={{
+                            borderRadius: 50,
+                            width: 100,
+                            height: 100,
+                        }}
+                    />
+                ) : (
+                    <>
+                        <AVATAR
+                            width={100}
+                            height={100}
+                            style={{
+                                borderRadius: 50,
+                                width: 100,
+                                height: 100,
+                            }}
+                        />
+                    </>
+                )}
+                <View
+                    style={{
+                        position: "absolute",
+                        bottom: 0,
+                        right: 0,
+                    }}
+                >
+                    <EDIT width={30} height={30} />
+                </View>
+            </Pressable>
+
             <RNInput
                 label="Full name"
                 onChangeText={(t) => handleInputChange("fullName", t)}
             />
-            <Pressable
-                onPress={() => {
-                    setShowCountryPicker(true);
+
+            <RNInput
+                label="Phone Number"
+                value={formData.phoneNumber}
+                prefix={formData.countryCode}
+                onChangeText={(t) => handleInputChange("fullName", t)}
+                keyboardType="phone-pad"
+                key={formData.countryCode}
+            />
+
+            <RNCountryPicker
+                value={
+                    (formData.countryFlag ? formData.countryFlag + "    " : "") +
+                    (formData.country ?? "")
+                }
+                onSelectCountry={(country) => {
+                    handleInputChange("country", country.name["en"]);
+                    handleInputChange("countryFlag", country.flag);
+                    handleInputChange("countryCode", country.dial_code);
                 }}
-                style={{
-                    width: "100%",
-                    position: "relative",
-                }}
-            >
-                <RNInput
-                    label="Country/Region"
-                    value={formData.country}
-                    editable={false}
-                    key={formData.country}
-                />
-                <AntDesign
-                    style={{
-                        position: "absolute",
-                        right: 8,
-                        top: 20,
-                        padding: 4,
-                    }}
-                    name="down"
-                    size={20}
-                    color={COLORS.muted}
-                />
-            </Pressable>
+            />
 
             <RNPicker
                 items={[
@@ -110,16 +159,13 @@ export default function UserInfoScreen() {
                 key={formData.gender}
             />
 
-            <RNCountryPicker
-                showCountryPicker={showCountryPicker}
-                setShowCountryPicker={setShowCountryPicker}
-                onSelectCountry={(country) => {
-                    handleInputChange("country", country.name["en"]);
-                    handleInputChange("countryFlag", country.code);
-                }}
+            <RNDatePicker
+                onChangeDate={(date) => handleInputChange("dateOfBirth", date)}
+                label="Date of Birth"
+                value={formData.dateOfBirth}
             />
 
-            <RNButton variant="outline">Add profile photo</RNButton>
+            <RNButton>Submit</RNButton>
         </Layout>
     );
 }
