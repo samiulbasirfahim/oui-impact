@@ -2,6 +2,7 @@ import { CountryItem, CountryPicker } from "react-native-country-codes-picker";
 import { TouchableOpacity } from "react-native";
 import { COLORS } from "@/constants";
 import { RNText } from "../ui/text";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = {
     showCountryPicker: boolean;
@@ -20,6 +21,8 @@ export function RNCountryPicker({
         }
         setShowCountryPicker(false);
     };
+
+    const { bottom } = useSafeAreaInsets();
 
     return (
         <CountryPicker
@@ -52,6 +55,7 @@ export function RNCountryPicker({
             style={{
                 modal: {
                     height: "80%",
+                    paddingBottom: bottom,
                 },
             }}
             lang="en"

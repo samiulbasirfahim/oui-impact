@@ -7,6 +7,7 @@ import {
     Pressable,
     Dimensions,
 } from "react-native";
+
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -14,10 +15,12 @@ import Animated, {
     interpolate,
     Extrapolate,
 } from "react-native-reanimated";
+
 import { COLORS } from "@/constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { RNText } from "../ui/text";
 import { RNInput } from "../ui/input";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = {
     label?: string;
@@ -27,8 +30,10 @@ type Props = {
 };
 
 const height = Dimensions.get("window").height;
+const marginTop = 8;
 
 export function RNPicker({ onSelectItem, label, value, items }: Props) {
+    const { bottom } = useSafeAreaInsets();
     const [showPicker, setShowPicker] = useState(false);
     const animationDriver = useSharedValue(0);
 
@@ -72,7 +77,6 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
 
     const renderItem = ({
         item,
-        index,
     }: {
         item: {
             value: string;
@@ -103,13 +107,18 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                     position: "relative",
                 }}
             >
-                <RNInput label={label} value={value} editable={false} />
+                <RNInput
+                    label={label}
+                    value={value}
+                    editable={false}
+                    marginTop={marginTop}
+                />
 
                 <AntDesign
                     style={{
                         position: "absolute",
                         right: 8,
-                        top: 20,
+                        top: 10 + marginTop,
                         padding: 4,
                     }}
                     name="down"
@@ -205,6 +214,9 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                             keyExtractor={(item, index) => `${item}-${index}`}
                             renderItem={renderItem}
                             style={{ marginBottom: 20, marginTop: 12 }}
+                            contentContainerStyle={{
+                                paddingBottom: bottom + 20,
+                            }}
                             ItemSeparatorComponent={() => (
                                 <View
                                     style={{

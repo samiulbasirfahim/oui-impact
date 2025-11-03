@@ -11,17 +11,23 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from "react-native-reanimated";
-import { RNText } from "./text";
 import { COLORS } from "@/constants";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import Entypo from "@expo/vector-icons/Entypo";
 
 type Props = {
     label?: string;
+    marginTop?: number;
     style?: ViewProps["style"];
 } & TextInputProps;
 
-export function RNInput({ style, label, placeholder, ...props }: Props) {
+export function RNInput({
+    style,
+    label,
+    placeholder,
+    marginTop = 8,
+    ...props
+}: Props) {
     const isFocused = useSharedValue(false);
     const [isFocusedState, setIsFocusedState] = useState(false);
 
@@ -72,11 +78,11 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
 
     return (
         <View
-            style={[{ marginTop: 12, position: "relative" }, style]}
+            style={[{ marginTop, padding: 1, position: "relative" }, style]}
             pointerEvents="box-none"
         >
             {label && (
-                <Animated.View
+                <Animated.Text
                     pointerEvents={"none"}
                     style={[
                         {
@@ -88,14 +94,8 @@ export function RNInput({ style, label, placeholder, ...props }: Props) {
                         animatedLabelStyle,
                     ]}
                 >
-                    <RNText
-                        pointerEvents="none"
-                        size="md"
-                        style={{ color: COLORS.secondaryText }}
-                    >
-                        {label}
-                    </RNText>
-                </Animated.View>
+                    {label}
+                </Animated.Text>
             )}
 
             <TextInput
