@@ -1,5 +1,3 @@
-import { COLORS } from "@/constants";
-import { ReactNode } from "react";
 import { View } from "react-native";
 import { RNText } from "./text";
 
