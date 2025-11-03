@@ -58,7 +58,7 @@ export function RNInput({
     const animatedLabelStyle = useAnimatedStyle(() => {
         const translateY = labelPosition.value === 1 ? -10 : 12;
         const translateX = labelPosition.value === 1 ? 8 : 10;
-        const fontSize = labelPosition.value === 1 ? 13 : 16;
+        const fontSize = labelPosition.value === 1 ? 12 : 16;
 
         return {
             transform: [
