@@ -47,7 +47,12 @@ export function OnboardingScreen({
                 >
                     <Image
                         source={imageSource}
-                        style={{ width: 200, height: 200, marginBottom: 20 }}
+                        style={{
+                            width: 200,
+                            height: 200,
+                            marginBottom: 20,
+                            borderRadius: 12,
+                        }}
                     />
                 </View>
                 <View style={{ alignItems: "flex-start", gap: 12, flex: 1 }}>

@@ -45,6 +45,12 @@ export default function Index() {
                     Go to Register Screen
                 </RNText>
             </Link>
+
+            <Link href={"/protected/(tabs)"}>
+                <RNText variant="accent" size="md">
+                    Go to Main App Screen
+                </RNText>
+            </Link>
         </View>
     );
 }

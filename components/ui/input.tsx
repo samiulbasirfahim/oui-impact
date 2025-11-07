@@ -149,7 +149,7 @@ export function RNInput({
                             // borderWidth: 1,
                             // borderColor: COLORS.secondaryText,
                             color: COLORS.text,
-                            padding: 10,
+                            padding: 12,
                             borderRadius: 8,
                             fontSize: 16,
                         },

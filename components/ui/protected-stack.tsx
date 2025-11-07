@@ -1,17 +1,23 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
+import NOTIFICATION from "@/assets/svgs/notification.svg";
 import { COLORS } from "@/constants";
 import { router, Stack } from "expo-router";
 import { TouchableOpacity } from "react-native";
 
-export function RNPublicStack() {
+export function RNProtectedStack() {
     return (
         <Stack
             screenOptions={{
                 headerShadowVisible: false,
-                headerTitle: "",
                 headerStyle: {
                     backgroundColor: COLORS.background,
                 },
+
+                headerTitleAlign: "center",
+                headerTitleStyle: {
+                    fontFamily: "SuezOne",
+                },
+
                 headerLeft(props) {
                     return (
                         <TouchableOpacity
@@ -30,6 +36,23 @@ export function RNPublicStack() {
                             }}
                         >
                             <Ionicons name="arrow-back-sharp" size={24} color="black" />
+                        </TouchableOpacity>
+                    );
+                },
+
+                headerRight(props) {
+                    return (
+                        <TouchableOpacity
+                            {...(props as any)}
+                            style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                            onPress={() => {
+                                router.push("/protected/others/notification");
+                            }}
+                        >
+                            <NOTIFICATION width={40} height={40} />
                         </TouchableOpacity>
                     );
                 },

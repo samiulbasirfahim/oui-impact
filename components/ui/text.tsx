@@ -3,6 +3,7 @@ import { Text, TextProps } from "react-native";
 import { COLORS } from "@/constants";
 
 const sizes = {
+    xs: { fontSize: 10, lineHeight: 16 },
     sm: { fontSize: 14, lineHeight: 18 },
     md: { fontSize: 16, lineHeight: 22 },
     lg: { fontSize: 18, lineHeight: 26 },
@@ -17,6 +18,7 @@ const variants = {
     primary: { fontWeight: "bold", color: COLORS.primary },
     accent: { fontWeight: "light", color: COLORS.accent },
     secondary: { color: COLORS.secondaryText },
+    caption: { color: COLORS.muted },
 };
 
 export type RNTextProps = TextProps & {
