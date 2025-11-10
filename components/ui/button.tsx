@@ -1,9 +1,11 @@
+import Entypo from "@expo/vector-icons/Entypo";
 import { ReactNode } from "react";
 import {
     TouchableOpacity,
     TouchableOpacityProps,
     ActivityIndicator,
     ViewStyle,
+    View,
 } from "react-native";
 import { COLORS } from "@/constants";
 import { RNText } from "./text";
@@ -118,6 +120,59 @@ export function RNButton({
                     {children}
                 </RNText>
             )}
+        </TouchableOpacity>
+    );
+}
+
+type RNSettingButtonProps = TouchableOpacityProps & {
+    title: string;
+    description?: string;
+    icon?: ReactNode;
+};
+
+export function RNSettingButton({
+    title,
+    description,
+    icon,
+    ...props
+}: RNSettingButtonProps) {
+    return (
+        <TouchableOpacity
+            style={{
+                flexDirection: "row",
+                alignItems: "center",
+                paddingHorizontal: 16,
+            }}
+            activeOpacity={0.7}
+            {...props}
+        >
+            {icon && (
+                <View
+                    style={{
+                        padding: 10,
+                        backgroundColor: COLORS.backgroundSecondary,
+                        borderRadius: "50%",
+                        marginRight: 12,
+                    }}
+                >
+                    {icon}
+                </View>
+            )}
+            <View style={{ flex: 1 }}>
+                <RNText size="md" variant="title">
+                    {title}
+                </RNText>
+                {description && (
+                    <RNText
+                        size="sm"
+                        variant="base"
+                        style={{ marginTop: 4, color: COLORS.muted }}
+                    >
+                        {description}
+                    </RNText>
+                )}
+            </View>
+            <Entypo name="chevron-thin-right" size={24} color={COLORS.muted} />
         </TouchableOpacity>
     );
 }

@@ -101,8 +101,8 @@ export function RNSwitch({ value, label, subLabel, onToggle }: Props) {
 const switchStyles = StyleSheet.create({
     track: {
         alignItems: "flex-start",
-        width: 55,
-        height: 30,
+        width: 45,
+        height: 25,
         padding: 1,
     },
     thumb: {

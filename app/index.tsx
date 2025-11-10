@@ -3,7 +3,7 @@ import { Link, Redirect } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function Index() {
-    // return <Redirect href={"/public/auth/register/user-info"} />;
+    // return <Redirect href={"/protected/(tabs)/account"} />;
     return (
         <View
             style={{

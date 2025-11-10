@@ -4,11 +4,11 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Notification } from "@/type/notification";
 import { Stack } from "expo-router";
-import { View } from "react-native";
-import { colors } from "react-native-keyboard-controller/lib/typescript/components/KeyboardToolbar/colors";
+import { useState } from "react";
+import { Pressable, View } from "react-native";
 
 export default function NotificationScreen() {
-    const notifications: Notification[] = [
+    const [notifications, setNotifications] = useState<Notification[]>([
         {
             id: "1",
             title: "Welcome to the App!",
@@ -69,7 +69,22 @@ export default function NotificationScreen() {
             createdAt: new Date("2024-06-20T16:40:00Z"),
             read: true,
         },
-    ];
+    ]);
+
+    const markAllAsRead = () => {
+        const updatedNotifications = notifications.map((notification) => ({
+            ...notification,
+            read: true,
+        }));
+        setNotifications(updatedNotifications);
+    };
+
+    const markAsRead = (id: string) => {
+        const updatedNotifications = notifications.map((notification) =>
+            notification.id === id ? { ...notification, read: true } : notification,
+        );
+        setNotifications(updatedNotifications);
+    };
 
     return (
         <>
@@ -86,11 +101,14 @@ export default function NotificationScreen() {
                         justifyContent: "flex-end",
                     }}
                 >
-                    <RNButton size="sm">Read All</RNButton>
+                    <RNButton onPress={markAllAsRead} size="sm">
+                        Read All
+                    </RNButton>
                 </View>
 
                 {notifications.map((notification) => (
-                    <View
+                    <Pressable
+                        onPress={() => markAsRead(notification.id)}
                         key={notification.id}
                         style={{
                             padding: 12,
@@ -124,7 +142,7 @@ export default function NotificationScreen() {
                         >
                             {notification.createdAt.toLocaleString()}
                         </RNText>
-                    </View>
+                    </Pressable>
                 ))}
             </Layout>
         </>

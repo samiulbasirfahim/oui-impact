@@ -1,6 +1,8 @@
 import { PointsCard } from "@/components/common/points-card";
+import INFO from "@/assets/svgs/info.svg";
+import LOGOUT from "@/assets/svgs/logout.svg";
 import { ProfileCard } from "@/components/common/profile-card";
-import { RNButton } from "@/components/ui/button";
+import { RNButton, RNSettingButton } from "@/components/ui/button";
 import { Layout } from "@/components/ui/layout";
 import { RNSwitch } from "@/components/ui/switch";
 import { RNText } from "@/components/ui/text";
@@ -126,6 +128,16 @@ export default function Screen() {
                     </RNButton>
                     <RNButton style={{ flex: 1 }}>Confirm</RNButton>
                 </View>
+
+                <RNSettingButton
+                    icon={<INFO width={24} height={24} />}
+                    title="Help & Support"
+                />
+
+                <RNSettingButton
+                    icon={<LOGOUT width={24} height={24} />}
+                    title="Log Out"
+                />
             </Layout>
         </>
     );
