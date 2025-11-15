@@ -110,6 +110,11 @@ export function RNInput({
                     borderRadius: 8,
                     paddingRight: props.secureTextEntry ? 32 : 0,
                 }}
+                onFocus={() => {
+                    isFocused.value = true;
+                    setIsFocusedState(true);
+                    labelPosition.value = withTiming(1, { duration: 200 });
+                }}
             >
                 {prefix && (
                     <Animated.Text

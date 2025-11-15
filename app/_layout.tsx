@@ -6,6 +6,7 @@ import { Platform } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { useLoadInterstitialAds } from "@/hooks/intersitialAd";
 import { useLoadFonts } from "@/hooks/useLoadFonts";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
     // useLoadInterstitialAds()
@@ -17,13 +18,15 @@ export default function RootLayout() {
     return (
         <>
             <StatusBar style="dark" />
-            <KeyboardProvider>
-                <Stack
-                    screenOptions={{
-                        headerShown: false,
-                    }}
-                />
-            </KeyboardProvider>
+            <GestureHandlerRootView>
+                <KeyboardProvider>
+                    <Stack
+                        screenOptions={{
+                            headerShown: false,
+                        }}
+                    />
+                </KeyboardProvider>
+            </GestureHandlerRootView>
         </>
     );
 }

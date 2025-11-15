@@ -3,7 +3,7 @@ import { COLORS } from "@/constants";
 import { RNTabs } from "@/lib/tabNavigation";
 import { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs";
 import { Tabs } from "expo-router";
-import { Pressable, View } from "react-native";
+import { Dimensions, Pressable, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ProtectedLayout() {
@@ -75,8 +75,8 @@ function CustomTabBar(props: MaterialTopTabBarProps) {
                         {IconComponent && (
                             <>
                                 <IconComponent
-                                    width={24}
-                                    height={24}
+                                    width={Dimensions.get("window").width > 400 ? 24 : 20}
+                                    height={Dimensions.get("window").width > 400 ? 24 : 20}
                                     fill={isFocused ? COLORS.primary : COLORS.muted}
                                 />
                             </>
@@ -86,6 +86,7 @@ function CustomTabBar(props: MaterialTopTabBarProps) {
                             style={{
                                 color: isFocused ? COLORS.primary : COLORS.muted,
                             }}
+                            size={Dimensions.get("window").width > 400 ? "md" : "sm"}
                         >
                             {tabs[index].charAt(0).toUpperCase() + tabs[index].slice(1)}
                         </RNText>

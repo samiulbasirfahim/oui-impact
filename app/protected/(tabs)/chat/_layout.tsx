@@ -1,5 +1,4 @@
-import { RNProtectedStack } from "@/components/ui/protected-stack";
-
-export default function RewardLayout() {
-    return <RNProtectedStack />;
+import { Drawer } from "expo-router/drawer";
+export default function ChatLayout() {
+    return <Drawer />;
 }

@@ -4,7 +4,6 @@ import AVATAR from "@/assets/svgs/avatar.svg";
 import EDIT from "@/assets/svgs/edit.svg";
 
 import { Layout } from "@/components/ui/layout";
-import { RNText } from "@/components/ui/text";
 import { Stack } from "expo-router";
 import { Image, Pressable, View } from "react-native";
 import { imagePicker } from "@/lib/imagePicker";
