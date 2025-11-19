@@ -1,12 +1,13 @@
 import { Layout } from "@/components/ui/layout";
+import { FlashList } from "@shopify/flash-list";
 import BottomSheet, {
-    BottomSheetFlashList,
     BottomSheetTextInput,
     BottomSheetView,
+    useBottomSheetScrollableCreator,
 } from "@gorhom/bottom-sheet";
 import { RNText } from "@/components/ui/text";
 import SHARE_EARN from "@/assets/svgs/share-earn.svg";
-import { Pressable, View } from "react-native";
+import { Image, Pressable, StyleSheet, View } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 import { COLORS } from "@/constants";
 import { RNButton } from "@/components/ui/button";
@@ -14,6 +15,7 @@ import { useState } from "react";
 
 export default function Screen() {
     const [showSearch, setShowSearch] = useState<boolean>(false);
+    const scrollView = useBottomSheetScrollableCreator();
 
     const data = Array.from({ length: 20 }, (_, i) => {
         return {
@@ -138,16 +140,72 @@ export default function Screen() {
                         </Pressable>
                     </View>
 
-                    <BottomSheetFlashList
+                    <FlashList
                         data={data}
-                        keyExtractor={(item: number) => item.toString()}
-                        renderItem={({ item }: { item: number }) => (
-                            <View style={{}}></View>
+                        renderScrollComponent={scrollView}
+                        renderItem={(item) => {
+                            return (
+                                <View style={styles.friendItem}>
+                                    <View
+                                        style={{
+                                            flexDirection: "row",
+                                            alignItems: "center",
+                                            gap: 12,
+                                        }}
+                                    >
+                                        <Image
+                                            source={item.item.avatar}
+                                            style={{ width: 48, height: 48, borderRadius: 24 }}
+                                        />
+                                        <View>
+                                            <RNText variant="title">{item.item.name}</RNText>
+                                            <RNText
+                                                variant="caption"
+                                                size="sm"
+                                                style={{ color: COLORS.secondaryText }}
+                                            >
+                                                {item.item.platform}
+                                            </RNText>
+                                        </View>
+                                    </View>
+                                    <RNButton
+                                        size="sm"
+                                        style={{
+                                            opacity: item.index % 3 === 0 ? 0.6 : 1,
+                                        }}
+                                    >
+                                        {item.index % 3 === 0 ? "Accepted" : "Invite"}
+                                    </RNButton>
+                                </View>
+                            );
+                        }}
+                        style={{
+                            marginTop: 16,
+                            height: 400,
+                        }}
+                        ItemSeparatorComponent={() => (
+                            <View
+                                style={{
+                                    height: 1,
+                                    backgroundColor: COLORS.primary,
+                                }}
+                            ></View>
                         )}
-                        estimatedItemSize={50}
+                        contentContainerStyle={{
+                            paddingBottom: 32,
+                        }}
                     />
                 </BottomSheetView>
             </BottomSheet>
         </>
     );
 }
+
+const styles = StyleSheet.create({
+    friendItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 12,
+    },
+});

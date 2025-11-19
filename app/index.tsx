@@ -3,7 +3,7 @@ import { Link, Redirect } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function Index() {
-    return <Redirect href={"/protected/others/share-earn"} />;
+    // return <Redirect href={"/protected/others/share-earn"} />;
     return (
         <View
             style={{

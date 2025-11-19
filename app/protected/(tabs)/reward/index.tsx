@@ -1,14 +1,17 @@
+import Fontisto from "@expo/vector-icons/Fontisto";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import TREE from "@/assets/svgs/tree.svg";
 import BOOK from "@/assets/svgs/book.svg";
 import { RNButton } from "@/components/ui/button";
-import { LinearGradient } from "expo-linear-gradient";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Link, Stack } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { GradientBG } from "@/components/ui/gradient-bg";
+import { GradientButton } from "@/components/ui/gradient-button";
 
 export default function Screen() {
     return (
@@ -19,12 +22,14 @@ export default function Screen() {
                 }}
             />
             <Layout>
-                <LinearGradient
-                    colors={["#A5D3B4", "#5A92B1"]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.pointCardContainer}
-                >
+                <GradientBG style={styles.pointCardContainer}>
+                    <RNText
+                        style={{
+                            color: COLORS.background,
+                        }}
+                    >
+                        Your Points
+                    </RNText>
                     <View
                         style={{
                             flexDirection: "row",
@@ -37,17 +42,10 @@ export default function Screen() {
                             <RNText
                                 style={{
                                     color: COLORS.background,
-                                }}
-                            >
-                                Your Points
-                            </RNText>
-                            <RNText
-                                style={{
-                                    color: COLORS.background,
-                                    fontSize: 32,
-                                    paddingVertical: 10,
+                                    fontSize: 38,
+                                    paddingTop: 8,
+                                    paddingBottom: 16,
                                     fontWeight: "bold",
-                                    marginTop: 8,
                                 }}
                             >
                                 1,250
@@ -111,7 +109,7 @@ export default function Screen() {
                             +125 points this week
                         </RNText>
                     </View>
-                </LinearGradient>
+                </GradientBG>
 
                 <Link href="/protected/(tabs)/reward/watch-earn" asChild>
                     <RNButton
@@ -122,8 +120,17 @@ export default function Screen() {
                             marginBottom: 16,
                         }}
                     >
-                        <FontAwesome5 name="play" size={20} color="black" />
-                        <RNText style={{ marginLeft: 8 }}>Watch & Earn</RNText>
+                        <FontAwesome5 name="play" size={20} color={COLORS.background} />
+                        <RNText
+                            style={{
+                                marginLeft: 8,
+                                color: COLORS.background,
+                                paddingVertical: 6,
+                            }}
+                            variant="title"
+                        >
+                            Watch & Earn
+                        </RNText>
                     </RNButton>
                 </Link>
 
@@ -143,6 +150,7 @@ export default function Screen() {
                                 style={{
                                     color: COLORS.primary,
                                     textDecorationLine: "underline",
+                                    fontWeight: "500",
                                 }}
                                 size="sm"
                             >
@@ -151,25 +159,168 @@ export default function Screen() {
                         </Link>
                     </View>
 
+                    <View style={styles.redeedmChildContainer}>
+                        <View style={styles.redemChildItem}>
+                            <AntDesign
+                                name="percentage"
+                                size={28}
+                                color={COLORS.secondary}
+                                style={{
+                                    backgroundColor: COLORS.secondary + "20",
+                                    padding: 12,
+                                    borderRadius: 50,
+                                }}
+                            />
+                            <RNText
+                                variant="title"
+                                style={{
+                                    marginTop: 8,
+                                    textAlign: "center",
+                                }}
+                                size="sm"
+                            >
+                                Discounts
+                            </RNText>
+                        </View>
+                        <View style={styles.redemChildItem}>
+                            <FontAwesome5
+                                name="gift"
+                                size={28}
+                                color={COLORS.primary}
+                                style={{
+                                    backgroundColor: COLORS.primary + "20",
+                                    padding: 12,
+                                    borderRadius: 50,
+                                }}
+                            />
+                            <RNText
+                                variant="title"
+                                style={{
+                                    marginTop: 8,
+                                    textAlign: "center",
+                                }}
+                                size="sm"
+                            >
+                                Offers
+                            </RNText>
+                        </View>
+                        <View style={styles.redemChildItem}>
+                            <Fontisto
+                                name="heart"
+                                size={28}
+                                color={COLORS.accent}
+                                style={{
+                                    backgroundColor: COLORS.accent + "20",
+                                    padding: 12,
+                                    borderRadius: 50,
+                                }}
+                            />
+
+                            <RNText
+                                variant="title"
+                                style={{
+                                    marginTop: 8,
+                                    textAlign: "center",
+                                }}
+                                size="sm"
+                            >
+                                Partner's App Reward
+                            </RNText>
+                        </View>
+                    </View>
                 </View>
 
                 <View style={styles.shareCardContainer}>
-                    
-                    <RNText>Share your progress with friends and earn extra points!</RNText>
-                    <Link href="/protected/others/share-earn" asChild>
-                        <RNButton
-                            nowrap
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-start",
+                        }}
+                    >
+                        <View
                             style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                marginTop: 12,
+                                paddingVertical: 15,
+                                paddingHorizontal: 10,
+                                backgroundColor: COLORS.primary + "20",
+                                borderRadius: 10,
+                                alignSelf: "center",
                             }}
                         >
-                            <FontAwesome5 name="share-alt" size={20} color="black" />
-                            <RNText style={{ marginLeft: 8 }}>Share & Earn</RNText>
-                        </RNButton>
-                    </Link>
+                            <FontAwesome name="share" size={24} color={COLORS.secondary} />
+                        </View>
+
+                        <View
+                            style={{
+                                marginLeft: 12,
+                            }}
+                        >
+                            <RNText variant="title" size="lg">
+                                Share with friends
+                            </RNText>
+                            <RNText variant="secondary" size="md">
+                                Invite friends to join
+                            </RNText>
+                        </View>
+                    </View>
+
+                    <View>
+                        <RNText
+                            style={{
+                                backgroundColor: COLORS.text + "10",
+                                paddingVertical: 4,
+                                paddingHorizontal: 8,
+                                borderRadius: 30,
+                                alignSelf: "flex-start",
+                                marginBottom: 8,
+                                fontWeight: "800",
+                                color: COLORS.secondaryText,
+                            }}
+                            variant="title"
+                            size="sm"
+                        >
+                            +30 PTS
+                        </RNText>
+
+                        <Link href="/protected/others/share-earn" asChild>
+                            <RNButton
+                                nowrap
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    paddingVertical: 0,
+                                    paddingHorizontal: 0,
+                                }}
+                                variant="secondary"
+                            >
+                                <RNText
+                                    style={{
+                                        color: COLORS.background,
+                                        fontWeight: "500",
+                                    }}
+                                    variant="title"
+                                >
+                                    Share
+                                </RNText>
+                            </RNButton>
+                        </Link>
+                    </View>
                 </View>
+
+                <GradientButton
+                    title="Premium Upgrade"
+                    subtitle="Get 2x points on all videos!"
+                    buttonText="Upgrade"
+                    onPress={() => { }}
+                />
+
+                <GradientButton
+                    title="Referrals List"
+                    subtitle="Get 2x points on all Referrals!"
+                    buttonText="View"
+                    onPress={() => { }}
+                />
+                <View style={{ height: 32 }} />
             </Layout>
         </>
     );
@@ -177,15 +328,33 @@ export default function Screen() {
 
 const styles = StyleSheet.create({
     pointCardContainer: {
-        borderRadius: 8,
+        borderRadius: 12,
         padding: 16,
         marginBottom: 12,
-        gap: 18,
     },
     shareCardContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
         borderRadius: 8,
         padding: 16,
         marginTop: 16,
         backgroundColor: COLORS.backgroundSecondary,
+    },
+    redeedmChildContainer: {
+        marginTop: 12,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        flex: 1,
+    },
+
+    redemChildItem: {
+        width: "32%",
+        borderRadius: 12,
+        padding: 12,
+        backgroundColor: COLORS.backgroundSecondary,
+        justifyContent: "center",
+        alignItems: "center",
+        borderWidth: 2,
+        borderColor: COLORS.muted + "20",
     },
 });

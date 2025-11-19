@@ -3,11 +3,14 @@ import { COLORS } from "@/constants";
 import { RNTabs } from "@/lib/tabNavigation";
 import { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs";
 import { Tabs } from "expo-router";
+import { useState } from "react";
 import { Dimensions, Pressable, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ProtectedLayout() {
     const { bottom } = useSafeAreaInsets();
+
+
     return (
         <RNTabs
             tabBarPosition="bottom"
@@ -65,7 +68,7 @@ function CustomTabBar(props: MaterialTopTabBarProps) {
                         }}
                         key={route.key}
                         style={{
-                            padding: 16,
+                            paddingBottom: 16,
                             flex: 1,
                             alignItems: "center",
                             gap: 4,

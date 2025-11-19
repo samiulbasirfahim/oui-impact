@@ -1,6 +1,7 @@
 import * as NavigationBar from "expo-navigation-bar";
 import { StatusBar } from "expo-status-bar";
 
+import { Host } from "react-native-portalize";
 import { Stack } from "expo-router";
 import { Platform } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
@@ -19,13 +20,15 @@ export default function RootLayout() {
         <>
             <StatusBar style="dark" />
             <GestureHandlerRootView>
-                <KeyboardProvider>
-                    <Stack
-                        screenOptions={{
-                            headerShown: false,
-                        }}
-                    />
-                </KeyboardProvider>
+                <Host>
+                    <KeyboardProvider>
+                        <Stack
+                            screenOptions={{
+                                headerShown: false,
+                            }}
+                        />
+                    </KeyboardProvider>
+                </Host>
             </GestureHandlerRootView>
         </>
     );
