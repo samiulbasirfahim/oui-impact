@@ -44,7 +44,7 @@ const variants = {
     outline: {
         backgroundColor: "transparent",
         borderWidth: 1,
-        borderColor: COLORS.primary,
+        borderColor: COLORS.secondaryText + "33",
     },
     ghost: {
         backgroundColor: "transparent",
@@ -62,7 +62,7 @@ const textColors = {
     default: "#ffffff",
     secondary: "#ffffff",
     accent: "#ffffff",
-    outline: COLORS.primary,
+    outline: COLORS.text,
     ghost: COLORS.primary,
 } as const;
 
@@ -115,7 +115,7 @@ export function RNButton({
                 <RNText
                     size={textSizes[size]}
                     variant="base"
-                    style={{ color: textColors[variant] }}
+                    style={{ color: textColors[variant], fontWeight: "500" }}
                 >
                     {children}
                 </RNText>

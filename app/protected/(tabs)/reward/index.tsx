@@ -8,7 +8,7 @@ import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Link, Stack } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { GradientBG } from "@/components/ui/gradient-bg";
 import { GradientButton } from "@/components/ui/gradient-button";
@@ -42,11 +42,9 @@ export default function Screen() {
                             <RNText
                                 style={{
                                     color: COLORS.background,
-                                    fontSize: 38,
-                                    paddingTop: 8,
-                                    paddingBottom: 16,
                                     fontWeight: "bold",
                                 }}
+                                size="4xl"
                             >
                                 1,250
                             </RNText>
@@ -111,7 +109,7 @@ export default function Screen() {
                     </View>
                 </GradientBG>
 
-                <Link href="/protected/(tabs)/reward/watch-earn" asChild>
+                <Link href="/protected/others/rewards/watch-earn" asChild>
                     <RNButton
                         nowrap
                         style={{
@@ -145,7 +143,7 @@ export default function Screen() {
                         <RNText variant="title" size="lg">
                             Redeem your points
                         </RNText>
-                        <Link href="/protected/(tabs)/reward/redeem">
+                        <Link href="/protected/others/rewards/leaderboard" asChild>
                             <RNText
                                 style={{
                                     color: COLORS.primary,
@@ -154,57 +152,67 @@ export default function Screen() {
                                 }}
                                 size="sm"
                             >
-                                View Point History
+                                View leadearboard
                             </RNText>
                         </Link>
                     </View>
 
                     <View style={styles.redeedmChildContainer}>
-                        <View style={styles.redemChildItem}>
-                            <AntDesign
-                                name="percentage"
-                                size={28}
-                                color={COLORS.secondary}
-                                style={{
-                                    backgroundColor: COLORS.secondary + "20",
-                                    padding: 12,
-                                    borderRadius: 50,
-                                }}
-                            />
-                            <RNText
-                                variant="title"
-                                style={{
-                                    marginTop: 8,
-                                    textAlign: "center",
-                                }}
-                                size="sm"
+                        <Link href={"/protected/others/rewards/discount"} asChild>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                style={styles.redeemChildItem}
                             >
-                                Discounts
-                            </RNText>
-                        </View>
-                        <View style={styles.redemChildItem}>
-                            <FontAwesome5
-                                name="gift"
-                                size={28}
-                                color={COLORS.primary}
-                                style={{
-                                    backgroundColor: COLORS.primary + "20",
-                                    padding: 12,
-                                    borderRadius: 50,
-                                }}
-                            />
-                            <RNText
-                                variant="title"
-                                style={{
-                                    marginTop: 8,
-                                    textAlign: "center",
-                                }}
-                                size="sm"
+                                <AntDesign
+                                    name="percentage"
+                                    size={28}
+                                    color={COLORS.secondary}
+                                    style={{
+                                        backgroundColor: COLORS.secondary + "20",
+                                        padding: 12,
+                                        borderRadius: 50,
+                                    }}
+                                />
+                                <RNText
+                                    variant="title"
+                                    style={{
+                                        marginTop: 8,
+                                        textAlign: "center",
+                                    }}
+                                    size="sm"
+                                >
+                                    Discounts
+                                </RNText>
+                            </TouchableOpacity>
+                        </Link>
+                        <Link href={"/protected/others/rewards/offer"} asChild>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                style={styles.redeemChildItem}
                             >
-                                Offers
-                            </RNText>
-                        </View>
-                        <View style={styles.redemChildItem}>
+                                <FontAwesome5
+                                    name="gift"
+                                    size={28}
+                                    color={COLORS.primary}
+                                    style={{
+                                        backgroundColor: COLORS.primary + "20",
+                                        padding: 12,
+                                        borderRadius: 50,
+                                    }}
+                                />
+                                <RNText
+                                    variant="title"
+                                    style={{
+                                        marginTop: 8,
+                                        textAlign: "center",
+                                    }}
+                                    size="sm"
+                                >
+                                    Offers
+                                </RNText>
+                            </TouchableOpacity>
+                        </Link>
+                        <View style={styles.redeemChildItem}>
                             <Fontisto
                                 name="heart"
                                 size={28}
@@ -224,7 +232,7 @@ export default function Screen() {
                                 }}
                                 size="sm"
                             >
-                                Partner's App Reward
+                                Charity
                             </RNText>
                         </View>
                     </View>
@@ -338,7 +346,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 16,
         marginTop: 16,
-        backgroundColor: COLORS.backgroundSecondary,
+        backgroundColor: COLORS.primary + "10",
     },
     redeedmChildContainer: {
         marginTop: 12,
@@ -347,7 +355,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
-    redemChildItem: {
+    redeemChildItem: {
         width: "32%",
         borderRadius: 12,
         padding: 12,

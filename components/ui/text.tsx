@@ -9,12 +9,16 @@ const sizes = {
     lg: { fontSize: 18, lineHeight: 26 },
     xl: { fontSize: 22, lineHeight: 28 },
     "2xl": { fontSize: 24, lineHeight: 32 },
+    "4xl": {
+        fontSize: 36,
+        lineHeight: 40,
+    },
 };
 
 const variants = {
     base: { color: COLORS.text },
     title: { fontWeight: "bold", color: COLORS.text },
-    subtitle: { fontStyle: "italic", color: COLORS.secondary },
+    subtitle: { fontStyle: "semibold", color: COLORS.text },
     primary: { fontWeight: "bold", color: COLORS.primary },
     accent: { fontWeight: "light", color: COLORS.accent },
     secondary: { color: COLORS.secondaryText },

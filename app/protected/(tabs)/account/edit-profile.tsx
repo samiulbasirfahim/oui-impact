@@ -96,15 +96,6 @@ export default function Screen() {
                     onChangeText={(t) => handleInputChange("fullName", t)}
                 />
 
-                <RNInput
-                    label="Phone Number"
-                    value={formData.phoneNumber}
-                    prefix={formData.countryCode}
-                    onChangeText={(t) => handleInputChange("fullName", t)}
-                    keyboardType="phone-pad"
-                    key={formData.countryCode}
-                />
-
                 <RNCountryPicker
                     value={
                         (formData.countryFlag ? formData.countryFlag + "    " : "") +
@@ -115,6 +106,15 @@ export default function Screen() {
                         handleInputChange("countryFlag", country.flag);
                         handleInputChange("countryCode", country.dial_code);
                     }}
+                />
+
+                <RNInput
+                    label="Phone Number"
+                    value={formData.phoneNumber}
+                    prefix={formData.countryCode}
+                    onChangeText={(t) => handleInputChange("fullName", t)}
+                    keyboardType="phone-pad"
+                    key={formData.countryCode}
                 />
 
                 <RNPicker

@@ -12,6 +12,8 @@ import { IMPACT } from "@/type/recent-impact";
 import { RNButton } from "@/components/ui/button";
 import { Stack } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const MOCK_IMPACT_DATA: IMPACT[] = [
     {
@@ -84,7 +86,7 @@ export default function ImpactIndex() {
                         textAlign: "center",
                         marginHorizontal: 16,
                         padding: 14,
-                        backgroundColor: COLORS.primary + "20",
+                        backgroundColor: COLORS.impactCardsBG,
                         borderRadius: 20,
                         fontWeight: "500",
                         color: COLORS.secondary,
@@ -407,6 +409,67 @@ export default function ImpactIndex() {
                     <FontAwesome5 name="medal" size={24} color={"#9CA3AF"} />
                 </View>
 
+                <View
+                    style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        marginTop: 16,
+                        gap: 8,
+                        borderBottomWidth: 1,
+                        borderBottomColor: COLORS.muted + "20",
+                        paddingBottom: 16,
+                    }}
+                >
+                    <TouchableOpacity
+                        onPress={() => {
+                            console.log("CLICKED SHARE BUTTON");
+                        }}
+                    >
+                        <FontAwesome
+                            name="instagram"
+                            size={22}
+                            color={COLORS.background}
+                            style={{
+                                padding: 14,
+                                backgroundColor: "#EC4899",
+                                borderRadius: "100%",
+                            }}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            console.log("CLICKED SHARE BUTTON");
+                        }}
+                    >
+                        <FontAwesome6
+                            name="tiktok"
+                            size={22}
+                            color={COLORS.background}
+                            style={{
+                                padding: 14,
+                                backgroundColor: "#111827",
+                                borderRadius: "100%",
+                            }}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            console.log("CLICKED SHARE BUTTON");
+                        }}
+                    >
+                        <FontAwesome
+                            name="whatsapp"
+                            size={22}
+                            color={COLORS.background}
+                            style={{
+                                padding: 14,
+                                backgroundColor: "#10B981",
+                                borderRadius: "100%",
+                            }}
+                        />
+                    </TouchableOpacity>
+                </View>
+
                 <RNText
                     style={{
                         textAlign: "center",
@@ -450,7 +513,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         textAlign: "center",
         padding: 14,
-        backgroundColor: COLORS.primary + "40",
+        backgroundColor: COLORS.impactCardsBG,
         borderRadius: 20,
         fontWeight: "500",
         color: COLORS.secondary,
@@ -461,7 +524,7 @@ const styles = StyleSheet.create({
     progressContainer: {
         alignItems: "center",
         gap: 8,
-        backgroundColor: COLORS.primary + "40",
+        backgroundColor: COLORS.impactCardsBG,
         borderRadius: 20,
         padding: 16,
     },

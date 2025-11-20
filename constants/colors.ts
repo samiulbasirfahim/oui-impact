@@ -9,4 +9,5 @@ export const COLORS = {
     text: "#051532",
     secondaryText: "#6B7280",
     muted: "#929292",
+    impactCardsBG: "#F0FDF4",
 };

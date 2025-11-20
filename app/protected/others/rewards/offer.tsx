@@ -7,7 +7,7 @@ export default function Screen() {
         <>
             <Stack.Screen options={{ title: "Redeem Points" }} />
             <View>
-                <RNText>Redeem your points here!</RNText>
+                <RNText>Offers!</RNText>
             </View>
         </>
     );

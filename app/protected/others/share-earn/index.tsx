@@ -187,7 +187,7 @@ export default function Screen() {
                             <View
                                 style={{
                                     height: 1,
-                                    backgroundColor: COLORS.primary,
+                                    backgroundColor: COLORS.muted + "33",
                                 }}
                             ></View>
                         )}

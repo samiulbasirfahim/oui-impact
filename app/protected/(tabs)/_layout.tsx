@@ -10,7 +10,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function ProtectedLayout() {
     const { bottom } = useSafeAreaInsets();
 
-
     return (
         <RNTabs
             tabBarPosition="bottom"
@@ -68,7 +67,7 @@ function CustomTabBar(props: MaterialTopTabBarProps) {
                         }}
                         key={route.key}
                         style={{
-                            paddingBottom: 16,
+                            paddingVertical: 8,
                             flex: 1,
                             alignItems: "center",
                             gap: 4,
