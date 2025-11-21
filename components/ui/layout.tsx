@@ -4,6 +4,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import {
     SafeAreaView,
     SafeAreaViewProps,
+    useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 
 export function Layout({ children, style, ...props }: Props) {
     const padding = 12;
+    const { bottom } = useSafeAreaInsets();
 
     return (
         <SafeAreaView
@@ -30,6 +32,7 @@ export function Layout({ children, style, ...props }: Props) {
                     {
                         flexGrow: 1,
                         gap: 8,
+                        paddingBottom: 40 + bottom,
                     },
                     style,
                 ]}

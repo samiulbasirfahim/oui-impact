@@ -7,6 +7,7 @@ export default function ShareEarnLayout() {
         <Stack
             screenOptions={{
                 headerTransparent: true,
+                headerTitle: "",
                 headerLeft(props) {
                     return (
                         <TouchableOpacity

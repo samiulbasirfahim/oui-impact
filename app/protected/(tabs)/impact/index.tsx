@@ -424,49 +424,37 @@ export default function ImpactIndex() {
                         onPress={() => {
                             console.log("CLICKED SHARE BUTTON");
                         }}
+                        style={{
+                            padding: 14,
+                            backgroundColor: "#EC4899",
+                            borderRadius: "50%",
+                        }}
                     >
-                        <FontAwesome
-                            name="instagram"
-                            size={22}
-                            color={COLORS.background}
-                            style={{
-                                padding: 14,
-                                backgroundColor: "#EC4899",
-                                borderRadius: "100%",
-                            }}
-                        />
+                        <FontAwesome name="instagram" size={22} color={COLORS.background} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
                             console.log("CLICKED SHARE BUTTON");
                         }}
+                        style={{
+                            padding: 14,
+                            backgroundColor: "#111827",
+                            borderRadius: "50%",
+                        }}
                     >
-                        <FontAwesome6
-                            name="tiktok"
-                            size={22}
-                            color={COLORS.background}
-                            style={{
-                                padding: 14,
-                                backgroundColor: "#111827",
-                                borderRadius: "100%",
-                            }}
-                        />
+                        <FontAwesome6 name="tiktok" size={22} color={COLORS.background} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
                             console.log("CLICKED SHARE BUTTON");
                         }}
+                        style={{
+                            padding: 14,
+                            backgroundColor: "#10B981",
+                            borderRadius: "50%",
+                        }}
                     >
-                        <FontAwesome
-                            name="whatsapp"
-                            size={22}
-                            color={COLORS.background}
-                            style={{
-                                padding: 14,
-                                backgroundColor: "#10B981",
-                                borderRadius: "100%",
-                            }}
-                        />
+                        <FontAwesome name="whatsapp" size={22} color={COLORS.background} />
                     </TouchableOpacity>
                 </View>
 

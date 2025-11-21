@@ -1,17 +1,17 @@
-import Fontisto from "@expo/vector-icons/Fontisto";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import TREE from "@/assets/svgs/tree.svg";
 import BOOK from "@/assets/svgs/book.svg";
+import TREE from "@/assets/svgs/tree.svg";
 import { RNButton } from "@/components/ui/button";
+import { GradientBG } from "@/components/ui/gradient-bg";
+import { GradientButton } from "@/components/ui/gradient-button";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
-import { Link, Stack } from "expo-router";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { GradientBG } from "@/components/ui/gradient-bg";
-import { GradientButton } from "@/components/ui/gradient-button";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Fontisto from "@expo/vector-icons/Fontisto";
+import { Link, router, Stack } from "expo-router";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function Screen() {
     return (
@@ -212,29 +212,34 @@ export default function Screen() {
                                 </RNText>
                             </TouchableOpacity>
                         </Link>
-                        <View style={styles.redeemChildItem}>
-                            <Fontisto
-                                name="heart"
-                                size={28}
-                                color={COLORS.accent}
-                                style={{
-                                    backgroundColor: COLORS.accent + "20",
-                                    padding: 12,
-                                    borderRadius: 50,
-                                }}
-                            />
-
-                            <RNText
-                                variant="title"
-                                style={{
-                                    marginTop: 8,
-                                    textAlign: "center",
-                                }}
-                                size="sm"
+                        <Link href={"/protected/others/rewards/charity"} asChild>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                style={styles.redeemChildItem}
                             >
-                                Charity
-                            </RNText>
-                        </View>
+                                <Fontisto
+                                    name="heart"
+                                    size={28}
+                                    color={COLORS.accent}
+                                    style={{
+                                        backgroundColor: COLORS.accent + "20",
+                                        padding: 12,
+                                        borderRadius: 50,
+                                    }}
+                                />
+
+                                <RNText
+                                    variant="title"
+                                    style={{
+                                        marginTop: 8,
+                                        textAlign: "center",
+                                    }}
+                                    size="sm"
+                                >
+                                    Charity
+                                </RNText>
+                            </TouchableOpacity>
+                        </Link>
                     </View>
                 </View>
 
@@ -326,7 +331,9 @@ export default function Screen() {
                     title="Referrals List"
                     subtitle="Get 2x points on all Referrals!"
                     buttonText="View"
-                    onPress={() => { }}
+                    onPress={() => {
+                        router.push("/protected/others/share-earn");
+                    }}
                 />
                 <View style={{ height: 32 }} />
             </Layout>

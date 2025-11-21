@@ -1,9 +1,9 @@
+import { COLORS } from "@/constants";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import { RNText, RNTextProps } from "./text";
-import { COLORS } from "@/constants";
 
 type Props = {
     label?: string;

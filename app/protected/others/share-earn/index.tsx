@@ -21,7 +21,7 @@ export default function Screen() {
         return {
             id: i + 1,
             name: `Friend ${i + 1}`,
-            platform: i % 2 === 0 ? "Facebook" : "Instagram",
+            date: new Date().toISOString().split("T")[0],
             avatar: require("@/assets/images/placeholder-image.jpg"),
         };
     });
@@ -120,7 +120,7 @@ export default function Screen() {
                             />
                         ) : (
                             <RNText size="lg" variant="title">
-                                Invite a Friend
+                                Invited Friends
                             </RNText>
                         )}
 
@@ -158,24 +158,32 @@ export default function Screen() {
                                             style={{ width: 48, height: 48, borderRadius: 24 }}
                                         />
                                         <View>
-                                            <RNText variant="title">{item.item.name}</RNText>
-                                            <RNText
-                                                variant="caption"
-                                                size="sm"
-                                                style={{ color: COLORS.secondaryText }}
-                                            >
-                                                {item.item.platform}
+                                            <RNText variant="title" size="lg">
+                                                {item.item.name}
                                             </RNText>
+                                            {
+                                                <RNText
+                                                    variant="caption"
+                                                    size="sm"
+                                                    style={{ color: COLORS.secondaryText }}
+                                                >
+                                                    {item.item.date}
+                                                </RNText>
+                                            }
                                         </View>
                                     </View>
-                                    <RNButton
+                                    <RNText
+                                        variant="title"
                                         size="sm"
                                         style={{
-                                            opacity: item.index % 3 === 0 ? 0.6 : 1,
+                                            color: COLORS.primary,
+                                            backgroundColor: COLORS.primary + "22",
+                                            padding: 6,
+                                            borderRadius: 4,
                                         }}
                                     >
-                                        {item.index % 3 === 0 ? "Accepted" : "Invite"}
-                                    </RNButton>
+                                        550 Points
+                                    </RNText>
                                 </View>
                             );
                         }}

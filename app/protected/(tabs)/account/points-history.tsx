@@ -1,6 +1,9 @@
-import { Layout } from "@/components/ui/layout";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { PointItem } from "@/components/common/history-point-item";
+import { GradientBG } from "@/components/ui/gradient-bg";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { rawData } from "@/lib/point-history-fake-data";
 import { Stack } from "expo-router";
 import { useState } from "react";
 import {
@@ -10,6 +13,7 @@ import {
     useWindowDimensions,
     View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { SceneMap, TabView } from "react-native-tab-view";
 
 const renderSchene = SceneMap({
@@ -30,7 +34,78 @@ export default function Screen() {
     return (
         <>
             <Stack.Screen options={{ headerTitle: "Point History" }} />
-            <Layout>
+            <SafeAreaView
+                style={{
+                    flex: 1,
+                    backgroundColor: COLORS.background,
+                    padding: 16,
+                }}
+                edges={[]}
+            >
+                <GradientBG
+                    style={{
+                        padding: 20,
+                        borderRadius: 16,
+                        marginBottom: 16,
+                    }}
+                >
+                    <View
+                        style={{ flexDirection: "row", justifyContent: "space-between" }}
+                    >
+                        <View>
+                            <RNText
+                                style={{
+                                    color: COLORS.background,
+                                }}
+                            >
+                                Total Points
+                            </RNText>
+                            <RNText
+                                size="4xl"
+                                style={{
+                                    color: COLORS.background,
+                                    fontWeight: "bold",
+                                }}
+                            >
+                                2,879
+                            </RNText>
+                        </View>
+                        <View
+                            style={{
+                                padding: 14,
+                                backgroundColor: COLORS.backgroundSecondary + "33",
+                                alignSelf: "flex-start",
+                                borderRadius: "50%",
+                                borderWidth: 1,
+                                borderColor: COLORS.backgroundSecondary + "33",
+                            }}
+                        >
+                            <FontAwesome6 name="coins" size={28} color={COLORS.background} />
+                        </View>
+                    </View>
+
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            marginTop: 20,
+                        }}
+                    >
+                        <View style={styles.cardChildren}>
+                            <RNText style={styles.cardItemText}>This Month</RNText>
+                            <RNText size="xl" variant="title" style={styles.cardItemText}>
+                                +450
+                            </RNText>
+                        </View>
+                        <View style={styles.cardChildren}>
+                            <RNText style={styles.cardItemText}>Redeemed</RNText>
+                            <RNText size="xl" variant="title" style={styles.cardItemText}>
+                                1,200
+                            </RNText>
+                        </View>
+                    </View>
+                </GradientBG>
+
                 <TabView
                     renderScene={renderSchene}
                     navigationState={{ index, routes }}
@@ -67,9 +142,9 @@ export default function Screen() {
                                             }}
                                         >
                                             <RNText
-                                                variant="primary"
-                                                size="lg"
+                                                size="md"
                                                 style={{
+                                                    fontWeight: isFocused ? "500" : "400",
                                                     color: isFocused
                                                         ? COLORS.backgroundSecondary
                                                         : COLORS.muted,
@@ -84,66 +159,66 @@ export default function Screen() {
                         );
                     }}
                 />
-            </Layout>
+            </SafeAreaView>
         </>
     );
 }
 
-const data = [
-    {
-        title: "2025-11-09",
-        data: ["Component A", "Component B", "Component C"],
-    },
-    {
-        title: "2025-11-08",
-        data: ["Component D", "Component E"],
-    },
-    {
-        title: "2025-11-07",
-        data: ["Component F"],
-    },
-];
-
 function AllTab() {
+    const allData = rawData;
+
     return (
-        <View>
-            <RNText>All Points History</RNText>
-            <SectionList
-                sections={data}
-                keyExtractor={(item, index) => item + index}
-                renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <RNText style={styles.itemText}>{item}</RNText>
-                    </View>
-                )}
-                renderSectionHeader={({ section: { title } }) => (
-                    <RNText style={styles.header}>{title}</RNText>
-                )}
-                contentContainerStyle={styles.container}
-            />
-        </View>
+        <SectionList
+            sections={allData}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <PointItem item={item} />}
+            renderSectionHeader={({ section }) => (
+                <RNText style={styles.header}>{section.date}</RNText>
+            )}
+            contentContainerStyle={styles.container}
+        />
     );
 }
 
 function EarnedTab() {
+    const earnedData = rawData
+        .map((s) => ({ ...s, items: s.data.filter((i) => i.points > 0) }))
+        .filter((s) => s.items.length > 0);
+
     return (
-        <View>
-            <RNText>Earned Points History</RNText>
-        </View>
+        <SectionList
+            sections={earnedData}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <PointItem item={item} />}
+            renderSectionHeader={({ section }) => (
+                <RNText style={styles.header}>{section.date}</RNText>
+            )}
+            contentContainerStyle={styles.container}
+        />
     );
 }
 
 function RedeemedTab() {
+    const redeemedData = rawData
+        .map((s) => ({ ...s, items: s.data.filter((i) => i.points < 0) }))
+        .filter((s) => s.items.length > 0);
+
     return (
-        <View>
-            <RNText>Redeemed Points History</RNText>
-        </View>
+        <SectionList
+            sections={redeemedData}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <PointItem item={item} />}
+            renderSectionHeader={({ section }) => (
+                <RNText style={styles.header}>{section.date}</RNText>
+            )}
+            contentContainerStyle={styles.container}
+        />
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
+        paddingVertical: 16,
     },
     header: {
         fontSize: 18,
@@ -160,5 +235,19 @@ const styles = StyleSheet.create({
     itemText: {
         fontSize: 16,
         color: "#222",
+    },
+
+    cardChildren: {
+        width: "48%",
+        gap: 4,
+        backgroundColor: COLORS.backgroundSecondary + "33",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: COLORS.backgroundSecondary + "33",
+        padding: 12,
+    },
+
+    cardItemText: {
+        color: COLORS.backgroundSecondary,
     },
 });

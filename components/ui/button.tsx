@@ -1,13 +1,13 @@
+import { COLORS } from "@/constants";
 import Entypo from "@expo/vector-icons/Entypo";
 import { ReactNode } from "react";
 import {
+    ActivityIndicator,
     TouchableOpacity,
     TouchableOpacityProps,
-    ActivityIndicator,
-    ViewStyle,
     View,
+    ViewStyle,
 } from "react-native";
-import { COLORS } from "@/constants";
 import { RNText } from "./text";
 
 const sizes = {
