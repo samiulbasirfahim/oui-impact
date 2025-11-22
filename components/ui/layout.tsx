@@ -10,10 +10,11 @@ import {
 type Props = {
     children?: ReactNode;
     stickyHeaderIndices?: number[];
+    noPadding?: boolean;
 } & SafeAreaViewProps;
 
 export function Layout({ children, style, ...props }: Props) {
-    const padding = 12;
+    const padding = props.noPadding ? 0 : 16;
     const { bottom } = useSafeAreaInsets();
 
     return (

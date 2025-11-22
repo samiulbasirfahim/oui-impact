@@ -181,13 +181,20 @@ function AllTab() {
 }
 
 function EarnedTab() {
-    const earnedData = rawData
-        .map((s) => ({ ...s, items: s.data.filter((i) => i.points > 0) }))
-        .filter((s) => s.items.length > 0);
+    const earnedData = rawData.map((section) =>
+        section.data.filter((item) => item.points > 0),
+    );
+
+    const finalEarnedData = rawData
+        .map((s, index) => ({
+            date: s.date,
+            data: earnedData[index],
+        }))
+        .filter((s) => s.data.length > 0);
 
     return (
         <SectionList
-            sections={earnedData}
+            sections={finalEarnedData}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => <PointItem item={item} />}
             renderSectionHeader={({ section }) => (
@@ -199,13 +206,20 @@ function EarnedTab() {
 }
 
 function RedeemedTab() {
-    const redeemedData = rawData
-        .map((s) => ({ ...s, items: s.data.filter((i) => i.points < 0) }))
-        .filter((s) => s.items.length > 0);
+    const redeemedData = rawData.map((section) =>
+        section.data.filter((item) => item.points < 0),
+    );
+
+    const finalRedeemedData = rawData
+        .map((s, index) => ({
+            date: s.date,
+            data: redeemedData[index],
+        }))
+        .filter((s) => s.data.length > 0);
 
     return (
         <SectionList
-            sections={redeemedData}
+            sections={finalRedeemedData}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => <PointItem item={item} />}
             renderSectionHeader={({ section }) => (

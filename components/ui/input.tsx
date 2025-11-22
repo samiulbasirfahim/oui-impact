@@ -164,9 +164,10 @@ export function RNInput({
                     <TouchableOpacity
                         style={{
                             position: "absolute",
-                            right: 16,
+                            right: 10,
                             top: eyeIconTopOffset,
-                            transform: [{ translateY: -9 }],
+                            transform: [{ translateY: -15 }],
+                            padding: 6
                         }}
                         onPress={() => setShowPassword((prev) => !prev)}
                         activeOpacity={0.7}

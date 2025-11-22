@@ -4,6 +4,7 @@ export const COLORS = {
     accent: "#DE5D83",
     purple: "#9333EA",
     blue: "#2563EB",
+    orange: "#F59E0B",
     background: "#FFFFFF",
     backgroundSecondary: "#F4FAFB",
     text: "#051532",

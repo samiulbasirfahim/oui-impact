@@ -324,7 +324,9 @@ export default function Screen() {
                     title="Premium Upgrade"
                     subtitle="Get 2x points on all videos!"
                     buttonText="Upgrade"
-                    onPress={() => { }}
+                    onPress={() => {
+                        router.push("/protected/others/subscription");
+                    }}
                 />
 
                 <GradientButton
