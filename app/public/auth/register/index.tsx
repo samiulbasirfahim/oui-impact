@@ -8,6 +8,7 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Link, router } from "expo-router";
 import { useState } from "react";
+import { Alert } from "react-native";
 
 type FormState = {
     email?: string;
@@ -48,12 +49,14 @@ export default function LoginScreen() {
                 style={{
                     marginTop: 12,
                 }}
-                size="sm"
                 label="By continuing, you agree to our Terms of Service and Privacy Policy."
                 value={form.checkBox}
                 onChange={(checked) =>
                     handleChange("checkBox", checked ? "true" : "false")
                 }
+                onPressLabel={() => {
+                    router.push("/public/terms-conditions");
+                }}
             />
             <RNButton
                 onPress={() => {

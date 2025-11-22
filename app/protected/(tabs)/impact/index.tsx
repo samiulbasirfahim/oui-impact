@@ -10,7 +10,7 @@ import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { GradientBG } from "@/components/ui/gradient-bg";
 import { IMPACT } from "@/type/recent-impact";
 import { RNButton } from "@/components/ui/button";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -104,7 +104,7 @@ export default function ImpactIndex() {
                         >
                             12L
                         </RNText>
-                        <RNText style={{ color: COLORS.muted, fontStyle: "italic" }}>
+                        <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
                             💧Water Donated
                         </RNText>
                     </View>
@@ -117,7 +117,7 @@ export default function ImpactIndex() {
                         >
                             4
                         </RNText>
-                        <RNText style={{ color: COLORS.muted, fontStyle: "italic" }}>
+                        <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
                             🌲 Water Donated
                         </RNText>
                     </View>
@@ -137,66 +137,70 @@ export default function ImpactIndex() {
                         Keep engaging to reach your next milestone.
                     </RNText>
                 </View>
-                <View
-                    style={{
-                        ...styles.statCard,
-                        flexDirection: "column",
-                        gap: 16,
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
-                    <View style={{ ...styles.statChild, flexDirection: "row", gap: 12 }}>
+                {false && (
+                    <View
+                        style={{
+                            ...styles.statCard,
+                            flexDirection: "column",
+                            gap: 16,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
                         <View
+                            style={{ ...styles.statChild, flexDirection: "row", gap: 12 }}
+                        >
+                            <View
+                                style={{
+                                    padding: 10,
+                                    borderRadius: 24,
+                                    backgroundColor: COLORS.background + "40",
+                                }}
+                            >
+                                <BOOK width={22} height={22} />
+                            </View>
+                            <RNText variant="title" size="lg">
+                                Room to Read
+                            </RNText>
+                        </View>
+
+                        <RNText
                             style={{
-                                padding: 10,
-                                borderRadius: 24,
-                                backgroundColor: COLORS.background + "40",
+                                textAlign: "center",
+                                color: COLORS.muted,
                             }}
                         >
-                            <BOOK width={22} height={22} />
-                        </View>
-                        <RNText variant="title" size="lg">
-                            Room to Read
+                            You're supporting Room to Read — helping children get access to
+                            books.
                         </RNText>
-                    </View>
 
-                    <RNText
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.muted,
-                        }}
-                    >
-                        You're supporting Room to Read — helping children get access to
-                        books.
-                    </RNText>
-
-                    <TouchableOpacity
-                        style={{
-                            width: "100%",
-                            borderRadius: 12,
-                        }}
-                    >
-                        <GradientBG
-                            colors={["#A5D3B4", "#5A92B1"]}
+                        <TouchableOpacity
                             style={{
-                                paddingVertical: 10,
                                 width: "100%",
                                 borderRadius: 12,
                             }}
                         >
-                            <RNText
+                            <GradientBG
+                                colors={["#A5D3B4", "#5A92B1"]}
                                 style={{
-                                    textAlign: "center",
-                                    color: COLORS.background,
+                                    paddingVertical: 10,
+                                    width: "100%",
+                                    borderRadius: 12,
                                 }}
-                                size="lg"
                             >
-                                Learn More
-                            </RNText>
-                        </GradientBG>
-                    </TouchableOpacity>
-                </View>
+                                <RNText
+                                    style={{
+                                        textAlign: "center",
+                                        color: COLORS.background,
+                                    }}
+                                    size="lg"
+                                >
+                                    Learn More
+                                </RNText>
+                            </GradientBG>
+                        </TouchableOpacity>
+                    </View>
+                )}
 
                 <View style={{ marginTop: 24, marginBottom: 12 }}>
                     <RNText
@@ -360,6 +364,9 @@ export default function ImpactIndex() {
                             marginTop: 12,
                             width: "100%",
                             backgroundColor: COLORS.text,
+                        }}
+                        onPress={() => {
+                            router.push("/protected/others/subscription");
                         }}
                     >
                         Upgrade to Premium

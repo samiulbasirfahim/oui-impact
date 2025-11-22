@@ -3,12 +3,12 @@ import { COLORS } from "@/constants";
 import { router, Stack } from "expo-router";
 import { TouchableOpacity } from "react-native";
 
-export function RNPublicStack() {
+export function RNPublicStack({ title }: { title?: string }) {
     return (
         <Stack
             screenOptions={{
                 headerShadowVisible: false,
-                headerTitle: "",
+                headerTitle: title ? title : "",
                 headerStyle: {
                     backgroundColor: COLORS.background,
                 },

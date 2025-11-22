@@ -11,6 +11,7 @@ type Props = {
     value?: boolean;
     disableExternalToggle?: boolean;
     size?: RNTextProps["size"];
+    onPressLabel?: () => void;
 } & ViewProps;
 
 export function RNCheckbox({
@@ -20,6 +21,7 @@ export function RNCheckbox({
     style,
     size = "md",
     disableExternalToggle,
+    onPressLabel,
 }: Props) {
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -44,7 +46,6 @@ export function RNCheckbox({
     return (
         <View
             style={[{ flexDirection: "row", alignItems: "center", gap: 6 }, style]}
-            onTouchEnd={toggleCheckbox}
         >
             <View
                 style={{
@@ -57,6 +58,7 @@ export function RNCheckbox({
                     alignItems: "center",
                     backgroundColor: isChecked ? COLORS.primary : "transparent",
                 }}
+                onTouchEnd={toggleCheckbox}
             >
                 {isChecked && (
                     <Entypo
@@ -66,7 +68,7 @@ export function RNCheckbox({
                     />
                 )}
             </View>
-            <RNText variant="secondary" size={size}>
+            <RNText variant="secondary" size={size} onPress={onPressLabel}>
                 {label}
             </RNText>
         </View>

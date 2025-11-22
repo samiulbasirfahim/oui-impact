@@ -3,7 +3,6 @@ import { COLORS } from "@/constants";
 import { RNTabs } from "@/lib/tabNavigation";
 import { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs";
 import { Tabs } from "expo-router";
-import { useState } from "react";
 import { Dimensions, Pressable, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 

@@ -56,7 +56,7 @@ export function ProfileCard() {
                     alignItems: "center",
                 }}
                 onPress={() => {
-                    router.push("/protected/(tabs)/account/edit-profile");
+                    router.push("/protected/others/accounts/edit-profile");
                 }}
             >
                 <FontAwesome6 name="pencil" size={24} color={COLORS.muted} />

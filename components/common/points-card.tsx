@@ -17,7 +17,7 @@ export function PointsCard() {
                 paddingVertical: 16,
             }}
             onPress={() => {
-                router.push("/protected/(tabs)/account/points-history");
+                router.push("/protected/others/accounts/points-history");
             }}
         >
             <COINS width={40} height={40} />

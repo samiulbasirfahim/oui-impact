@@ -7,7 +7,7 @@ import { Layout } from "@/components/ui/layout";
 import { RNSwitch } from "@/components/ui/switch";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
 
@@ -132,6 +132,9 @@ export default function Screen() {
                 <RNSettingButton
                     icon={<INFO width={24} height={24} />}
                     title="Help & Support"
+                    onPress={() => {
+                        router.push("/protected/others/accounts/help-support");
+                    }}
                 />
 
                 <RNSettingButton
