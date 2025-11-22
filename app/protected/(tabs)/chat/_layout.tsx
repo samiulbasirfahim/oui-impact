@@ -1,5 +1,4 @@
 import RADIXDASHBOARD from "@/assets/svgs/radix-icons_dashboard.svg";
-import Entypo from "@expo/vector-icons/Entypo";
 import ASSISTANT from "@/assets/svgs/assistant.svg";
 import { GradientBG } from "@/components/ui/gradient-bg";
 import { RNInput } from "@/components/ui/input";
@@ -9,6 +8,8 @@ import { router } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { FlatList, Keyboard, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { RNButton } from "@/components/ui/button";
+import Feather from "@expo/vector-icons/Feather";
 
 export default function ChatLayout() {
     const chatList = [
@@ -104,11 +105,36 @@ export default function ChatLayout() {
                             placeholderTextColor={COLORS.muted}
                         />
 
+                        <RNButton
+                            nowrap
+                            style={{
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                marginTop: 20,
+                                backgroundColor: "transparent",
+                                width: "90%",
+                                gap: 12,
+                            }}
+                            onPress={() => {
+                                router.push("/protected/(tabs)/chat");
+                            }}
+                        >
+                            <Feather name="edit" size={24} color="black" />
+                            <RNText
+                                style={{
+                                    fontSize: 16,
+                                }}
+                            >
+                                New Chat
+                            </RNText>
+                        </RNButton>
+
                         <View
                             style={{
                                 flex: 1,
                                 width: "90%",
-                                marginTop: 30,
+                                marginTop: 16,
                             }}
                         >
                             <RNText
@@ -123,23 +149,27 @@ export default function ChatLayout() {
                             <FlatList
                                 data={chatList}
                                 keyExtractor={(item) => item.id}
-                                renderItem={({ item }) => (
-                                    <Pressable
-                                        onPress={() => {
-                                            router.push(`/protected/chat/${item.id}`);
-                                        }}
-                                    >
-                                        <GradientBG
-                                            style={{
-                                                padding: 15,
-                                                borderRadius: 10,
-                                                marginTop: 10,
+                                renderItem={({ item }) => {
+                                    const selected_id = "1";
+                                    const Wrapper = item.id === selected_id ? GradientBG : View;
+                                    return (
+                                        <Pressable
+                                            onPress={() => {
+                                                router.push(`/protected/chat/${item.id}`);
                                             }}
                                         >
-                                            <RNText>{item.name}</RNText>
-                                        </GradientBG>
-                                    </Pressable>
-                                )}
+                                            <Wrapper
+                                                style={{
+                                                    padding: 15,
+                                                    borderRadius: 10,
+                                                    marginTop: 10,
+                                                }}
+                                            >
+                                                <RNText>{item.name}</RNText>
+                                            </Wrapper>
+                                        </Pressable>
+                                    );
+                                }}
                                 style={{
                                     marginTop: 20,
                                     width: "100%",

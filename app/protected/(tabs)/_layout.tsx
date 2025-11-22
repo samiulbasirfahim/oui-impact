@@ -46,7 +46,13 @@ function CustomTabBar(props: MaterialTopTabBarProps) {
     };
 
     return (
-        <View style={{ flexDirection: "row", paddingBottom: bottom }}>
+        <View
+            style={{
+                flexDirection: "row",
+                paddingBottom: bottom,
+                backgroundColor: COLORS.background,
+            }}
+        >
             {props.state.routes.map((route, index) => {
                 const isFocused = props.state.index === index;
                 const IconComponent = icons[route.name.toLowerCase()]?.default;
