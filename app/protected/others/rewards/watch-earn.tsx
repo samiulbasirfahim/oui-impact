@@ -1,11 +1,12 @@
 import { RNButton } from "@/components/ui/button";
 import { GradientBG } from "@/components/ui/gradient-bg";
+import { GradientButton } from "@/components/ui/gradient-button";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { ClaimButton, WatchButton } from "@/components/ui/watch-earn-buttons";
 import { COLORS } from "@/constants";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { StyleSheet, View } from "react-native";
 
 export default function Screen() {
@@ -143,6 +144,48 @@ export default function Screen() {
                     description="Invite friends to join"
                     icon={<FontAwesome5 name="share" size={24} color={COLORS.primary} />}
                     buttonTitle="Claim"
+                />
+
+                <View
+                    style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: 16,
+                        borderRadius: 8,
+                        marginTop: 8,
+                        backgroundColor: COLORS.orange + "22",
+                    }}
+                >
+                    <View
+                        style={{
+                            maxWidth: "70%",
+                        }}
+                    >
+                        <RNText variant="title" size="lg">
+                            Redeem Now
+                        </RNText>
+                        <RNText variant="secondary" size="md">
+                            Make offers, discounts or donations with your earned points
+                        </RNText>
+                    </View>
+
+                    <RNButton
+                        style={{
+                            backgroundColor: COLORS.orange,
+                        }}
+                    >
+                        Redeem
+                    </RNButton>
+                </View>
+
+                <GradientButton
+                    title="Premium Upgrade"
+                    subtitle="Get 2x points on all videos!"
+                    buttonText="Upgrade"
+                    onPress={() => {
+                        router.push("/protected/others/subscription");
+                    }}
                 />
             </Layout>
         </>
