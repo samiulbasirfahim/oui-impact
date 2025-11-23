@@ -49,6 +49,8 @@ function CustomTabBar(props: MaterialTopTabBarProps) {
         <View
             style={{
                 flexDirection: "row",
+                borderTopWidth: 1,
+                borderTopColor: COLORS.muted + "33",
                 paddingBottom: bottom,
                 backgroundColor: COLORS.background,
             }}

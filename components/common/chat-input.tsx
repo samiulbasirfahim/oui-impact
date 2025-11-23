@@ -32,6 +32,7 @@ export const ChatInput = ({ value, onChange, onSend, inputRef }: Props) => (
                 paddingHorizontal: 12,
                 paddingVertical: 15,
                 fontSize: 16,
+                maxHeight: 150,
             }}
             placeholder="Type Your Message"
             value={value}
