@@ -33,7 +33,7 @@ export default function ChatLayout() {
                 swipeEdgeWidth: 140,
                 drawerHideStatusBarOnOpen: true,
 
-                headerTitle: () => null,
+                headerTitle: "",
 
                 headerRight: () => (
                     <Pressable

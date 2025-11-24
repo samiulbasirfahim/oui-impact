@@ -12,7 +12,7 @@ export default {
         newArchEnabled: true,
         ios: {
             supportsTablet: true,
-            bundleIdentifier: "com.samiulbasirfahim.rxen.ouiimpact",
+            bundleIdentifier: "com.ouidogood.ouiimpact",
         },
         android: {
             adaptiveIcon: {
@@ -23,7 +23,7 @@ export default {
             },
             edgeToEdgeEnabled: true,
             predictiveBackGestureEnabled: false,
-            package: "com.samiulbasirfahim.rxen.ouiimpact",
+            package: "com.ouidogood.ouiimpact",
         },
         web: {
             output: "static",
