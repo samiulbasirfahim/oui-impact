@@ -13,6 +13,7 @@ import { Message } from "@/type/message";
 import { useKeyboardOffset } from "@/hooks/useKeyboardOffset";
 import { MessageBubble } from "@/components/common/chat-bubble";
 import { ChatInput } from "@/components/common/chat-input";
+import { RNBannerAd } from "@/components/common/banner-ad";
 
 const formatTime = (d: Date): string =>
     d.toLocaleTimeString("en-US", {
@@ -123,6 +124,7 @@ export default function ChatScreen() {
                         onChange={setInputText}
                         onSend={handleSend}
                     />
+                    <RNBannerAd />
                 </KeyboardAvoidingView>
             </View>
         </>

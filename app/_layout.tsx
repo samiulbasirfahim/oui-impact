@@ -10,11 +10,15 @@ import { useLoadFonts } from "@/hooks/useLoadFonts";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
-    // useLoadInterstitialAds()
+    useLoadInterstitialAds();
 
     const ready = useLoadFonts();
 
     if (Platform.OS === "android") NavigationBar.setStyle("light");
+
+    if (!ready) {
+        return null;
+    }
 
     return (
         <>

@@ -40,7 +40,7 @@ export default function CharityScreen() {
 
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Offers" }} />
+            <Stack.Screen options={{ headerTitle: "Charity" }} />
             <DiscountConfirmationModal
                 open={showModal}
                 onConfirm={onCloseModal}

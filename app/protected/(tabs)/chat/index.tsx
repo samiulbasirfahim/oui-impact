@@ -16,6 +16,7 @@ import { RNText } from "@/components/ui/text";
 import { RNButton } from "@/components/ui/button";
 import { ChatTemplateButton } from "@/components/ui/chat-template-button";
 import { ChatInput } from "@/components/common/chat-input";
+import { RNBannerAd } from "@/components/common/banner-ad";
 
 const createChatId = () => `chat-${Date.now()}`;
 
@@ -143,6 +144,7 @@ export default function NewChatScreen() {
                     onSend={handleSend}
                     inputRef={inputRef}
                 />
+                <RNBannerAd />
             </KeyboardAvoidingView>
         </View>
     );

@@ -57,7 +57,7 @@ export default function Screen() {
                 />
 
                 <RNSwitch
-                    label="Reawrd Notifications"
+                    label="Reward Notifications"
                     subLabel="Recieve app notification"
                     onToggle={(toggled) => {
                         setForm({ ...form, rewardNotifications: toggled });

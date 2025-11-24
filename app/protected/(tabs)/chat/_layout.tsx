@@ -4,7 +4,7 @@ import { GradientBG } from "@/components/ui/gradient-bg";
 import { RNInput } from "@/components/ui/input";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
-import { router } from "expo-router";
+import { router, usePathname } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { FlatList, Keyboard, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -20,6 +20,8 @@ export default function ChatLayout() {
 
     const { top } = useSafeAreaInsets();
 
+    const pathname = usePathname();
+
     return (
         <Drawer
             screenOptions={({ navigation }) => ({
@@ -27,6 +29,9 @@ export default function ChatLayout() {
                 headerStyle: {
                     height: 120,
                 },
+                drawerType: "slide",
+                swipeEdgeWidth: 140,
+                drawerHideStatusBarOnOpen: true,
 
                 headerTitle: () => null,
 
@@ -150,7 +155,7 @@ export default function ChatLayout() {
                                 data={chatList}
                                 keyExtractor={(item) => item.id}
                                 renderItem={({ item }) => {
-                                    const selected_id = "1";
+                                    const selected_id = pathname.split("/").pop();
                                     const Wrapper = item.id === selected_id ? GradientBG : View;
                                     return (
                                         <Pressable
@@ -160,9 +165,9 @@ export default function ChatLayout() {
                                         >
                                             <Wrapper
                                                 style={{
-                                                    padding: 15,
+                                                    padding: 8,
                                                     borderRadius: 10,
-                                                    marginTop: 10,
+                                                    marginTop: 6,
                                                 }}
                                             >
                                                 <RNText>{item.name}</RNText>

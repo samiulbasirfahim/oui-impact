@@ -31,7 +31,7 @@ export function useLoadInterstitialAds() {
                 return;
             }
 
-            if (!randomChance(50)) {
+            if (!randomChance(33)) {
                 return;
             }
 
