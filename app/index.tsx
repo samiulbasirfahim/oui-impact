@@ -1,6 +1,6 @@
 import { RNText } from "@/components/ui/text";
-import { Link, Redirect } from "expo-router";
-import { Text, View } from "react-native";
+import { Link } from "expo-router";
+import { View } from "react-native";
 
 export default function Index() {
     // return <Redirect href={"/protected/others/share-earn"} />;
@@ -46,7 +46,7 @@ export default function Index() {
                 </RNText>
             </Link>
 
-            <Link href={"/protected/(tabs)"}>
+            <Link href={"/protected/(tabs)/chat"}>
                 <RNText variant="accent" size="md">
                     Go to Main App Screen
                 </RNText>

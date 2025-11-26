@@ -1,7 +1,7 @@
 import { useLoadInterstitialAds } from "@/hooks/intersitialAd";
 import { Slot } from "expo-router";
 
-export function RootLayout() {
+export default function RootLayout() {
     useLoadInterstitialAds();
 
     return <Slot />;
