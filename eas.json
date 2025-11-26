@@ -1,0 +1,36 @@
+{
+  "cli": {
+    "version": ">= 16.18.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m1-medium"
+      },
+      "env": {
+        "COCOAPODS_NO_REPO_UPDATE": "true"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m1-medium"
+      },
+      "env": {
+        "COCOAPODS_NO_REPO_UPDATE": "true"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "ios": {
+        "resourceClass": "m1-medium"
+      },
+      "env": {
+        "COCOAPODS_NO_REPO_UPDATE": "true"
+      }
+    }
+  }
+}

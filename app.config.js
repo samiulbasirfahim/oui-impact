@@ -13,6 +13,9 @@ export default {
         ios: {
             supportsTablet: true,
             bundleIdentifier: "com.ouidogood.ouiimpact",
+            infoPlist: {
+                ITSAppUsesNonExemptEncryption: false,
+            },
         },
         android: {
             adaptiveIcon: {
@@ -63,6 +66,12 @@ export default {
         experiments: {
             typedRoutes: true,
             reactCompiler: true,
+        },
+
+        extra: {
+            eas: {
+                projectId: "4b97af7a-0aa2-433e-a9f8-f391bf177f38",
+            },
         },
     },
 };
