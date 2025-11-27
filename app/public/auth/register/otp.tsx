@@ -15,7 +15,7 @@ export default function OTPScreen() {
             </RNText>
 
             <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                We just sent 5-digit code to {email}, enter it bellow
+                We just sent a 5-digit code to {email}, enter it bellow
             </RNText>
 
             <RNText size="md" style={{ marginTop: 12 }} variant="secondary">

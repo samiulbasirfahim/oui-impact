@@ -6,7 +6,7 @@ export default function ThirdOnboardingScreen() {
     return (
         <OnboardingScreen
             imageSource={Illustration}
-            title="Welcome"
+            title="Welcome to Oui Impact"
             subtitle="Small Actions, Big Impact"
             description="Your engagement helps fund social and environmental projects."
             caption="Together,We're building a better future."

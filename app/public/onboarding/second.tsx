@@ -6,7 +6,7 @@ export default function SecondOnboardingScreen() {
     return (
         <OnboardingScreen
             imageSource={Illustration}
-            title="Welcome"
+            title="Welcome to Oui Impact"
             subtitle="Earn Rewards Effortlessly"
             description="Use AI assistant daily"
             caption="Every action earns OUI Points and supports good causes."

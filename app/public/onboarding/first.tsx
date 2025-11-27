@@ -6,8 +6,8 @@ export default function FirstOnboardingScreen() {
     return (
         <OnboardingScreen
             imageSource={Illustration}
-            title="Welcome"
-            subtitle="Welcome to OUI IMPACT"
+            title="Welcome to OUI IMPACT"
+            subtitle="Contribute to a Better World"
             description="Your AI Assistant for Rewards and Impact"
             caption="Chat, learn and make a difference every day."
             tatalSteps={3}

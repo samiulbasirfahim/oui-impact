@@ -8,9 +8,11 @@ import {
     useForeground,
 } from "react-native-google-mobile-ads";
 
-const adUnitId = __DEV__
-    ? TestIds.BANNER
-    : AD_UNIT_IDS.BANNER || TestIds.BANNER;
+// const adUnitId = __DEV__
+//     ? TestIds.BANNER
+//     : AD_UNIT_IDS.BANNER || TestIds.BANNER;
+//
+const adUnitId = TestIds.BANNER;
 
 export function RNBannerAd() {
     const bannerRef = useRef<BannerAd>(null);

@@ -98,7 +98,7 @@ export default function NewChatScreen() {
 
                         <View style={{ alignItems: "center", gap: 6 }}>
                             <RNText size="xl" variant="title">
-                                Welcome to Rewardly
+                                Welcome to OUI IMPACT
                             </RNText>
 
                             <RNText

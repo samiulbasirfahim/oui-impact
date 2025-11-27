@@ -19,11 +19,13 @@ import { SceneMap, TabView } from "react-native-tab-view";
 const renderSchene = SceneMap({
     all: AllTab,
     earned: EarnedTab,
+    pending: PendingTab,
     redeemed: RedeemedTab,
 });
 const routes = [
     { key: "all", title: "All" },
     { key: "earned", title: "Earned" },
+    { key: "pending", title: "Pending" },
     { key: "redeemed", title: "Redeemed" },
 ];
 
@@ -52,7 +54,11 @@ export default function Screen() {
                     <View
                         style={{ flexDirection: "row", justifyContent: "space-between" }}
                     >
-                        <View>
+                        <View
+                            style={{
+                                alignItems: "center",
+                            }}
+                        >
                             <RNText
                                 style={{
                                     color: COLORS.background,
@@ -122,7 +128,7 @@ export default function Screen() {
                                     justifyContent: "space-around",
                                     backgroundColor: COLORS.primary + "1A",
                                     borderRadius: 12,
-                                    padding: 8,
+                                    paddingVertical: 6,
                                 }}
                             >
                                 {props.navigationState.routes.map((route, i) => {
@@ -132,8 +138,8 @@ export default function Screen() {
                                             key={route.key}
                                             onPress={() => setIndex(i)}
                                             style={{
-                                                paddingVertical: 10,
-                                                width: tabWidth / routes.length - 16,
+                                                paddingVertical: 6,
+                                                width: tabWidth / routes.length,
                                                 alignItems: "center",
                                                 borderRadius: 12,
                                                 backgroundColor: isFocused
@@ -142,8 +148,8 @@ export default function Screen() {
                                             }}
                                         >
                                             <RNText
-                                                size="md"
                                                 style={{
+                                                    fontSize: 14,
                                                     fontWeight: isFocused ? "500" : "400",
                                                     color: isFocused
                                                         ? COLORS.backgroundSecondary
@@ -205,6 +211,31 @@ function EarnedTab() {
     );
 }
 
+function PendingTab() {
+    const pendingData = rawData.map((section) =>
+        section.data.filter((item) => item.points < 0),
+    );
+
+    const finalPandingData = rawData
+        .map((s, index) => ({
+            date: s.date,
+            data: pendingData[index],
+        }))
+        .filter((s) => s.data.length > 0);
+
+    return (
+        <SectionList
+            sections={finalPandingData}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => <PointItem item={item} />}
+            renderSectionHeader={({ section }) => (
+                <RNText style={styles.header}>{section.date}</RNText>
+            )}
+            contentContainerStyle={styles.container}
+        />
+    );
+}
+
 function RedeemedTab() {
     const redeemedData = rawData.map((section) =>
         section.data.filter((item) => item.points < 0),
@@ -252,6 +283,8 @@ const styles = StyleSheet.create({
     },
 
     cardChildren: {
+        alignItems: "center",
+        justifyContent: "center",
         width: "48%",
         gap: 4,
         backgroundColor: COLORS.backgroundSecondary + "33",

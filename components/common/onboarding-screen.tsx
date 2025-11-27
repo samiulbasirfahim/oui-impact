@@ -57,13 +57,13 @@ export function OnboardingScreen({
                 </View>
                 <View style={{ alignItems: "flex-start", gap: 12, flex: 1 }}>
                     {title && (
-                        <RNText size="2xl" variant="title">
+                        <RNText size="3xl" variant="title">
                             {title}
                         </RNText>
                     )}
 
                     {subtitle && (
-                        <RNText size="xl" variant="title" style={{ textAlign: "center" }}>
+                        <RNText size="lg" variant="title" style={{ textAlign: "center" }}>
                             {subtitle}
                         </RNText>
                     )}
@@ -176,7 +176,7 @@ export function OnboardingScreen({
                         }}
                         variant="secondary"
                     >
-                        By contininuing you agree to
+                        By contininuing you agree to our Terms & Policy
                     </RNText>
                 </View>
             </View>

@@ -68,7 +68,14 @@ export function RNCheckbox({
                     />
                 )}
             </View>
-            <RNText variant="secondary" size={size} onPress={onPressLabel}>
+            <RNText
+                variant="secondary"
+                size={size}
+                onPress={onPressLabel}
+                style={{
+                    width: onPressLabel ? "85%" : "auto",
+                }}
+            >
                 {label}
             </RNText>
         </View>

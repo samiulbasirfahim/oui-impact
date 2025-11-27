@@ -7,9 +7,11 @@ import {
     TestIds,
 } from "react-native-google-mobile-ads";
 
-const adUnitId = __DEV__
-    ? TestIds.INTERSTITIAL
-    : AD_UNIT_IDS.INTERSTITIAL || TestIds.INTERSTITIAL;
+// const adUnitId = __DEV__
+//     ? TestIds.INTERSTITIAL
+//     : AD_UNIT_IDS.INTERSTITIAL || TestIds.INTERSTITIAL;
+
+const adUnitId = TestIds.INTERSTITIAL;
 
 function randomChance(percent: number): boolean {
     return Math.random() * 100 < percent;
@@ -31,7 +33,7 @@ export function useLoadInterstitialAds() {
                 return;
             }
 
-            if (!randomChance(33)) {
+            if (!randomChance(10)) {
                 return;
             }
 

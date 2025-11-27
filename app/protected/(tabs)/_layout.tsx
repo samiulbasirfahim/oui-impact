@@ -35,7 +35,7 @@ export default function ProtectedLayout() {
 }
 
 function CustomTabBar(props: MaterialTopTabBarProps) {
-    const tabs = ["Chat", "Reward", "Impact", "Account"];
+    const tabs = ["Chat", "Redeem", "Impact", "Account"];
     const { bottom } = useSafeAreaInsets();
 
     const icons: Record<string, any> = {

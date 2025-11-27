@@ -6,6 +6,7 @@ export default function FourthOnboardingScreen() {
     return (
         <OnboardingScreen
             imageSource={Illustration}
+            title="Welcome to Oui Impact"
             subtitle="Ready to Begin ?"
             description="Manage your rewards, track your impact, and join a community making tech a force for good."
             skipAction={() => {

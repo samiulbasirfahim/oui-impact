@@ -9,6 +9,7 @@ const sizes = {
     lg: { fontSize: 18, lineHeight: 26 },
     xl: { fontSize: 22, lineHeight: 28 },
     "2xl": { fontSize: 24, lineHeight: 32 },
+    "3xl": { fontSize: 28, lineHeight: 36 },
     "4xl": {
         fontSize: 36,
         lineHeight: 40,

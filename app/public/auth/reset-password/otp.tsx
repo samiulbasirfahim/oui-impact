@@ -12,7 +12,7 @@ export default function OTPScreen() {
             </RNText>
 
             <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                We just sent 5-digit code to your email address. Please enter the code
+                We just sent a 5-digit code to your email address. Please enter the code
             </RNText>
 
             <OTPFields

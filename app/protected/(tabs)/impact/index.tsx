@@ -93,7 +93,7 @@ export default function ImpactIndex() {
                     }}
                     size="lg"
                 >
-                    Together, Rewardly users have funded 12,482 trees.
+                    Together, OUI IMPACT users have funded 12,482 trees.
                 </RNText>
                 <View style={styles.statCard}>
                     <View style={styles.statChild}>

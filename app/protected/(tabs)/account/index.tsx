@@ -95,39 +95,41 @@ export default function Screen() {
                     <RNSwitch label="DARK MODE" onToggle={(toggled) => { }} />
                 </View>
 
-                <RNText
-                    style={{
-                        marginTop: 24,
-                        color: COLORS.secondary,
-                        textAlign: "center",
-                    }}
-                    size="lg"
-                    variant="title"
-                >
-                    Account Control & GDPR Compliance
-                </RNText>
-                <RNText
-                    size="sm"
-                    variant="base"
-                    style={{ color: COLORS.muted, textAlign: "center" }}
-                >
-                    Easily manage your account with options to delete or deactivate,
-                    ensuring full GDPR compliance.
-                </RNText>
-
-                <View
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        gap: 6,
-                        marginTop: 12,
-                    }}
-                >
-                    <RNButton variant="outline" style={{ flex: 1 }}>
-                        Cancel
-                    </RNButton>
-                    <RNButton style={{ flex: 1 }}>Confirm</RNButton>
-                </View>
+                {
+                    //     <RNText
+                    //     style={{
+                    //         marginTop: 24,
+                    //         color: COLORS.secondary,
+                    //         textAlign: "center",
+                    //     }}
+                    //     size="lg"
+                    //     variant="title"
+                    // >
+                    //     Account Control & GDPR Compliance
+                    // </RNText>
+                    // <RNText
+                    //     size="sm"
+                    //     variant="base"
+                    //     style={{ color: COLORS.muted, textAlign: "center" }}
+                    // >
+                    //     Easily manage your account with options to delete or deactivate,
+                    //     ensuring full GDPR compliance.
+                    // </RNText>
+                    //
+                    // <View
+                    //     style={{
+                    //         flexDirection: "row",
+                    //         justifyContent: "space-between",
+                    //         gap: 6,
+                    //         marginTop: 12,
+                    //     }}
+                    // >
+                    //     <RNButton variant="outline" style={{ flex: 1 }}>
+                    //         Cancel
+                    //     </RNButton>
+                    //     <RNButton style={{ flex: 1 }}>Confirm</RNButton>
+                    // </View>
+                }
 
                 <RNSettingButton
                     icon={<INFO width={24} height={24} />}

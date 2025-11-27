@@ -18,7 +18,7 @@ export default function Screen() {
         <>
             <Stack.Screen
                 options={{
-                    title: "Rewards",
+                    title: "Redeem",
                 }}
             />
             <Layout>
