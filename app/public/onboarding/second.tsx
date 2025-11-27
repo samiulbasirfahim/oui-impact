@@ -1,15 +1,16 @@
 import Illustration from "@/assets/images/onboarding-2.png";
 import { OnboardingScreen } from "@/components/common/onboarding-screen";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function SecondOnboardingScreen() {
+    const { t } = useTranslation();
+
     return (
         <OnboardingScreen
             imageSource={Illustration}
-            title="Welcome to Oui Impact"
-            subtitle="Earn Rewards Effortlessly"
-            description="Use AI assistant daily"
-            caption="Every action earns OUI Points and supports good causes."
+            title={t("onboarding.screen2.title")}
+            subtitle={t("onboarding.screen2.subtitle")}
             tatalSteps={3}
             currentStep={2}
             skipAction={() => {

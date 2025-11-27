@@ -9,16 +9,17 @@ import { COLORS } from "@/constants";
 import { Image } from "expo-image";
 import { Link, router, Stack } from "expo-router";
 import { useState } from "react";
-import { Alert, View } from "react-native";
+import { View } from "react-native";
+import { useTranslation } from "react-i18next";
 
 type FormState = {
     email?: string;
     checkBox?: boolean;
 };
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
+    const { t } = useTranslation(); // <-- added
     const [form, setForm] = useState<FormState>({});
-
     const [error, setError] = useState<string | null>(null);
 
     const handleChange = (name: keyof FormState, value: string) => {
@@ -49,15 +50,16 @@ export default function LoginScreen() {
                     />
 
                     <RNText size="3xl" variant="title">
-                        Create your account
+                        {t("auth.createAccount.title")}
                     </RNText>
+
                     <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                        Just enter your email to get started
+                        {t("auth.createAccount.subtitle")}
                     </RNText>
                 </View>
 
                 <RNInput
-                    label="Email Address"
+                    label={t("auth.createAccount.email")}
                     keyboardType="email-address"
                     onChangeText={(text) => handleChange("email", text)}
                 />
@@ -65,10 +67,8 @@ export default function LoginScreen() {
                 {error && <RNText variant="accent">{error}</RNText>}
 
                 <RNCheckbox
-                    style={{
-                        marginTop: 12,
-                    }}
-                    label="By continuing, you agree to our Terms of Service and Privacy Policy."
+                    style={{ marginTop: 12 }}
+                    label={t("onboarding.screen1.terms")}
                     value={form.checkBox}
                     onChange={(checked) =>
                         handleChange("checkBox", checked ? "true" : "false")
@@ -77,13 +77,13 @@ export default function LoginScreen() {
                         router.push("/public/terms-conditions");
                     }}
                 />
+
                 <RNButton
                     onPress={() => {
                         if (!form.email) {
                             setError("Please fill all the fields");
                             return;
                         }
-
                         if (!form.checkBox) {
                             setError("Please agree to the terms");
                             return;
@@ -96,26 +96,19 @@ export default function LoginScreen() {
                     }}
                     style={{ marginTop: 12 }}
                 >
-                    Continue
+                    {t("auth.createAccount.button")}
                 </RNButton>
-                <RNText
-                    style={{
-                        alignSelf: "center",
-                    }}
-                >
-                    Already have an account?{" "}
+
+                <RNText style={{ alignSelf: "center" }}>
                     <Link href={"/public/auth/login"} asChild>
-                        <RNText
-                            style={{
-                                color: COLORS.primary,
-                            }}
-                        >
-                            Log In
+                        <RNText style={{ color: COLORS.primary }}>
+                            {t("auth.createAccount.loginRedirect")}
                         </RNText>
                     </Link>
                 </RNText>
 
                 <Seperator color={COLORS.muted}>OR</Seperator>
+
                 <SocialSignIn />
             </Layout>
         </>

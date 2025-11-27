@@ -9,6 +9,7 @@ import { COLORS } from "@/constants";
 import { Link, router, Stack } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
+import { useTranslation } from "react-i18next";
 
 type FormState = {
     email?: string;
@@ -16,6 +17,8 @@ type FormState = {
 };
 
 export default function LoginScreen() {
+    const { t } = useTranslation();
+
     const [form, setForm] = useState<FormState>({});
 
     const [error, setError] = useState<string | null>(null);
@@ -46,20 +49,20 @@ export default function LoginScreen() {
                     />
 
                     <RNText size="3xl" variant="title">
-                        Log In
+                        {t("auth.login.title")}
                     </RNText>
                     <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                        Welcome back to OUI IMPACT
+                        {t("auth.login.subtitle")}
                     </RNText>
                 </View>
 
                 <RNInput
-                    label="Email Address"
+                    label={t("auth.login.email")}
                     keyboardType="email-address"
                     onChangeText={(text) => handleChange("email", text)}
                 />
                 <RNInput
-                    label="Password"
+                    label={t("auth.login.password")}
                     secureTextEntry
                     onChangeText={(text) => handleChange("password", text)}
                 />
@@ -73,7 +76,7 @@ export default function LoginScreen() {
                         }}
                         variant="secondary"
                     >
-                        Forgot Password?
+                        {t("auth.login.forgot")}
                     </RNText>
                 </Link>
                 <RNButton
@@ -93,14 +96,13 @@ export default function LoginScreen() {
                         alignSelf: "center",
                     }}
                 >
-                    Don't have an account?{" "}
                     <Link href={"/public/auth/register"} asChild>
                         <RNText
                             style={{
                                 color: COLORS.primary,
                             }}
                         >
-                            Create account
+                            {t("auth.login.registerRedirect")}
                         </RNText>
                     </Link>
                 </RNText>

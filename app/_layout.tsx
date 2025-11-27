@@ -7,6 +7,7 @@ import { Platform } from "react-native";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { useLoadFonts } from "@/hooks/useLoadFonts";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { I18nextProvider } from "react-i18next";
 
 export default function RootLayout() {
     const ready = useLoadFonts();
@@ -23,11 +24,13 @@ export default function RootLayout() {
             <GestureHandlerRootView>
                 <Host>
                     <KeyboardProvider>
-                        <Stack
-                            screenOptions={{
-                                headerShown: false,
-                            }}
-                        />
+                        <I18nextProvider i18n={require("@/i18n").default}>
+                            <Stack
+                                screenOptions={{
+                                    headerShown: false,
+                                }}
+                            />
+                        </I18nextProvider>
                     </KeyboardProvider>
                 </Host>
             </GestureHandlerRootView>

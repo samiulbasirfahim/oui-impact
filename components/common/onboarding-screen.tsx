@@ -4,6 +4,7 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Image, View } from "react-native";
 import { RNButton } from "../ui/button";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     imageSource: any;
@@ -15,6 +16,7 @@ type Props = {
     currentStep?: number;
     skipAction?: () => void;
     nextAction?: () => void;
+    children?: React.ReactNode;
 };
 
 export function OnboardingScreen({
@@ -27,14 +29,17 @@ export function OnboardingScreen({
     tatalSteps,
     skipAction,
     nextAction,
+    children,
 }: Props) {
+    const { t } = useTranslation();
+
     return (
         <BlurBG centered>
             <View
                 style={{
                     flex: 1,
                     justifyContent: "space-between",
-                    paddingVertical: 40,
+                    paddingVertical: 20,
                     alignItems: "center",
                 }}
             >
@@ -42,7 +47,7 @@ export function OnboardingScreen({
                     style={{
                         alignItems: "center",
                         justifyContent: "center",
-                        height: "50%",
+                        height: "45%",
                     }}
                 >
                     <Image
@@ -63,7 +68,7 @@ export function OnboardingScreen({
                     )}
 
                     {subtitle && (
-                        <RNText size="lg" variant="title" style={{ textAlign: "center" }}>
+                        <RNText size="md" style={{ textAlign: "center" }}>
                             {subtitle}
                         </RNText>
                     )}
@@ -126,6 +131,14 @@ export function OnboardingScreen({
 
                     <View
                         style={{
+                            alignItems: "center",
+                            paddingBottom: 8,
+                        }}
+                    >
+                        {children}
+                    </View>
+                    <View
+                        style={{
                             flexDirection: "row",
                             gap: 12,
                             width: "100%",
@@ -142,7 +155,7 @@ export function OnboardingScreen({
                                 variant="ghost"
                                 onPress={skipAction}
                             >
-                                Skip
+                                {t("onboarding.screen1.skip")}
                             </RNButton>
                         )}
                         {nextAction && (
@@ -176,7 +189,7 @@ export function OnboardingScreen({
                         }}
                         variant="secondary"
                     >
-                        By contininuing you agree to our Terms & Policy
+                        {t("onboarding.screen1.terms")}
                     </RNText>
                 </View>
             </View>

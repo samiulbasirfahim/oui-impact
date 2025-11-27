@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { RNInput } from "../ui/input";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     value?: string;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export function RNCountryPicker({ onSelectCountry, value }: Props) {
+    const { t } = useTranslation();
     const [showCountryPicker, setShowCountryPicker] = useState<boolean>(false);
 
     const onSelectCountryHandle = (country: CountryItem) => {
@@ -37,7 +39,7 @@ export function RNCountryPicker({ onSelectCountry, value }: Props) {
                 }}
             >
                 <RNInput
-                    label="Country/Region"
+                    label={t("auth.userInfo.country")}
                     value={value}
                     editable={false}
                     key={value}

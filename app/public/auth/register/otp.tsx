@@ -5,40 +5,41 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { Pressable, View } from "react-native";
+import { useTranslation } from "react-i18next";
 
 export default function OTPScreen() {
     const { email } = useLocalSearchParams<{ email: string }>();
+    const { t } = useTranslation();
+
     return (
         <Layout>
             <RNText size="2xl" variant="title">
-                Verify your email
+                {t("auth.verifyEmail.title")}
             </RNText>
 
             <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                We just sent a 5-digit code to {email}, enter it bellow
-            </RNText>
-
-            <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                Secure your account to start earning points
+                {t("auth.verifyEmail.sent")} {email}. {t("auth.verifyEmail.enterCode")}
             </RNText>
 
             <OTPFields
-                label="Verify Code"
-                numberOfDigits={5}
+                label={t("auth.verifyEmail.button")}
+                numberOfDigits={6} // Your copy says 6-digit
                 onChange={(v) => {
                     console.log("OTP Code:", v);
                 }}
             />
+
             <RNButton
                 onPress={() => {
                     router.push("/public/auth/register/create-password");
                 }}
                 style={{ marginTop: 12 }}
             >
-                Submit
+                {t("auth.verifyEmail.button")}
             </RNButton>
 
             <View style={{ gap: 2, marginTop: 12 }}>
+                {/* Wrong email */}
                 <View
                     style={{
                         flexDirection: "row",
@@ -46,13 +47,6 @@ export default function OTPScreen() {
                         alignItems: "center",
                     }}
                 >
-                    <RNText
-                        style={{
-                            alignSelf: "center",
-                        }}
-                    >
-                        Wrong email?{" "}
-                    </RNText>
                     <Pressable
                         onPress={() =>
                             router.canGoBack()
@@ -60,38 +54,33 @@ export default function OTPScreen() {
                                 : router.push("/public/auth/register")
                         }
                     >
-                        <RNText
-                            style={{
-                                color: COLORS.primary,
-                            }}
-                        >
-                            Send to different email
+                        <RNText style={{ color: COLORS.primary }}>
+                            {t("auth.verifyEmail.wrongEmail")}
                         </RNText>
                     </Pressable>
                 </View>
 
+                {/* OR */}
                 <RNText
                     style={{
                         alignSelf: "center",
+                        marginTop: 6,
                     }}
                     variant="secondary"
                 >
-                    OR
+                    {t("auth.verifyEmail.or")}
                 </RNText>
 
+                {/* Redirect to Login */}
                 <RNText
                     style={{
                         alignSelf: "center",
+                        marginTop: 4,
                     }}
                 >
-                    Already have an account?{" "}
                     <Link href={"/public/auth/login"} asChild>
-                        <RNText
-                            style={{
-                                color: COLORS.primary,
-                            }}
-                        >
-                            Log In
+                        <RNText style={{ color: COLORS.primary }}>
+                            {t("auth.verifyEmail.loginRedirect")}
                         </RNText>
                     </Link>
                 </RNText>

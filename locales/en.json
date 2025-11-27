@@ -1,5 +1,11 @@
 {
   "auth": {
+    "root": {
+      "title": "Welcome to OUI IMPACT",
+      "subtitle": "Sign in or create your account to continue",
+      "button1": "Log In",
+      "button2": "Create Account"
+    },
     "createAccount": {
       "title": "Create your account",
       "subtitle": "Enter your email to get started",
@@ -26,6 +32,7 @@
       "rule1": "8 characters minimum",
       "rule2": "Use uppercase & lowercase",
       "rule3": "Use numbers or symbols",
+      "rule4": "Passwords match",
       "button": "Continue"
     },
     "login": {
@@ -95,7 +102,9 @@
     "screen4": {
       "title": "Ready to Begin?",
       "subtitle": "Manage your rewards, track your impact, and join a community making tech a force for good.",
-      "cta": "Manage – Earn – Achieve"
+      "cta1": "Manage",
+      "cata2": "Earn",
+      "cta3": "Achieve"
     }
   },
 

@@ -4,10 +4,14 @@ import GOOGLE from "../../assets/svgs/gogole.svg";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { RNText } from "../ui/text";
 import { COLORS } from "@/constants";
+import { useTranslation } from "react-i18next";
 
 export function SocialSignIn() {
+    const { t } = useTranslation();
+
     return (
         <View style={{ width: "100%", gap: 8 }}>
+            {/* Google */}
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={{
@@ -22,8 +26,10 @@ export function SocialSignIn() {
                 }}
             >
                 <GOOGLE width={30} height={31} />
-                <RNText>Continue with Google</RNText>
+                <RNText>{t("auth.createAccount.google")}</RNText>
             </TouchableOpacity>
+
+            {/* Facebook */}
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={{
@@ -37,14 +43,12 @@ export function SocialSignIn() {
                 }}
             >
                 <FontAwesome5 name="facebook" size={24} color="white" />
-                <RNText
-                    style={{
-                        color: "white",
-                    }}
-                >
-                    Continue with Facebook
+                <RNText style={{ color: "white" }}>
+                    {t("auth.createAccount.facebook")}
                 </RNText>
             </TouchableOpacity>
+
+            {/* Apple */}
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={{
@@ -58,12 +62,8 @@ export function SocialSignIn() {
                 }}
             >
                 <AntDesign name="apple" size={24} color="white" />
-                <RNText
-                    style={{
-                        color: "white",
-                    }}
-                >
-                    Continue with Facebook
+                <RNText style={{ color: "white" }}>
+                    {t("auth.createAccount.apple")}
                 </RNText>
             </TouchableOpacity>
         </View>

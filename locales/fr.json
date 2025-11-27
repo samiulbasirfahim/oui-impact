@@ -1,5 +1,11 @@
 {
   "auth": {
+    "root": {
+      "title": "Bienvenue sur OUI IMPACT",
+      "subtitle": "Connectez-vous ou créez votre compte pour continuer",
+      "button1": "Se connecter",
+      "button2": "Créer un compte"
+    },
     "createAccount": {
       "title": "Créer votre compte",
       "subtitle": "Entrez votre email pour commencer",
@@ -26,6 +32,7 @@
       "rule1": "8 caractères min",
       "rule2": "Majuscules + minuscules",
       "rule3": "Chiffres ou symboles",
+      "rule4": "Les mots de passe correspondent",
       "button": "Continuer"
     },
     "login": {
@@ -95,7 +102,9 @@
     "screen4": {
       "title": "Prêt à commencer ?",
       "subtitle": "Gérez vos gains, suivez votre impact, rejoignez une communauté engagée.",
-      "cta": "Gérez – Gagnez – Progressez"
+      "cta1": "Gérez",
+      "cta2": "Gagnez",
+      "cta3": "Progressez"
     }
   },
 

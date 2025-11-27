@@ -5,6 +5,7 @@ export const COLORS = {
     purple: "#9333EA",
     blue: "#2563EB",
     orange: "#F59E0B",
+    "orangeLight": "#FDE047",
     background: "#FFFFFF",
     backgroundSecondary: "#F4FAFB",
     text: "#051532",
