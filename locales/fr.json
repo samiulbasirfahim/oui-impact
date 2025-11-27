@@ -1,0 +1,193 @@
+{
+  "auth": {
+    "createAccount": {
+      "title": "Créer votre compte",
+      "subtitle": "Entrez votre email pour commencer",
+      "email": "Adresse email",
+      "button": "Créer un compte",
+      "loginRedirect": "Déjà un compte ? Connexion",
+      "google": "Continuer avec Google",
+      "facebook": "Continuer avec Facebook",
+      "apple": "Continuer avec Apple"
+    },
+    "verifyEmail": {
+      "title": "Vérifier votre email",
+      "sent": "Code à 6 chiffres envoyé",
+      "enterCode": "Entrez-le ci-dessous",
+      "button": "Vérifier",
+      "wrongEmail": "Mauvais email ? Envoyer sur un autre email",
+      "or": "OU",
+      "loginRedirect": "Vous possédez déjà un compte ? Connectez-vous"
+    },
+    "createPassword": {
+      "title": "Créer votre mot de passe",
+      "subtitle": "Sécurisez votre compte",
+      "password": "Mot de passe",
+      "rule1": "8 caractères min",
+      "rule2": "Majuscules + minuscules",
+      "rule3": "Chiffres ou symboles",
+      "button": "Continuer"
+    },
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Hello !",
+      "email": "Email",
+      "password": "Mot de passe",
+      "forgot": "Mot de passe oublié ?",
+      "registerRedirect": "Pas de compte ? Créer un compte"
+    },
+    "reset": {
+      "request": {
+        "title": "Réinitialiser votre mot de passe",
+        "subtitle": "Entrez votre email pour recevoir un code",
+        "button": "Continuer"
+      },
+      "enterCode": {
+        "title": "Entrer le code",
+        "button": "Vérifier",
+        "resend": "Renvoyer le code"
+      },
+      "newPassword": {
+        "title": "Nouveau mot de passe",
+        "confirm": "Confirmer",
+        "button": "Continuer"
+      },
+      "success": {
+        "title": "Mot de passe réinitialisé !",
+        "subtitle": "Redirection en cours."
+      }
+    },
+    "userInfo": {
+      "title": "Profil",
+      "subtitle": "Pour personnaliser un peu",
+      "fullName": "Nom complet",
+      "phone": "Numéro de téléphone",
+      "country": "Pays/Région",
+      "gender": "Sexe",
+      "dob": "Date de naissance",
+      "button": "Valider"
+    },
+    "session": {
+      "expiredTitle": "Session expirée",
+      "expiredSubtitle": "Votre session a expiré. Veuillez vous reconnecter.",
+      "loginButton": "Se reconnecter",
+      "noInternetTitle": "Pas de connexion Internet",
+      "noInternetSubtitle": "Vérifiez votre connexion puis réessayez.",
+      "retry": "Réessayer"
+    }
+  },
+
+  "onboarding": {
+    "screen1": {
+      "title": "Bienvenue sur Oui Impact",
+      "subtitle": "Votre assistant IA a impact et qui vous récompense. Parlez, apprenez et faites la différence. »",
+      "skip": "Passer",
+      "terms": "En continuant, vous acceptez les termes et conditions"
+    },
+    "screen2": {
+      "title": "Gagnez des récompenses rapidement",
+      "subtitle": "Chaque action rapporte des Oui Points et soutient des causes."
+    },
+    "screen3": {
+      "title": "Petites actions, grand impact",
+      "subtitle": "Votre engagement finance des projets sociaux et écolos. Ensemble, on avance."
+    },
+    "screen4": {
+      "title": "Prêt à commencer ?",
+      "subtitle": "Gérez vos gains, suivez votre impact, rejoignez une communauté engagée.",
+      "cta": "Gérez – Gagnez – Progressez"
+    }
+  },
+
+  "chat": {
+    "home": {
+      "title": "Assistant IA",
+      "placeholder": "Posez-moi toutes les questions que vous souhaitez…",
+      "quickPrompts": "Quelques Idées",
+      "done": "Terminé"
+    },
+    "empty": {
+      "title": "Aucune conversation",
+      "subtitle": "Commencez une nouvelle conversation.",
+      "button": "Nouvelle conversation"
+    }
+  },
+
+  "home": {
+    "header": {
+      "welcomeShort": "Bienvenue",
+      "welcomeLong": "Bienvenue sur Oui Impact",
+      "points": "Vos points"
+    }
+  },
+
+  "rewards": {
+    "home": {
+      "title": "Gagner des recompenses",
+      "redeem": "Utiliser vos points",
+      "redeemNow": "Utiliser vos points",
+      "upgrade": "Passer Premium"
+    },
+    "watch": {
+      "title": "Regarder & Gagner",
+      "checkIn": "Check-in quotidien",
+      "bonus": "Bonus",
+      "watchMore": "Regarder plus"
+    },
+    "offers": {
+      "discounts": "Réductions",
+      "offers": "Offres",
+      "redeem": "Utilisez vos points",
+      "history": "Historique",
+      "confirmTitle": "Confirmer l’utilisation",
+      "confirm": "Confirmer"
+    },
+    "ads": {
+      "title": "Publicité",
+      "congrats": "Bravo !",
+      "earned": "Vous avez gagné +5 points !",
+      "ok": "OK"
+    }
+  },
+
+  "impact": {
+    "dashboard": {
+      "title": "Votre impact",
+      "donated": "Ensemble, vous avez donné",
+      "nextGoal": "Objectif suivant",
+      "recent": "Impact récent",
+      "amplify": "Amplifiez votre impact",
+      "premium": "Passer Premium",
+      "share": "Partager"
+    }
+  },
+
+  "account": {
+    "settings": {
+      "title": "Réglages",
+      "pointsHistory": "Historique des points",
+      "notifications": "Notifications",
+      "push": "Notifications push",
+      "newReward": "Alerte nouvelle récompense",
+      "emailUpdates": "Emails",
+      "marketing": "Marketing",
+      "language": "Langue",
+      "darkMode": "Mode sombre",
+      "gdpr": "Contrôle du compte & RGPD",
+      "help": "Aide & Support",
+      "confirm": "Confirmer",
+      "cancel": "Annuler"
+    },
+    "editProfile": {
+      "title": "Modifier le profil",
+      "save": "Enregistrer"
+    },
+    "pointsHistory": {
+      "title": "Historique des points",
+      "all": "Tous",
+      "earned": "Gagnés",
+      "redeemed": "Utilisés",
+      "recent": "Activité récente"
+    }
+  }
+}

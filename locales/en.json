@@ -1,0 +1,193 @@
+{
+  "auth": {
+    "createAccount": {
+      "title": "Create your account",
+      "subtitle": "Enter your email to get started",
+      "email": "Email Address",
+      "button": "Create an account",
+      "loginRedirect": "Already have an account? Log In",
+      "google": "Continue with Google",
+      "facebook": "Continue with Facebook",
+      "apple": "Continue with Apple"
+    },
+    "verifyEmail": {
+      "title": "Verify your email",
+      "sent": "We sent a 6-digit code to",
+      "enterCode": "Enter it below",
+      "button": "Verify Code",
+      "wrongEmail": "Wrong email? Send to different email",
+      "or": "OR",
+      "loginRedirect": "Already have an account? Log In"
+    },
+    "createPassword": {
+      "title": "Create your Password",
+      "subtitle": "Secure your account to start earning",
+      "password": "Password",
+      "rule1": "8 characters minimum",
+      "rule2": "Use uppercase & lowercase",
+      "rule3": "Use numbers or symbols",
+      "button": "Continue"
+    },
+    "login": {
+      "title": "Log In",
+      "subtitle": "Welcome back!",
+      "email": "Email Address",
+      "password": "Password",
+      "forgot": "Forgot password?",
+      "registerRedirect": "Don’t have an account? Create account"
+    },
+    "reset": {
+      "request": {
+        "title": "Reset your password",
+        "subtitle": "Enter your email and we’ll send a code",
+        "button": "Continue"
+      },
+      "enterCode": {
+        "title": "Enter the Code",
+        "button": "Verify Code",
+        "resend": "Send code again"
+      },
+      "newPassword": {
+        "title": "Create a New Password",
+        "confirm": "Confirm Password",
+        "button": "Continue"
+      },
+      "success": {
+        "title": "Reset Password Successful!",
+        "subtitle": "You will be redirected shortly."
+      }
+    },
+    "userInfo": {
+      "title": "User Information",
+      "subtitle": "Just making it a little more personal",
+      "fullName": "Full Name",
+      "phone": "Phone Number",
+      "country": "Country/Region",
+      "gender": "Gender",
+      "dob": "Date of Birth",
+      "button": "Submit"
+    },
+    "session": {
+      "expiredTitle": "Session Expired",
+      "expiredSubtitle": "Your session has expired. Please log in again.",
+      "loginButton": "Log In Again",
+      "noInternetTitle": "No Internet Connection",
+      "noInternetSubtitle": "Please check your connection and try again.",
+      "retry": "Try Again"
+    }
+  },
+
+  "onboarding": {
+    "screen1": {
+      "title": "Welcome to Oui Impact",
+      "subtitle": "Your AI Assistant for rewards and impact. Chat, learn, and make a difference every day.",
+      "skip": "Skip",
+      "terms": "By continuing you agree to the terms and conditions"
+    },
+    "screen2": {
+      "title": "Earn Rewards Effortlessly",
+      "subtitle": "Use your assistant daily. Every action earns Oui Points and supports good causes."
+    },
+    "screen3": {
+      "title": "Small Actions, Big Impact",
+      "subtitle": "Your engagement funds social and environmental projects. Together, we’re building a better future."
+    },
+    "screen4": {
+      "title": "Ready to Begin?",
+      "subtitle": "Manage your rewards, track your impact, and join a community making tech a force for good.",
+      "cta": "Manage – Earn – Achieve"
+    }
+  },
+
+  "chat": {
+    "home": {
+      "title": "AI Assistant",
+      "placeholder": "Ask me anything…",
+      "quickPrompts": "Quick Prompts",
+      "done": "Done"
+    },
+    "empty": {
+      "title": "No Chats Yet",
+      "subtitle": "Start a new conversation to see chats here.",
+      "button": "Start Chat"
+    }
+  },
+
+  "home": {
+    "header": {
+      "welcomeShort": "Welcome",
+      "welcomeLong": "Welcome to Oui Impact",
+      "points": "Your Points"
+    }
+  },
+
+  "rewards": {
+    "home": {
+      "title": "Earn Rewards",
+      "redeem": "Redeem Your Points",
+      "redeemNow": "Redeem Now",
+      "upgrade": "Upgrade"
+    },
+    "watch": {
+      "title": "Watch & Earn",
+      "checkIn": "Daily Check-in",
+      "bonus": "Bonus Opportunities",
+      "watchMore": "Watch More"
+    },
+    "offers": {
+      "discounts": "Discounts",
+      "offers": "Offers",
+      "redeem": "Redeem Your Points",
+      "history": "Redemption History",
+      "confirmTitle": "Confirm Redemption",
+      "confirm": "Confirm"
+    },
+    "ads": {
+      "title": "Ads",
+      "congrats": "Congratulations!",
+      "earned": "You earned +5 points for watching this video!",
+      "ok": "OK"
+    }
+  },
+
+  "impact": {
+    "dashboard": {
+      "title": "Your Impact",
+      "donated": "Together You Donated",
+      "nextGoal": "Next Goal",
+      "recent": "Recent Impact",
+      "amplify": "Amplify Your Impact",
+      "premium": "Upgrade to Premium",
+      "share": "Share Your Impact"
+    }
+  },
+
+  "account": {
+    "settings": {
+      "title": "Settings",
+      "pointsHistory": "Points History",
+      "notifications": "Notification Settings",
+      "push": "Push Notifications",
+      "newReward": "Notify Me When A New Reward Available",
+      "emailUpdates": "Email Updates",
+      "marketing": "Marketing",
+      "language": "Language Selection",
+      "darkMode": "Dark Mode",
+      "gdpr": "Account Control & GDPR Compliance",
+      "help": "Help & Support",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "editProfile": {
+      "title": "Edit Profile",
+      "save": "Save"
+    },
+    "pointsHistory": {
+      "title": "Point History",
+      "all": "All",
+      "earned": "Earned",
+      "redeemed": "Redeemed",
+      "recent": "Recent Activity"
+    }
+  }
+}
