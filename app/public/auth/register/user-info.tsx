@@ -115,7 +115,6 @@ export default function UserInfoScreen() {
                     (formData.countryFlag ? formData.countryFlag + "    " : "") +
                     (formData.country ?? "")
                 }
-                label={t("auth.userInfo.country")}
                 onSelectCountry={(country) => {
                     handleInputChange("country", country.name["en"]);
                     handleInputChange("countryFlag", country.flag);

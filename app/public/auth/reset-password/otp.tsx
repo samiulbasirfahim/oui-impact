@@ -3,35 +3,44 @@ import { Layout } from "@/components/ui/layout";
 import { OTPFields } from "@/components/ui/otp-input";
 import { RNText } from "@/components/ui/text";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function OTPScreen() {
+    const { t } = useTranslation();
+
     return (
         <Layout>
+            {/* Title */}
             <RNText size="2xl" variant="title">
-                Enter The Code
+                {t("auth.reset.enterCode.title")}
             </RNText>
 
+            {/* Subtitle */}
             <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                We just sent a 5-digit code to your email address. Please enter the code
+                {t("auth.verifyEmail.sent")} — {t("auth.verifyEmail.enterCode")}
             </RNText>
 
+            {/* OTP Field */}
             <OTPFields
-                label="Verify Code"
-                numberOfDigits={5}
+                label={t("auth.reset.enterCode.button")}
+                numberOfDigits={6} // your translation says 6-digit
                 onChange={(v) => {
                     console.log("OTP Code:", v);
                 }}
             />
+
+            {/* Verify / Submit */}
             <RNButton
                 onPress={() => {
                     router.push("/public/auth/reset-password/new-password");
                 }}
                 style={{ marginTop: 12 }}
             >
-                Submit
+                {t("auth.reset.enterCode.button")}
             </RNButton>
 
-            <RNButton variant="ghost">Send Code Again</RNButton>
+            {/* Resend */}
+            <RNButton variant="ghost">{t("auth.reset.enterCode.resend")}</RNButton>
         </Layout>
     );
 }

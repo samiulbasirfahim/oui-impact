@@ -68,7 +68,7 @@ export function RNSwitch({ value, label, subLabel, onToggle }: Props) {
                 justifyContent: "space-between",
             }}
         >
-            <View>
+            <View style={{ flex: 1, maxWidth: "80%" }}>
                 {label && (
                     <RNText size="md" variant="title">
                         {label}

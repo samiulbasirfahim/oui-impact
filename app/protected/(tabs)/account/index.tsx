@@ -2,7 +2,7 @@ import { PointsCard } from "@/components/common/points-card";
 import INFO from "@/assets/svgs/info.svg";
 import LOGOUT from "@/assets/svgs/logout.svg";
 import { ProfileCard } from "@/components/common/profile-card";
-import { RNButton, RNSettingButton } from "@/components/ui/button";
+import { RNSettingButton } from "@/components/ui/button";
 import { Layout } from "@/components/ui/layout";
 import { RNSwitch } from "@/components/ui/switch";
 import { RNText } from "@/components/ui/text";
@@ -10,6 +10,8 @@ import { COLORS } from "@/constants";
 import { router, Stack } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
+import { useTranslation } from "react-i18next";
+import { useLanguage } from "@/hooks/useLanguages";
 
 type States = {
     pushNotifications: boolean;
@@ -19,6 +21,10 @@ type States = {
 };
 
 export default function Screen() {
+    const { t } = useTranslation();
+
+    const { toggleLanguage, currentLanguage } = useLanguage();
+
     const [form, setForm] = useState<States>({
         pushNotifications: false,
         rewardNotifications: true,
@@ -28,59 +34,53 @@ export default function Screen() {
 
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Settings" }} />
-            <Layout
-                style={{
-                    gap: 12,
-                }}
-            >
+            <Stack.Screen options={{ headerTitle: t("account.settings.title") }} />
+
+            <Layout style={{ gap: 12 }}>
                 <ProfileCard />
                 <PointsCard />
 
-                <RNText
-                    size="xl"
-                    variant="primary"
-                    style={{
-                        marginTop: 16,
-                    }}
-                >
-                    Notification Settings
+                <RNText size="xl" variant="primary" style={{ marginTop: 16 }}>
+                    {t("account.settings.notifications")}
                 </RNText>
 
                 <RNSwitch
-                    label="Push Notifications"
-                    subLabel="Receive app notifications"
-                    onToggle={(toggled) => {
-                        setForm({ ...form, pushNotifications: toggled });
-                    }}
+                    label={t("account.settings.push")}
+                    subLabel={t("account.settings.pushDescription")}
+                    onToggle={(v) => setForm({ ...form, pushNotifications: v })}
                     value={form.pushNotifications}
                 />
 
                 <RNSwitch
-                    label="Reward Notifications"
-                    subLabel="Recieve app notification"
-                    onToggle={(toggled) => {
-                        setForm({ ...form, rewardNotifications: toggled });
-                    }}
+                    label={t("account.settings.newReward")}
+                    subLabel={t("account.settings.rewardDescription")}
+                    onToggle={(v) => setForm({ ...form, rewardNotifications: v })}
                     value={form.rewardNotifications}
                 />
 
                 <RNSwitch
-                    label="Email Updates"
-                    subLabel="Receive email updates"
-                    onToggle={(toggled) => {
-                        setForm({ ...form, emailUpdates: toggled });
-                    }}
+                    label={t("account.settings.emailUpdates")}
+                    subLabel={t("account.settings.emailUpdatesDescription")}
+                    onToggle={(v) => setForm({ ...form, emailUpdates: v })}
                     value={form.emailUpdates}
                 />
 
                 <RNSwitch
-                    label="Marketing Emails"
-                    subLabel="Promotional offers"
-                    onToggle={(toggled) => {
-                        setForm({ ...form, marketingEmails: toggled });
-                    }}
+                    label={t("account.settings.marketing")}
+                    subLabel={t("account.settings.marketingDescription")}
+                    onToggle={(v) => setForm({ ...form, marketingEmails: v })}
                     value={form.marketingEmails}
+                />
+
+                <RNSwitch
+                    label={currentLanguage === "fr" ? "Langue" : "Language"}
+                    subLabel={
+                        currentLanguage === "fr"
+                            ? "Changer la langue en anglais"
+                            : "Switch language to French"
+                    }
+                    value={currentLanguage === "fr"}
+                    onToggle={toggleLanguage}
                 />
 
                 <View
@@ -92,48 +92,15 @@ export default function Screen() {
                         backgroundColor: COLORS.backgroundSecondary,
                     }}
                 >
-                    <RNSwitch label="DARK MODE" onToggle={(toggled) => { }} />
+                    <RNSwitch
+                        label={t("account.settings.darkMode")}
+                        onToggle={() => { }}
+                    />
                 </View>
-
-                {
-                    //     <RNText
-                    //     style={{
-                    //         marginTop: 24,
-                    //         color: COLORS.secondary,
-                    //         textAlign: "center",
-                    //     }}
-                    //     size="lg"
-                    //     variant="title"
-                    // >
-                    //     Account Control & GDPR Compliance
-                    // </RNText>
-                    // <RNText
-                    //     size="sm"
-                    //     variant="base"
-                    //     style={{ color: COLORS.muted, textAlign: "center" }}
-                    // >
-                    //     Easily manage your account with options to delete or deactivate,
-                    //     ensuring full GDPR compliance.
-                    // </RNText>
-                    //
-                    // <View
-                    //     style={{
-                    //         flexDirection: "row",
-                    //         justifyContent: "space-between",
-                    //         gap: 6,
-                    //         marginTop: 12,
-                    //     }}
-                    // >
-                    //     <RNButton variant="outline" style={{ flex: 1 }}>
-                    //         Cancel
-                    //     </RNButton>
-                    //     <RNButton style={{ flex: 1 }}>Confirm</RNButton>
-                    // </View>
-                }
 
                 <RNSettingButton
                     icon={<INFO width={24} height={24} />}
-                    title="Help & Support"
+                    title={t("account.settings.help")}
                     onPress={() => {
                         router.push("/protected/others/accounts/help-support");
                     }}
@@ -141,7 +108,7 @@ export default function Screen() {
 
                 <RNSettingButton
                     icon={<LOGOUT width={24} height={24} />}
-                    title="Log Out"
+                    title={t("account.settings.logout")}
                 />
             </Layout>
         </>

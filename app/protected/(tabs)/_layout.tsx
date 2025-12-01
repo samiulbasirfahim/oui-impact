@@ -24,6 +24,7 @@ export default function ProtectedLayout() {
                 },
                 animationEnabled: true,
             }}
+            
             tabBar={CustomTabBar}
         >
             <Tabs.Screen name="chat" />

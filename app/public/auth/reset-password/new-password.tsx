@@ -6,6 +6,7 @@ import { RNText } from "@/components/ui/text";
 import { router } from "expo-router";
 import { useMemo, useState } from "react";
 import { View } from "react-native";
+import { useTranslation } from "react-i18next";
 
 type FormData = {
     password: string;
@@ -13,6 +14,7 @@ type FormData = {
 };
 
 export default function EmailScreen() {
+    const { t } = useTranslation();
     const [formData, setFormData] = useState<FormData>({
         password: "",
         confirmPassword: "",
@@ -23,7 +25,7 @@ export default function EmailScreen() {
     };
 
     const passwordStatus = useMemo(() => {
-        const status = {
+        return {
             length: formData.password.length >= 8,
             uppercaseLowercase:
                 /[a-z]/.test(formData.password) && /[A-Z]/.test(formData.password),
@@ -34,66 +36,68 @@ export default function EmailScreen() {
                 formData.password === formData.confirmPassword &&
                 formData.password.length > 0,
         };
-        return status;
-    }, [formData.password]);
+    }, [formData.password, formData.confirmPassword]);
 
     return (
         <Layout>
+            {/* Title */}
             <RNText size="2xl" variant="title">
-                Create a new password
-            </RNText>
-            <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
-                Your new password must be different from previous used passwords.
+                {t("auth.reset.newPassword.title")}
             </RNText>
 
+            {/* Subtitle */}
+            <RNText size="md" style={{ marginTop: 12 }} variant="secondary">
+                {t("auth.createPassword.subtitle")}
+            </RNText>
+
+            {/* New Password */}
             <RNInput
-                label="Enter a new Password"
+                label={t("auth.createPassword.password")}
                 secureTextEntry
                 value={formData.password}
                 onChangeText={(text) => handleChange("password", text)}
             />
+
+            {/* Confirm Password */}
             <RNInput
-                label="Confirm Password"
+                label={t("auth.reset.newPassword.confirm")}
                 secureTextEntry
                 value={formData.confirmPassword}
                 onChangeText={(text) => handleChange("confirmPassword", text)}
             />
 
-            <View
-                style={{
-                    marginVertical: 16,
-                    gap: 6,
-                }}
-            >
+            {/* Password Rules */}
+            <View style={{ marginVertical: 16, gap: 6 }}>
                 <RNCheckbox
-                    label="8 charecters minimum"
+                    label={t("auth.createPassword.rule1")}
                     value={passwordStatus.length}
                     disableExternalToggle
                 />
                 <RNCheckbox
-                    label="use both uppercase and lowercase"
-                    disableExternalToggle
+                    label={t("auth.createPassword.rule2")}
                     value={passwordStatus.uppercaseLowercase}
+                    disableExternalToggle
                 />
                 <RNCheckbox
-                    label="combination of numbers and symbols"
-                    disableExternalToggle
+                    label={t("auth.createPassword.rule3")}
                     value={passwordStatus.numbersSymbols}
+                    disableExternalToggle
                 />
                 <RNCheckbox
-                    label="Passwords match"
-                    disableExternalToggle
+                    label={t("auth.createPassword.rule4")}
                     value={passwordStatus.missMatch}
+                    disableExternalToggle
                 />
             </View>
 
+            {/* Save Button */}
             <RNButton
                 onPress={() => {
                     router.push("/public/auth/login");
                 }}
                 style={{ marginTop: 12 }}
             >
-                Save
+                {t("auth.reset.newPassword.button")}
             </RNButton>
         </Layout>
     );

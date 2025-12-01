@@ -1,11 +1,12 @@
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { PointItem } from "@/components/common/history-point-item";
 import { GradientBG } from "@/components/ui/gradient-bg";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { rawData } from "@/lib/point-history-fake-data";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
     Pressable,
     SectionList,
@@ -22,20 +23,22 @@ const renderSchene = SceneMap({
     pending: PendingTab,
     redeemed: RedeemedTab,
 });
+// titles are set in component to use i18n
 const routes = [
-    { key: "all", title: "All" },
-    { key: "earned", title: "Earned" },
-    { key: "pending", title: "Pending" },
-    { key: "redeemed", title: "Redeemed" },
+    { key: "all", title: "all" },
+    { key: "earned", title: "earned" },
+    { key: "pending", title: "pending" },
+    { key: "redeemed", title: "redeemed" },
 ];
 
 export default function Screen() {
+    const { t } = useTranslation();
     const layout = useWindowDimensions();
     const [index, setIndex] = useState(0);
     const [tabWidth, setTabWidth] = useState(0);
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Point History" }} />
+            <Stack.Screen options={{ headerTitle: t("account.pointsHistory.title") }} />
             <SafeAreaView
                 style={{
                     flex: 1,
@@ -64,7 +67,7 @@ export default function Screen() {
                                     color: COLORS.background,
                                 }}
                             >
-                                Total Points
+                                {t("account.pointsHistory.total")}
                             </RNText>
                             <RNText
                                 size="4xl"
@@ -98,13 +101,13 @@ export default function Screen() {
                         }}
                     >
                         <View style={styles.cardChildren}>
-                            <RNText style={styles.cardItemText}>This Month</RNText>
+                            <RNText style={styles.cardItemText}>{t("account.pointsHistory.thisMonth")}</RNText>
                             <RNText size="xl" variant="title" style={styles.cardItemText}>
                                 +450
                             </RNText>
                         </View>
                         <View style={styles.cardChildren}>
-                            <RNText style={styles.cardItemText}>Redeemed</RNText>
+                            <RNText style={styles.cardItemText}>{t("account.pointsHistory.redeemed")}</RNText>
                             <RNText size="xl" variant="title" style={styles.cardItemText}>
                                 1,200
                             </RNText>
@@ -156,7 +159,7 @@ export default function Screen() {
                                                         : COLORS.muted,
                                                 }}
                                             >
-                                                {route.title}
+                                                {t(`account.pointsHistory.${route.title}`)}
                                             </RNText>
                                         </Pressable>
                                     );
