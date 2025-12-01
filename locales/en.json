@@ -72,7 +72,9 @@
             "country": "Country/Region",
             "gender": "Gender",
             "dob": "Date of Birth",
-            "button": "Submit"
+            "button": "Submit",
+            "male": "Male",
+            "female": "Female"
         },
         "session": {
             "expiredTitle": "Session Expired",
@@ -198,7 +200,21 @@
             "redeemed": "Redeemed",
             "recent": "Recent Activity",
             "total": "Total Points",
-            "thisMonth": "This Month"
+            "thisMonth": "This Month",
+            "description": "View your points history and see how you've earned and redeemed",
+            "items": {
+                "purchaseReward": "Purchase Reward",
+                "reviewReward": "Review Reward",
+                "dailyCheckinBonus": "Daily Check-in Bonus",
+                "redeemedCoupon": "Redeemed Coupon",
+                "referralReward": "Referral Reward",
+                "redeemedGiftCard": "Redeemed Gift Card",
+                "appEventParticipation": "App Event Participation",
+                "dailyLoginBonus": "Daily Login Bonus",
+                "redeemedPoints": "Redeemed Points",
+                "surveyReward": "Survey Reward",
+                "sale1111Bonus": "11.11 Sale Bonus"
+            }
         }
     }
 }

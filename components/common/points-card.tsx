@@ -1,11 +1,13 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { Pressable, View } from "react-native";
 import COINS from "@/assets/svgs/coins.svg";
 import { COLORS } from "@/constants";
-import { RNText } from "../ui/text";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { Pressable, View } from "react-native";
+import { RNText } from "../ui/text";
 
 export function PointsCard() {
+    const { t } = useTranslation();
     return (
         <Pressable
             style={{
@@ -29,14 +31,14 @@ export function PointsCard() {
                 }}
             >
                 <RNText size="lg" variant="title">
-                    Points History
+                    {t("account.settings.pointsHistory")}
                 </RNText>
                 <RNText
                     style={{ marginTop: 4, color: COLORS.muted }}
                     size="sm"
                     variant="base"
                 >
-                    View your points history and see how you've earned and redeemed
+                    {t("account.pointsHistory.description")}
                 </RNText>
             </View>
             <AntDesign name="right" size={24} color={COLORS.muted} />

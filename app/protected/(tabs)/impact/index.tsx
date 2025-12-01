@@ -1,19 +1,20 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Entypo from "@expo/vector-icons/Entypo";
-import { TreeGoalProgress } from "@/components/common/tree-goal-progress";
 import BOOK from "@/assets/svgs/book-2.svg";
+import { TreeGoalProgress } from "@/components/common/tree-goal-progress";
+import { RNButton } from "@/components/ui/button";
+import { GradientBG } from "@/components/ui/gradient-bg";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { GradientBG } from "@/components/ui/gradient-bg";
 import { IMPACT } from "@/type/recent-impact";
-import { RNButton } from "@/components/ui/button";
-import { router, Stack } from "expo-router";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { router, Stack } from "expo-router";
+import { useTranslation } from "react-i18next";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 const MOCK_IMPACT_DATA: IMPACT[] = [
     {
@@ -54,9 +55,10 @@ const MOCK_IMPACT_DATA: IMPACT[] = [
 ];
 
 export default function ImpactIndex() {
+    const { t } = useTranslation();
     return (
         <>
-            <Stack.Screen options={{ title: "Impact" }} />
+            <Stack.Screen options={{ title: t("impact.dashboard.title") }} />
             <Layout>
                 <View
                     style={{
@@ -65,7 +67,7 @@ export default function ImpactIndex() {
                     }}
                 >
                     <RNText variant="title" size="xl">
-                        Your Impact
+                        {t("impact.dashboard.title")}
                     </RNText>
                     <RNText
                         size="sm"
@@ -78,7 +80,7 @@ export default function ImpactIndex() {
                         ⭐ Regular Member
                     </RNText>
                 </View>
-                <RNText>Every ad you watch funds real-world change.</RNText>
+                <RNText>{t("impact.dashboard.recent")}</RNText>
 
                 <RNText
                     style={{
@@ -93,7 +95,7 @@ export default function ImpactIndex() {
                     }}
                     size="lg"
                 >
-                    Together, OUI IMPACT users have funded 12,482 trees.
+                    {t("impact.dashboard.donated")}
                 </RNText>
                 <View style={styles.statCard}>
                     <View style={styles.statChild}>
@@ -105,7 +107,7 @@ export default function ImpactIndex() {
                             12L
                         </RNText>
                         <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
-                            💧Water Donated
+                            {t("impact.dashboard.donated")}
                         </RNText>
                     </View>
 
@@ -118,7 +120,7 @@ export default function ImpactIndex() {
                             4
                         </RNText>
                         <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
-                            🌲 Water Donated
+                            {t("impact.dashboard.donated")}
                         </RNText>
                     </View>
                 </View>
@@ -126,7 +128,7 @@ export default function ImpactIndex() {
                 <View style={styles.progressContainer}>
                     <TreeGoalProgress percent={20} />
                     <RNText size="xl" style={{ fontWeight: "500" }}>
-                        Next Tree Goal
+                        {t("impact.dashboard.nextGoal")}
                     </RNText>
                     <RNText
                         style={{
@@ -134,7 +136,7 @@ export default function ImpactIndex() {
                             color: COLORS.muted,
                         }}
                     >
-                        Keep engaging to reach your next milestone.
+                        {t("impact.dashboard.amplify")}
                     </RNText>
                 </View>
                 {false && (
@@ -195,7 +197,7 @@ export default function ImpactIndex() {
                                     }}
                                     size="lg"
                                 >
-                                    Learn More
+                                    {t("impact.dashboard.share")}
                                 </RNText>
                             </GradientBG>
                         </TouchableOpacity>
@@ -209,7 +211,7 @@ export default function ImpactIndex() {
                             fontSize: 20,
                         }}
                     >
-                        Recent Impact
+                        {t("impact.dashboard.recent")}
                     </RNText>
 
                     {MOCK_IMPACT_DATA.map((impact, i) => (
@@ -339,7 +341,7 @@ export default function ImpactIndex() {
                             textAlign: "center",
                         }}
                     >
-                        Amplify Your Impact
+                        {t("impact.dashboard.amplify")}
                     </RNText>
 
                     <RNText
@@ -347,7 +349,7 @@ export default function ImpactIndex() {
                             textAlign: "center",
                         }}
                     >
-                        Upgrade to Premium and earn 2× points on every ad you watch.
+                        {t("impact.dashboard.premium")}
                     </RNText>
 
                     <RNText
@@ -357,7 +359,7 @@ export default function ImpactIndex() {
                         }}
                         size="sm"
                     >
-                        Ad-free, double rewards, exclusive badges.
+                        {t("impact.dashboard.share")}
                     </RNText>
                     <RNButton
                         style={{
@@ -369,7 +371,7 @@ export default function ImpactIndex() {
                             router.push("/protected/others/subscription");
                         }}
                     >
-                        Upgrade to Premium
+                        {t("impact.dashboard.premium")}
                     </RNButton>
                 </GradientBG>
 
@@ -381,7 +383,7 @@ export default function ImpactIndex() {
                         textAlign: "center",
                     }}
                 >
-                    Share Your Impact
+                    {t("impact.dashboard.share")}
                 </RNText>
 
                 <View
@@ -411,7 +413,7 @@ export default function ImpactIndex() {
                         }}
                         size="md"
                     >
-                        47 Points Earned • Silver Badge
+                        {t("home.header.points")}
                     </RNText>
                     <FontAwesome5 name="medal" size={24} color={"#9CA3AF"} />
                 </View>
@@ -474,7 +476,7 @@ export default function ImpactIndex() {
                         color: COLORS.muted,
                     }}
                 >
-                    Keep earning points!
+                    {t("home.header.points")}
                 </RNText>
                 <GradientBG
                     style={{
@@ -493,7 +495,7 @@ export default function ImpactIndex() {
                     >
                         <Entypo name="leaf" size={24} color={COLORS.background} />
                         <RNText style={{ color: COLORS.background }} size="lg">
-                            Watch more ads to grow your impact!
+                            {t("impact.dashboard.amplify")}
                         </RNText>
                     </View>
                 </GradientBG>

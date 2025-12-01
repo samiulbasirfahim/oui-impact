@@ -1,8 +1,8 @@
-import { Image, Pressable, Text, View } from "react-native";
-import { RNText } from "../ui/text";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { COLORS } from "@/constants";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { router } from "expo-router";
+import { Image, Pressable, View } from "react-native";
+import { RNText } from "../ui/text";
 
 export function ProfileCard() {
     return (

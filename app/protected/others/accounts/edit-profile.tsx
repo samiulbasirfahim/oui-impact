@@ -1,17 +1,18 @@
-import { COLORS } from "@/constants";
-import { RNCountryPicker } from "@/components/common/country-picker";
 import AVATAR from "@/assets/svgs/avatar.svg";
 import EDIT from "@/assets/svgs/edit.svg";
+import { RNCountryPicker } from "@/components/common/country-picker";
+import { COLORS } from "@/constants";
 
-import { Layout } from "@/components/ui/layout";
-import { Stack } from "expo-router";
-import { Image, Pressable, View } from "react-native";
-import { imagePicker } from "@/lib/imagePicker";
-import { useState } from "react";
-import { RNInput } from "@/components/ui/input";
-import { RNPicker } from "@/components/common/picker";
 import { RNDatePicker } from "@/components/common/date-picker";
+import { RNPicker } from "@/components/common/picker";
 import { RNButton } from "@/components/ui/button";
+import { RNInput } from "@/components/ui/input";
+import { Layout } from "@/components/ui/layout";
+import { imagePicker } from "@/lib/imagePicker";
+import { Stack } from "expo-router";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Image, Pressable, View } from "react-native";
 
 type FormData = {
     fullName?: string;
@@ -25,6 +26,7 @@ type FormData = {
 };
 
 export default function Screen() {
+    const { t } = useTranslation();
     const [formData, setFormData] = useState<FormData>({});
 
     const handleInputChange = (field: keyof FormData, value: any) => {
@@ -36,7 +38,7 @@ export default function Screen() {
 
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Edit Profile" }} />
+            <Stack.Screen options={{ headerTitle: t("account.editProfile.title") }} />
             <Layout>
                 <Pressable
                     onPress={() => {
@@ -92,7 +94,7 @@ export default function Screen() {
                 </Pressable>
 
                 <RNInput
-                    label="Full name"
+                    label={t("auth.userInfo.fullName")}
                     onChangeText={(t) => handleInputChange("fullName", t)}
                 />
 
@@ -109,7 +111,7 @@ export default function Screen() {
                 />
 
                 <RNInput
-                    label="Phone Number"
+                    label={t("auth.userInfo.phone")}
                     value={formData.phoneNumber}
                     prefix={formData.countryCode}
                     onChangeText={(t) => handleInputChange("fullName", t)}
@@ -121,19 +123,19 @@ export default function Screen() {
                     items={[
                         {
                             value: "male",
-                            label: "Male",
+                            label: t("auth.userInfo.male"),
                         },
                         {
                             value: "female",
-                            label: "Female",
+                            label: t("auth.userInfo.female"),
                         },
                     ]}
-                    label="Gender"
+                    label={t("auth.userInfo.gender")}
                     value={
                         formData.gender
                             ? formData.gender === "male"
-                                ? "Male"
-                                : "Female"
+                                ? t("auth.userInfo.male")
+                                : t("auth.userInfo.female")
                             : ""
                     }
                     onSelectItem={(item) => {
@@ -145,11 +147,11 @@ export default function Screen() {
 
                 <RNDatePicker
                     onChangeDate={(date) => handleInputChange("dateOfBirth", date)}
-                    label="Date of Birth"
+                    label={t("auth.userInfo.dob")}
                     value={formData.dateOfBirth}
                 />
 
-                <RNButton>Submit</RNButton>
+                <RNButton>{t("account.editProfile.save")}</RNButton>
             </Layout>
         </>
     );

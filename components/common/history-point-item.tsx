@@ -1,7 +1,7 @@
-import { View } from "react-native";
-import { RNText } from "../ui/text";
 import { PointHistoryItem } from "@/type/point-history";
 import { useTranslation } from "react-i18next";
+import { View } from "react-native";
+import { RNText } from "../ui/text";
 
 const titleKeyMap: Record<string, string> = {
     "Purchase Reward": "account.pointsHistory.items.purchaseReward",

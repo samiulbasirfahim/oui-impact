@@ -11,14 +11,16 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { Link, router, Stack } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function Screen() {
+    const { t } = useTranslation();
     return (
         <>
             <Stack.Screen
                 options={{
-                    title: "Redeem",
+                    title: t("rewards.home.redeem"),
                 }}
             />
             <Layout>
@@ -28,7 +30,7 @@ export default function Screen() {
                             color: COLORS.background,
                         }}
                     >
-                        Your Points
+                        {t("home.header.points")}
                     </RNText>
                     <View
                         style={{
@@ -64,7 +66,7 @@ export default function Screen() {
                                         color: COLORS.background,
                                     }}
                                 >
-                                    5 Trees
+                                    {t("impact.dashboard.nextGoal")} {/* placeholder label */}
                                 </RNText>
                             </View>
 
@@ -77,7 +79,7 @@ export default function Screen() {
                                         color: COLORS.background,
                                     }}
                                 >
-                                    3 Books
+                                    {t("impact.dashboard.share")} {/* placeholder label */}
                                 </RNText>
                             </View>
                         </View>
@@ -104,7 +106,7 @@ export default function Screen() {
                                 color: COLORS.background,
                             }}
                         >
-                            +125 points this week
+                            {t("home.header.points")}
                         </RNText>
                     </View>
                 </GradientBG>
@@ -127,7 +129,7 @@ export default function Screen() {
                             }}
                             variant="title"
                         >
-                            Watch & Earn
+                            {t("rewards.watch.title")}
                         </RNText>
                     </RNButton>
                 </Link>
@@ -141,7 +143,7 @@ export default function Screen() {
                         }}
                     >
                         <RNText variant="title" size="lg">
-                            Redeem your points
+                            {t("rewards.offers.redeem")}
                         </RNText>
                         <Link href="/protected/others/rewards/leaderboard" asChild>
                             <RNText
@@ -152,7 +154,7 @@ export default function Screen() {
                                 }}
                                 size="sm"
                             >
-                                View leadearboard
+                                {t("rewards.offers.history")}
                             </RNText>
                         </Link>
                     </View>
@@ -181,7 +183,7 @@ export default function Screen() {
                                     }}
                                     size="sm"
                                 >
-                                    Discounts
+                                    {t("rewards.offers.discounts")}
                                 </RNText>
                             </TouchableOpacity>
                         </Link>
@@ -208,7 +210,7 @@ export default function Screen() {
                                     }}
                                     size="sm"
                                 >
-                                    Offers
+                                    {t("rewards.offers.offers")}
                                 </RNText>
                             </TouchableOpacity>
                         </Link>
@@ -236,7 +238,7 @@ export default function Screen() {
                                     }}
                                     size="sm"
                                 >
-                                    Charity
+                                    {t("impact.dashboard.share")}
                                 </RNText>
                             </TouchableOpacity>
                         </Link>
@@ -269,10 +271,10 @@ export default function Screen() {
                             }}
                         >
                             <RNText variant="title" size="lg">
-                                Share with friends
+                                {t("account.settings.help")}
                             </RNText>
                             <RNText variant="secondary" size="md">
-                                Invite friends to join
+                                {t("rewards.home.upgrade")}
                             </RNText>
                         </View>
                     </View>
@@ -313,7 +315,7 @@ export default function Screen() {
                                     }}
                                     variant="title"
                                 >
-                                    Share
+                                    {t("impact.dashboard.share")}
                                 </RNText>
                             </RNButton>
                         </Link>
@@ -321,18 +323,18 @@ export default function Screen() {
                 </View>
 
                 <GradientButton
-                    title="Premium Upgrade"
-                    subtitle="Get 2x points on all videos!"
-                    buttonText="Upgrade"
+                    title={t("impact.dashboard.premium")}
+                    subtitle={t("rewards.home.upgrade")}
+                    buttonText={t("rewards.home.upgrade")}
                     onPress={() => {
                         router.push("/protected/others/subscription");
                     }}
                 />
 
                 <GradientButton
-                    title="Referrals List"
-                    subtitle="Get 2x points on all Referrals!"
-                    buttonText="View"
+                    title={t("account.settings.help")}
+                    subtitle={t("rewards.home.upgrade")}
+                    buttonText={t("rewards.home.upgrade")}
                     onPress={() => {
                         router.push("/protected/others/share-earn");
                     }}

@@ -72,7 +72,9 @@
             "country": "Pays/Région",
             "gender": "Sexe",
             "dob": "Date de naissance",
-            "button": "Valider"
+            "button": "Valider",
+            "male": "Homme",
+            "female": "Femme"
         },
         "session": {
             "expiredTitle": "Session expirée",
@@ -199,6 +201,7 @@
             "recent": "Activité récente",
             "total": "Total des points",
             "thisMonth": "Ce mois-ci",
+            "description": "Consultez l’historique de vos points et voyez comment vous les avez gagnés et utilisés",
             "items": {
                 "purchaseReward": "Récompense d'achat",
                 "reviewReward": "Récompense d'avis",

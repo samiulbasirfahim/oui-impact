@@ -47,6 +47,7 @@
     "react-native-google-mobile-ads": "^16.0.0",
     "react-native-keyboard-controller": "1.18.5",
     "react-native-localize": "^3.6.0",
+    "react-native-mmkv": "^4.0.1",
     "react-native-modal-datetime-picker": "^18.0.0",
     "react-native-otp-entry": "^1.8.5",
     "react-native-pager-view": "6.9.1",

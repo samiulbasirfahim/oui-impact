@@ -1,6 +1,6 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
 import NOTIFICATION from "@/assets/svgs/notification.svg";
 import { COLORS } from "@/constants";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, Stack } from "expo-router";
 import { TouchableOpacity, View } from "react-native";
 
