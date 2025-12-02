@@ -9,8 +9,8 @@ import { COLORS } from "@/constants";
 import { Image } from "expo-image";
 import { Link, router, Stack } from "expo-router";
 import { useState } from "react";
-import { View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 
 type FormState = {
     email?: string;

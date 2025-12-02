@@ -36,7 +36,6 @@ export default function ChatLayout() {
                 drawerHideStatusBarOnOpen: true,
 
                 headerTitle: "",
-
                 headerRight: () => (
                     <Pressable
                         onPress={() => {
@@ -77,6 +76,7 @@ export default function ChatLayout() {
                             style={{
                                 fontSize: 20,
                                 fontWeight: "600",
+                                fontFamily: "SuezOne",
                             }}
                         >
                             {t("chat.home.title")}

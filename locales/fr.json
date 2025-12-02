@@ -113,12 +113,34 @@
             "title": "Assistant IA",
             "placeholder": "Posez-moi toutes les questions que vous souhaitez…",
             "quickPrompts": "Quelques Idées",
-            "done": "Terminé"
+            "done": "Terminé",
+            "helperSubtitle": "Je suis là pour vous aider avec vos questions et tâches créatives."
         },
         "empty": {
             "title": "Aucune conversation",
             "subtitle": "Commencez une nouvelle conversation.",
             "button": "Nouvelle conversation"
+        },
+        "reply": {
+            "initial": "Merci pour votre message ! Comment puis-je vous aider aujourd'hui ?",
+            "shortly": "Merci ! Je reviens vers vous rapidement."
+        },
+        "header": {
+            "newChat": "Nouvelle discussion",
+            "history": "Historique des chats"
+        },
+        "search": {
+            "placeholder": "Rechercher..."
+        },
+        "templates": {
+            "writing": {
+                "title": "Rédaction",
+                "description": "E-mails, articles, descriptions, et plus."
+            },
+            "creative": {
+                "title": "Créatif",
+                "description": "Histoires, idées, poèmes, légendes, et plus."
+            }
         }
     },
     "home": {
@@ -131,9 +153,9 @@
     "rewards": {
         "home": {
             "title": "Gagner des recompenses",
-            "redeem": "Utiliser vos points",
-            "redeemNow": "Utiliser vos points",
-            "upgrade": "Passer Premium"
+            "redeem": "Racheter",
+            "redeemNow": "Racheter",
+            "upgrade": "Premium"
         },
         "watch": {
             "title": "Regarder & Gagner",
@@ -154,8 +176,11 @@
             "redeem": "Utilisez",
             "charity": "Association",
             "history": "Historique",
-            "confirmTitle": "Confirmer l’utilisation",
-            "confirm": "Confirmer"
+            "confirmTitle": "Confirmer l'utilisation",
+            "confirm": "Confirmer",
+            "confirmDescription": "Vous êtes sur le point d'utiliser {{points}} points pour {{discount}}% de réduction sur l'application partenaire",
+            "redeemAction": "Utiliser",
+            "costPoints": "Coût {{count}} points"
         },
         "ads": {
             "title": "Publicité",
@@ -188,32 +213,17 @@
             "perMonth": "par mois"
         },
         "plans": {
-            "free": { "title": "Offre Gratuite", "description": "Fonctionnalités de base" },
-            "premium": { "title": "Offre Premium", "description": "Toutes les fonctionnalités déverrouillées" },
-            "pro": { "title": "Offre Pro", "description": "Pour utilisateurs avancés" }
-        }
-    },
-    "chat": {
-        "reply": {
-            "initial": "Merci pour votre message ! Comment puis-je vous aider aujourd'hui ?",
-            "shortly": "Merci ! Je reviens vers vous rapidement."
-        },
-        "header": {
-            "newChat": "Nouvelle discussion",
-            "history": "Historique des chats"
-        },
-        "search": { "placeholder": "Rechercher..." },
-        "home": {
-            "helperSubtitle": "Je suis là pour vous aider avec vos questions et tâches créatives."
-        },
-        "templates": {
-            "writing": {
-                "title": "Rédaction",
-                "description": "E-mails, articles, descriptions, et plus."
+            "free": {
+                "title": "Offre Gratuite",
+                "description": "Fonctionnalités de base"
             },
-            "creative": {
-                "title": "Créatif",
-                "description": "Histoires, idées, poèmes, légendes, et plus."
+            "premium": {
+                "title": "Offre Premium",
+                "description": "Toutes les fonctionnalités déverrouillées"
+            },
+            "pro": {
+                "title": "Offre Pro",
+                "description": "Pour utilisateurs avancés"
             }
         }
     },
@@ -290,8 +300,7 @@
                 "sale1111Bonus": "Bonus promo 11.11"
             }
         }
-    }
-    ,
+    },
     "tabs": {
         "chat": "Chat",
         "redeem": "Utiliser",

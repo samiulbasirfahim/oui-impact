@@ -176,6 +176,7 @@
             "history": "Redemption History",
             "confirmTitle": "Confirm Redemption",
             "confirm": "Confirm",
+            "confirmDescription": "You are about to redeem {{points}} points for {{discount}}% off Partner App",
             "redeemAction": "Redeem",
             "costPoints": "Cost {{count}} points"
         },

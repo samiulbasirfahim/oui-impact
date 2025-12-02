@@ -74,5 +74,9 @@ export default {
                 projectId: "4b97af7a-0aa2-433e-a9f8-f391bf177f38",
             },
         },
+        "react-native-google-mobile-ads": {
+            android_app_id: process.env.ADMOB_ANDROID_APP_ID,
+            ios_app_id: process.env.ADMOB_IOS_APP_ID,
+        },
     },
 };

@@ -1,6 +1,6 @@
-import { getString, setItem } from "@/lib/mmkv";
-import { minutesToMillis } from "@/lib/utils";
-import { useEffect } from "react";
+import { getNumber, getString, setItem } from "@/lib/mmkv";
+import { useNavigation } from "expo-router";
+import { useEffect, useRef } from "react";
 import {
     AdEventType,
     InterstitialAd,
@@ -20,7 +20,11 @@ type DailyCounter = {
 
 const STORAGE_KEYS = {
     dailyCounter: "ads:dailyCounter",
+    lastAdTime: "ads:lastAdTime",
 };
+
+const MAX_ADS_PER_DAY = 10;
+const MIN_AD_INTERVAL_MS = 4 * 60 * 1000; // 4 minutes
 
 function todayStr() {
     const d = new Date();
@@ -48,39 +52,96 @@ function incrementDailyCounter() {
     setItem(STORAGE_KEYS.dailyCounter, JSON.stringify(next));
 }
 
+function getLastAdTime(): number {
+    return getNumber(STORAGE_KEYS.lastAdTime) ?? 0;
+}
+
+function setLastAdTime(time: number): void {
+    setItem(STORAGE_KEYS.lastAdTime, time);
+}
+
+function canShowAd(): boolean {
+    const daily = getDailyCounter();
+    if (daily.count >= MAX_ADS_PER_DAY) {
+        return false;
+    }
+    
+    const lastAdTime = getLastAdTime();
+    const now = Date.now();
+    const timeSinceLastAd = now - lastAdTime;
+    
+    return timeSinceLastAd >= MIN_AD_INTERVAL_MS;
+}
+
 export function useLoadInterstitialAds() {
     const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
         requestNonPersonalizedAdsOnly: true,
     });
 
+    const firstLoad = useRef(false);
+    const navigation = useNavigation();
+
+    // Show ad on initial mount
     useEffect(() => {
-        const fiveMinutesMs = minutesToMillis(5);
-        const interval = setInterval(() => {
-            const daily = getDailyCounter();
-            if (daily.count >= 10) return;
+        const daily = getDailyCounter();
+        if (daily.count < MAX_ADS_PER_DAY) {
+            const loadedListener = interstitial.addAdEventListener(
+                AdEventType.LOADED,
+                () => {
+                    interstitial.show();
+                    incrementDailyCounter();
+                    setLastAdTime(Date.now());
+                }
+            );
+            const errorListener = interstitial.addAdEventListener(
+                AdEventType.ERROR,
+                () => {
+                    // swallow
+                }
+            );
+            interstitial.load();
+
+            return () => {
+                loadedListener();
+                errorListener();
+            };
+        }
+    }, []);
+
+    // Show ad on navigation change
+    useEffect(() => {
+        const unsubscribe = navigation.addListener("state", () => {
+            if (firstLoad.current === false) {
+                firstLoad.current = true;
+                return;
+            }
+
+            if (!canShowAd()) {
+                return;
+            }
 
             const loadedListener = interstitial.addAdEventListener(
                 AdEventType.LOADED,
                 () => {
                     interstitial.show();
                     incrementDailyCounter();
-                },
+                    setLastAdTime(Date.now());
+                }
             );
             const errorListener = interstitial.addAdEventListener(
                 AdEventType.ERROR,
                 () => {
                     // swallow
-                },
+                }
             );
             interstitial.load();
 
-            // Clean listeners after each attempt to avoid leaks
-            setTimeout(() => {
+            return () => {
                 loadedListener();
                 errorListener();
-            }, 0);
-        }, fiveMinutesMs);
+            };
+        });
 
-        return () => clearInterval(interval);
-    }, []);
+        return unsubscribe;
+    }, [navigation]);
 }

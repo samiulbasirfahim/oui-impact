@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { ConfirmationModal } from "./confirmation-modal";
 
 type Props = {
@@ -13,13 +14,14 @@ export function DiscountConfirmationModal({
     open,
     points,
 }: Props) {
+    const { t } = useTranslation();
     return (
         <ConfirmationModal
             onConfirm={onConfirm}
             onCancel={onCancel}
             open={open}
-            title="Confirm Redeemption"
-            description={`You are about to redeem ${points} points for ${200 / 10}% off Partner App`}
+            title={t("rewards.offers.confirmTitle")}
+            description={t("rewards.offers.confirmDescription", { points, discount: 200 / 10 })}
         />
     );
 }

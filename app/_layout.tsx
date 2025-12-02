@@ -1,13 +1,13 @@
 import * as NavigationBar from "expo-navigation-bar";
 import { StatusBar } from "expo-status-bar";
 
-import { Host } from "react-native-portalize";
-import { Stack } from "expo-router";
-import { Platform } from "react-native";
-import { KeyboardProvider } from "react-native-keyboard-controller";
 import { useLoadFonts } from "@/hooks/useLoadFonts";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Stack } from "expo-router";
 import { I18nextProvider } from "react-i18next";
+import { Platform } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
+import { Host } from "react-native-portalize";
 
 export default function RootLayout() {
     const ready = useLoadFonts();

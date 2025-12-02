@@ -41,11 +41,11 @@ export function RNCheckbox({
         }
     };
 
-    const checkBoxSize = size === "sm" ? 14 : size === "lg" ? 22 : 18;
+    const checkBoxSize = size === "sm" ? 16 : size === "lg" ? 22 : 24;
 
     return (
         <View
-            style={[{ flexDirection: "row", alignItems: "center", gap: 6 }, style]}
+            style={[{ flexDirection: "row", alignItems: "center", gap: 12 }, style]}
         >
             <View
                 style={{

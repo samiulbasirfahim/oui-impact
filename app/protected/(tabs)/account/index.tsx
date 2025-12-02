@@ -1,17 +1,17 @@
-import { PointsCard } from "@/components/common/points-card";
 import INFO from "@/assets/svgs/info.svg";
 import LOGOUT from "@/assets/svgs/logout.svg";
+import { PointsCard } from "@/components/common/points-card";
 import { ProfileCard } from "@/components/common/profile-card";
 import { RNSettingButton } from "@/components/ui/button";
 import { Layout } from "@/components/ui/layout";
 import { RNSwitch } from "@/components/ui/switch";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { useLanguage } from "@/hooks/useLanguages";
 import { router, Stack } from "expo-router";
 import { useState } from "react";
-import { View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "@/hooks/useLanguages";
+import { View } from "react-native";
 
 type States = {
     pushNotifications: boolean;

@@ -117,7 +117,7 @@ export function ClaimButton({
 }: ClaimButtonProps) {
     return (
         <View style={claimButtonStyles.container}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 12, maxWidth: "60%" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 12, maxWidth: "55%" }}>
                 <View style={claimButtonStyles.iconContainer}>{icon}</View>
                 <View>
                     <RNText variant="title">{title}</RNText>
@@ -131,7 +131,7 @@ export function ClaimButton({
                     </RNText>
                 </View>
             </View>
-            <View style={{ alignItems: "flex-end", gap: 12 }}>
+            <View style={{ alignItems: "flex-end", gap: 12, maxWidth: "40%" }}>
                 <RNText
                     style={{
                         color: COLORS.secondaryText,
