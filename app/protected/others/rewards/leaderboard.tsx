@@ -173,7 +173,7 @@ function todayTab() {
 
 function weekTab() {
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
             <LeaderboardHeader
                 first={{
                     name: "Alice",

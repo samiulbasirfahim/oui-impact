@@ -69,8 +69,8 @@ export default function Screen() {
                             backgroundColor: COLORS.background,
                             flexDirection: "row",
                             gap: 6,
-                            borderColor: COLORS.primary,
-                            borderWidth: 2,
+                            borderColor: COLORS.primary + "44",
+                            borderWidth: 1,
                             paddingVertical: 16,
                         }}
                     >

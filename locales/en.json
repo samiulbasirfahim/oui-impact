@@ -166,7 +166,11 @@
             "dailyCheckIn": "Daily Check-In Reward",
             "dailyTasks": "Complete daily tasks",
             "shareWithFriends": "Share with friends",
-            "inviteFriends": "Invite friends to join"
+            "inviteFriends": "Invite friends to join",
+            "durationSeconds": "{{seconds}} seconds",
+            "available": "Available",
+            "notAvailable": "Not Available",
+            "watchButton": "Watch"
         },
         "offers": {
             "discounts": "Discounts",
@@ -236,7 +240,9 @@
         }
     },
     "terms": {
-        "title": "Terms & Conditions"
+        "title": "Terms & Conditions",
+        "heading": "Terms & Conditions",
+        "lastUpdated": "Last updated: {{date}}"
     },
     "common": {
         "lastUpdated": "Last updated: {{date}}"
@@ -289,6 +295,11 @@
                 "surveyReward": "Survey Reward",
                 "sale1111Bonus": "11.11 Sale Bonus"
             }
+        },
+        "helpSupport": {
+            "title": "Help & Support",
+            "heading": "Helps & Supports",
+            "lastUpdated": "Last updated: {{date}}"
         }
     }
     ,
@@ -297,5 +308,12 @@
         "redeem": "Redeem",
         "impact": "Impact",
         "account": "Account"
+    },
+    "shareEarn": {
+        "title": "Earn Reward By Refer",
+        "referralLink": "Your referral link",
+        "searchPlaceholder": "Search Friends...",
+        "invitedFriends": "Invited Friends",
+        "points": "{{count}} Points"
     }
 }

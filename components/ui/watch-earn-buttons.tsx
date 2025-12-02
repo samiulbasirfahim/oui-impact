@@ -1,5 +1,6 @@
 import { COLORS } from "@/constants";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { RNButton } from "./button";
 import { RNText } from "./text";
@@ -11,6 +12,7 @@ type WatchButtonProps = {
     duration: number;
     category: string;
     title: string;
+    disabled?: boolean;
 };
 
 export function WatchButton({
@@ -20,7 +22,9 @@ export function WatchButton({
     title,
     category,
     onPress,
+    disabled,
 }: WatchButtonProps) {
+    const { t } = useTranslation();
     return (
         <View style={watchButtonStyles.container}>
             <View
@@ -51,7 +55,7 @@ export function WatchButton({
                             color: COLORS.secondaryText,
                         }}
                     >
-                        {duration} seconds - {category}
+                        {t("rewards.watch.durationSeconds", { seconds: duration })} - {category}
                     </RNText>
                 </View>
                 <View style={{ alignItems: "center", flexDirection: "row", gap: 12 }}>
@@ -75,12 +79,12 @@ export function WatchButton({
                             color: isAvailable ? COLORS.secondaryText : COLORS.accent,
                         }}
                     >
-                        {isAvailable ? "Available" : "Not Available"}
+                        {isAvailable ? t("rewards.watch.available") : t("rewards.watch.notAvailable")}
                     </RNText>
                 </View>
             </View>
 
-            <RNButton size="sm">Watch</RNButton>
+            <RNButton size="sm">{t("rewards.watch.watchButton")}</RNButton>
         </View>
     );
 }
@@ -90,8 +94,8 @@ const watchButtonStyles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        borderWidth: 2,
-        borderColor: COLORS.primary,
+        borderWidth: 1,
+        borderColor: COLORS.primary + "44",
         borderRadius: 12,
         padding: 12,
         marginTop: 8,

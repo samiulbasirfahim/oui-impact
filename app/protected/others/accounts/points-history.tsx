@@ -128,10 +128,10 @@ export default function Screen() {
                                 }}
                                 style={{
                                     flexDirection: "row",
-                                    justifyContent: "space-around",
+                                    justifyContent: "space-between",
                                     backgroundColor: COLORS.primary + "1A",
                                     borderRadius: 12,
-                                    paddingVertical: 6,
+                                    padding: 4,
                                 }}
                             >
                                 {props.navigationState.routes.map((route, i) => {
@@ -142,7 +142,7 @@ export default function Screen() {
                                             onPress={() => setIndex(i)}
                                             style={{
                                                 paddingVertical: 6,
-                                                width: tabWidth / routes.length,
+                                                width: (tabWidth - 12) / routes.length,
                                                 alignItems: "center",
                                                 borderRadius: 12,
                                                 backgroundColor: isFocused

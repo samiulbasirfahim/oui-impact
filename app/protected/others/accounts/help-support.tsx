@@ -2,9 +2,11 @@ import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Stack } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 
 export default function HelpSupport() {
+    const { t } = useTranslation();
     const data = [
         {
             question: "How to reset my password?",
@@ -36,19 +38,19 @@ export default function HelpSupport() {
         <>
             <Stack.Screen
                 options={{
-                    title: "Help & Support",
+                    title: t("account.helpSupport.title"),
                 }}
             />
             <Layout noPadding>
                 <View style={styles.labelContainer}>
                     <RNText
                         variant="title"
-                        size="4xl"
+                        size="3xl"
                         style={{
                             color: COLORS.text + "DD",
                         }}
                     >
-                        Helps & Supports
+                        {t("account.helpSupport.heading")}
                     </RNText>
                     <RNText
                         style={{
@@ -56,7 +58,7 @@ export default function HelpSupport() {
                             color: COLORS.text + "AA",
                         }}
                     >
-                        Last updated: June 2024
+                        {t("account.helpSupport.lastUpdated", { date: "June 2024" })}
                     </RNText>
                 </View>
 
@@ -71,7 +73,7 @@ export default function HelpSupport() {
                     >
                         <RNText
                             variant="title"
-                            size="xl"
+                            size="lg"
                             style={{
                                 color: COLORS.text + "DD",
                             }}

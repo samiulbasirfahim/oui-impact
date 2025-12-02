@@ -75,7 +75,7 @@ export default function NewChatScreen() {
                                 </View>
 
                                 <View
-                                    style={{ flexDirection: "row", gap: 4, alignItems: "center" }}
+                                    style={{ flexDirection: "row", gap: 6, alignItems: "center" }}
                                 >
                                     <RNButton
                                         style={{ backgroundColor: COLORS.orange }}

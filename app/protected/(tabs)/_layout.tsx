@@ -24,7 +24,7 @@ export default function ProtectedLayout() {
                     marginBottom: bottom,
                     height: 2,
                 },
-                animationEnabled: true,
+                // animationEnabled: true,
             }}
             
             tabBar={CustomTabBar}

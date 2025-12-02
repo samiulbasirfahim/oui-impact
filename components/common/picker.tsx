@@ -88,7 +88,11 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
             onPress={() => onSelectItemHandle(item.value)}
             style={{
                 width: "100%",
-                paddingHorizontal: 16,
+                paddingHorizontal: 14,
+                borderWidth: 1,
+                paddingVertical: 8,
+                borderRadius: 8,
+                borderColor: COLORS.primary + "33",
             }}
         >
             <RNText style={{ color: COLORS.text }}>{item.label}</RNText>
@@ -184,6 +188,7 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                         <View
                             style={{
                                 flexDirection: "row",
+                                paddingHorizontal: 12,
                                 justifyContent: "space-between",
                                 alignItems: "center",
                                 marginBottom: 12,
@@ -207,7 +212,7 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                             style={{
                                 width: "100%",
                                 height: 2,
-                                backgroundColor: COLORS.muted,
+                                backgroundColor: COLORS.primary,
                             }}
                         />
 
@@ -217,15 +222,14 @@ export function RNPicker({ onSelectItem, label, value, items }: Props) {
                             renderItem={renderItem}
                             style={{ marginTop: 12 }}
                             contentContainerStyle={{
-                                paddingBottom: bottom,
+                                paddingBottom: bottom + 10,
                             }}
                             ItemSeparatorComponent={() => (
                                 <View
                                     style={{
                                         width: "100%",
                                         height: 1,
-                                        backgroundColor: COLORS.muted,
-                                        marginVertical: 8,
+                                        marginVertical: 4,
                                     }}
                                 />
                             )}

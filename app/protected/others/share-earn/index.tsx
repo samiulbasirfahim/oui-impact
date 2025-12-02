@@ -1,19 +1,21 @@
+import SHARE_EARN from "@/assets/svgs/share-earn.svg";
+import { RNButton } from "@/components/ui/button";
 import { Layout } from "@/components/ui/layout";
-import { FlashList } from "@shopify/flash-list";
+import { RNText } from "@/components/ui/text";
+import { COLORS } from "@/constants";
+import Octicons from "@expo/vector-icons/Octicons";
 import BottomSheet, {
     BottomSheetTextInput,
     BottomSheetView,
     useBottomSheetScrollableCreator,
 } from "@gorhom/bottom-sheet";
-import { RNText } from "@/components/ui/text";
-import SHARE_EARN from "@/assets/svgs/share-earn.svg";
-import { Image, Pressable, StyleSheet, View } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
-import { COLORS } from "@/constants";
-import { RNButton } from "@/components/ui/button";
+import { FlashList } from "@shopify/flash-list";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Image, Pressable, StyleSheet, View } from "react-native";
 
 export default function Screen() {
+    const { t } = useTranslation();
     const [showSearch, setShowSearch] = useState<boolean>(false);
     const scrollView = useBottomSheetScrollableCreator();
 
@@ -40,10 +42,10 @@ export default function Screen() {
                         marginBottom: 24,
                     }}
                 >
-                    Earn Reward By Refer
+                    {t("shareEarn.title")}
                 </RNText>
 
-                <RNText>Your referral link</RNText>
+                <RNText>{t("shareEarn.referralLink")}</RNText>
                 <View
                     style={{
                         borderWidth: 1,
@@ -109,7 +111,7 @@ export default function Screen() {
                             <BottomSheetTextInput
                                 autoFocus
                                 placeholderTextColor={COLORS.secondaryText}
-                                placeholder="Search Friends..."
+                                placeholder={t("shareEarn.searchPlaceholder")}
                                 style={{
                                     borderWidth: 1,
                                     flex: 1,
@@ -120,7 +122,7 @@ export default function Screen() {
                             />
                         ) : (
                             <RNText size="lg" variant="title">
-                                Invited Friends
+                                {t("shareEarn.invitedFriends")}
                             </RNText>
                         )}
 
@@ -182,7 +184,7 @@ export default function Screen() {
                                             borderRadius: 4,
                                         }}
                                     >
-                                        550 Points
+                                        {t("shareEarn.points", { count: 550 })}
                                     </RNText>
                                 </View>
                             );

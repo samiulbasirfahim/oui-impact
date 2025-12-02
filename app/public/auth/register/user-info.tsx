@@ -115,6 +115,7 @@ export default function UserInfoScreen() {
                     (formData.countryFlag ? formData.countryFlag + "    " : "") +
                     (formData.country ?? "")
                 }
+                label={t("auth.userInfo.country")}
                 onSelectCountry={(country) => {
                     handleInputChange("country", country.name["en"]);
                     handleInputChange("countryFlag", country.flag);
@@ -135,18 +136,21 @@ export default function UserInfoScreen() {
             {/* GENDER PICKER */}
             <RNPicker
                 items={[
-                    { value: "male", label: "Male" },
+                    {
+                        value: "male",
+                        label: t("auth.userInfo.male"),
+                    },
                     {
                         value: "female",
-                        label: "Female",
+                        label: t("auth.userInfo.female"),
                     },
                 ]}
                 label={t("auth.userInfo.gender")}
                 value={
                     formData.gender
                         ? formData.gender === "male"
-                            ? (t("auth.userInfo.genderMale") ?? "Male")
-                            : (t("auth.userInfo.genderFemale") ?? "Female")
+                            ? t("auth.userInfo.male")
+                            : t("auth.userInfo.female")
                         : ""
                 }
                 onSelectItem={(item) => handleInputChange("gender", item)}

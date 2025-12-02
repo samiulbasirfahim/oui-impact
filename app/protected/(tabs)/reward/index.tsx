@@ -313,6 +313,7 @@ export default function Screen() {
                                         color: COLORS.background,
                                         fontWeight: "500",
                                     }}
+                                    size="sm"
                                     variant="title"
                                 >
                                     {t("impact.dashboard.share")}

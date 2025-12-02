@@ -168,7 +168,11 @@
             "dailyCheckIn": "Récompense de check-in quotidien",
             "dailyTasks": "Complétez les tâches quotidiennes",
             "shareWithFriends": "Partager avec des amis",
-            "inviteFriends": "Invitez des amis à rejoindre"
+            "inviteFriends": "Invitez des amis à rejoindre",
+            "durationSeconds": "{{seconds}} secondes",
+            "available": "Disponible",
+            "notAvailable": "Non disponible",
+            "watchButton": "Regarder"
         },
         "offers": {
             "discounts": "Réductions",
@@ -235,7 +239,9 @@
         }
     },
     "terms": {
-        "title": "Conditions Générales"
+        "title": "Conditions Générales",
+        "heading": "Conditions Générales",
+        "lastUpdated": "Dernière mise à jour : {{date}}"
     },
     "common": {
         "lastUpdated": "Dernière mise à jour : {{date}}"
@@ -299,6 +305,11 @@
                 "surveyReward": "Récompense de sondage",
                 "sale1111Bonus": "Bonus promo 11.11"
             }
+        },
+        "helpSupport": {
+            "title": "Aide & Support",
+            "heading": "Aide & Support",
+            "lastUpdated": "Dernière mise à jour : {{date}}"
         }
     },
     "tabs": {
@@ -306,5 +317,12 @@
         "redeem": "Utiliser",
         "impact": "Impact",
         "account": "Compte"
+    },
+    "shareEarn": {
+        "title": "Gagnez des récompenses en parrainant",
+        "referralLink": "Votre lien de parrainage",
+        "searchPlaceholder": "Rechercher des amis...",
+        "invitedFriends": "Amis invités",
+        "points": "{{count}} Points"
     }
 }
