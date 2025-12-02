@@ -6,6 +6,7 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 
 const redeemOptions = [
@@ -62,6 +63,7 @@ const redeemOptions = [
 ];
 
 export default function DiscountScreen() {
+    const { t } = useTranslation();
     const [shoeModal, setShowModal] = useState(false);
 
     const onCloseModal = () => {
@@ -70,7 +72,7 @@ export default function DiscountScreen() {
 
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Discounts" }} />
+            <Stack.Screen options={{ headerTitle: t("rewards.offers.discounts") }} />
             <DiscountConfirmationModal
                 open={shoeModal}
                 onConfirm={onCloseModal}
@@ -88,7 +90,7 @@ export default function DiscountScreen() {
                         backgroundColor: COLORS.background,
                     }}
                 >
-                    Redeem Your Points
+                    {t("rewards.offers.redeem")}
                 </RNText>
 
                 <View
@@ -134,7 +136,7 @@ export default function DiscountScreen() {
                                         setShowModal(true);
                                     }}
                                 >
-                                    Redeem
+                                    {t("rewards.offers.redeem")}
                                 </RNButton>
                             </View>
                         </View>

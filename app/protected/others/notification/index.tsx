@@ -5,9 +5,11 @@ import { COLORS } from "@/constants";
 import { Notification } from "@/type/notification";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, View } from "react-native";
 
 export default function NotificationScreen() {
+    const { t } = useTranslation();
     const [notifications, setNotifications] = useState<Notification[]>([
         {
             id: "1",
@@ -90,7 +92,7 @@ export default function NotificationScreen() {
         <>
             <Stack.Screen
                 options={{
-                    title: "Notifications",
+                    title: t("account.settings.notifications"),
                     headerRight: () => null,
                 }}
             />
@@ -102,7 +104,7 @@ export default function NotificationScreen() {
                     }}
                 >
                     <RNButton onPress={markAllAsRead} size="sm">
-                        Read All
+                        {t("account.settings.confirm")}
                     </RNButton>
                 </View>
 

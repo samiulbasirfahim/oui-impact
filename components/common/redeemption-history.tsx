@@ -1,8 +1,9 @@
 import { COLORS } from "@/constants";
+import { Redeem } from "@/type/redeem";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { RNText } from "../ui/text";
-import { Redeem } from "@/type/redeem";
 
 const dummy_data: Redeem[] = [
     {
@@ -32,12 +33,13 @@ const dummy_data: Redeem[] = [
 ];
 
 export function RedeemptionHistory() {
+    const { t } = useTranslation();
     return (
         <View>
             <View style={styles.labelContainer}>
                 <MaterialCommunityIcons name="history" size={24} color={COLORS.text} />
                 <RNText variant="subtitle" size="lg">
-                    Redeemption History
+                    {t("rewards.offers.history")}
                 </RNText>
             </View>
 

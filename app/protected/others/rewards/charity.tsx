@@ -6,6 +6,7 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 
 const redeemOptions = [
@@ -32,6 +33,7 @@ const redeemOptions = [
 ];
 
 export default function CharityScreen() {
+    const { t } = useTranslation();
     const [showModal, setShowModal] = useState(false);
 
     const onCloseModal = () => {
@@ -40,7 +42,7 @@ export default function CharityScreen() {
 
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Charity" }} />
+            <Stack.Screen options={{ headerTitle: t("rewards.offers.charity") }} />
             <DiscountConfirmationModal
                 open={showModal}
                 onConfirm={onCloseModal}
@@ -58,7 +60,7 @@ export default function CharityScreen() {
                         backgroundColor: COLORS.background,
                     }}
                 >
-                    Redeem Your Points
+                    {t("rewards.offers.redeem")}
                 </RNText>
 
                 <View
@@ -104,7 +106,7 @@ export default function CharityScreen() {
                                         setShowModal(true);
                                     }}
                                 >
-                                    Redeem
+                                    {t("rewards.offers.redeem")}
                                 </RNButton>
                             </View>
                         </View>

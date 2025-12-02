@@ -3,10 +3,12 @@ import { COLORS } from "@/constants";
 import { RNTabs } from "@/lib/tabNavigation";
 import { MaterialTopTabBarProps } from "@react-navigation/material-top-tabs";
 import { Tabs } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { Dimensions, Pressable, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ProtectedLayout() {
+    const { t } = useTranslation();
     const { bottom } = useSafeAreaInsets();
 
     return (
@@ -36,7 +38,13 @@ export default function ProtectedLayout() {
 }
 
 function CustomTabBar(props: MaterialTopTabBarProps) {
-    const tabs = ["Chat", "Redeem", "Impact", "Account"];
+    const { t } = useTranslation();
+    const tabs = [
+        t("tabs.chat"),
+        t("tabs.redeem"),
+        t("tabs.impact"),
+        t("tabs.account"),
+    ];
     const { bottom } = useSafeAreaInsets();
 
     const icons: Record<string, any> = {
@@ -98,7 +106,7 @@ function CustomTabBar(props: MaterialTopTabBarProps) {
                             }}
                             size={Dimensions.get("window").width > 400 ? "md" : "sm"}
                         >
-                            {tabs[index].charAt(0).toUpperCase() + tabs[index].slice(1)}
+                            {tabs[index]}
                         </RNText>
                     </Pressable>
                 );

@@ -1,11 +1,11 @@
-import Entypo from "@expo/vector-icons/Entypo";
 import { COLORS } from "@/constants";
-import { View } from "react-native";
-import { RNText } from "../ui/text";
-import { GradientBG } from "../ui/gradient-bg";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Feature } from "@/type/plan-features";
+import Entypo from "@expo/vector-icons/Entypo";
+import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 import { RNButton } from "../ui/button";
+import { GradientBG } from "../ui/gradient-bg";
+import { RNText } from "../ui/text";
 
 type PlanFeaturesProps = {
     title: string;
@@ -29,6 +29,7 @@ export function PlanFeatures({
     isCurrentPlan = false,
 }: PlanFeaturesProps) {
     const Wrapper = isPopular ? GradientBG : View;
+    const { t } = useTranslation();
 
     return (
         <Wrapper
@@ -62,7 +63,7 @@ export function PlanFeatures({
                         }}
                         size="sm"
                     >
-                        POPULAR
+                        {t("subscription.popular")}
                     </RNText>
                 </View>
             )}
@@ -183,7 +184,7 @@ export function PlanFeatures({
                             }}
                             variant="title"
                         >
-                            Current Plan
+                            {t("subscription.currentPlan")}
                         </RNText>
                     </RNButton>
                 ) : (
@@ -199,7 +200,7 @@ export function PlanFeatures({
                                 color: isPopular ? COLORS.primary : COLORS.background,
                             }}
                         >
-                            Upgrade to {title}
+                            {t("subscription.upgradeTo", { plan: title })}
                         </RNText>
                     </RNButton>
                 )}

@@ -139,12 +139,20 @@
             "title": "Regarder & Gagner",
             "checkIn": "Check-in quotidien",
             "bonus": "Bonus",
-            "watchMore": "Regarder plus"
+            "watchMore": "Regarder plus",
+            "featured": "À la une",
+            "premiumTitle": "Vidéo de marque premium",
+            "premiumSubtitle": "Regardez cette vidéo de 30 secondes et gagnez des points !",
+            "dailyCheckIn": "Récompense de check-in quotidien",
+            "dailyTasks": "Complétez les tâches quotidiennes",
+            "shareWithFriends": "Partager avec des amis",
+            "inviteFriends": "Invitez des amis à rejoindre"
         },
         "offers": {
             "discounts": "Réductions",
             "offers": "Offres",
-            "redeem": "Utilisez vos points",
+            "redeem": "Utilisez",
+            "charity": "Association",
             "history": "Historique",
             "confirmTitle": "Confirmer l’utilisation",
             "confirm": "Confirmer"
@@ -154,7 +162,73 @@
             "congrats": "Bravo !",
             "earned": "Vous avez gagné +5 points !",
             "ok": "OK"
+        },
+        "leaderboard": {
+            "title": "Classement",
+            "tabs": {
+                "today": "Aujourd'hui",
+                "week": "Semaine",
+                "month": "Mois"
+            }
         }
+    },
+    "subscription": {
+        "title": "Abonnements",
+        "hero": {
+            "title": "Débloquez les fonctionnalités Premium",
+            "subtitle": "Gagnez plus de points, débloquez des fonctions avancées et profitez d'une meilleure expérience"
+        },
+        "popular": "POPULAIRE",
+        "currentPlan": "Offre actuelle",
+        "freeVersion": "Version gratuite",
+        "pointsAvailable": "Points disponibles",
+        "upgradeTo": "Passer à {{plan}}",
+        "billing": {
+            "forever": "à vie",
+            "perMonth": "par mois"
+        },
+        "plans": {
+            "free": { "title": "Offre Gratuite", "description": "Fonctionnalités de base" },
+            "premium": { "title": "Offre Premium", "description": "Toutes les fonctionnalités déverrouillées" },
+            "pro": { "title": "Offre Pro", "description": "Pour utilisateurs avancés" }
+        }
+    },
+    "chat": {
+        "reply": {
+            "initial": "Merci pour votre message ! Comment puis-je vous aider aujourd'hui ?",
+            "shortly": "Merci ! Je reviens vers vous rapidement."
+        },
+        "header": {
+            "newChat": "Nouvelle discussion",
+            "history": "Historique des chats"
+        },
+        "search": { "placeholder": "Rechercher..." },
+        "home": {
+            "helperSubtitle": "Je suis là pour vous aider avec vos questions et tâches créatives."
+        },
+        "templates": {
+            "writing": {
+                "title": "Rédaction",
+                "description": "E-mails, articles, descriptions, et plus."
+            },
+            "creative": {
+                "title": "Créatif",
+                "description": "Histoires, idées, poèmes, légendes, et plus."
+            }
+        }
+    },
+    "status": {
+        "noRewards": {
+            "title": "Aucune récompense",
+            "subtitle": "Gagnez des récompenses en complétant des actions.",
+            "button": "Gagner maintenant"
+        }
+    },
+    "terms": {
+        "title": "Conditions Générales"
+    },
+    "common": {
+        "lastUpdated": "Dernière mise à jour : {{date}}"
     },
     "impact": {
         "dashboard": {
@@ -216,5 +290,12 @@
                 "sale1111Bonus": "Bonus promo 11.11"
             }
         }
+    }
+    ,
+    "tabs": {
+        "chat": "Chat",
+        "redeem": "Utiliser",
+        "impact": "Impact",
+        "account": "Compte"
     }
 }

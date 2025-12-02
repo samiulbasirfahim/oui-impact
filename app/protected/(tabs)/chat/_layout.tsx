@@ -1,17 +1,19 @@
-import RADIXDASHBOARD from "@/assets/svgs/radix-icons_dashboard.svg";
 import ASSISTANT from "@/assets/svgs/assistant.svg";
+import RADIXDASHBOARD from "@/assets/svgs/radix-icons_dashboard.svg";
+import { RNButton } from "@/components/ui/button";
 import { GradientBG } from "@/components/ui/gradient-bg";
 import { RNInput } from "@/components/ui/input";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import Feather from "@expo/vector-icons/Feather";
 import { router, usePathname } from "expo-router";
 import { Drawer } from "expo-router/drawer";
+import { useTranslation } from "react-i18next";
 import { FlatList, Keyboard, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { RNButton } from "@/components/ui/button";
-import Feather from "@expo/vector-icons/Feather";
 
 export default function ChatLayout() {
+    const { t } = useTranslation();
     const chatList = [
         { id: "1", name: "General" },
         { id: "2", name: "Random" },
@@ -77,7 +79,7 @@ export default function ChatLayout() {
                                 fontWeight: "600",
                             }}
                         >
-                            AI Assistant
+                            {t("chat.home.title")}
                         </RNText>
                     </View>
                 ),
@@ -99,11 +101,11 @@ export default function ChatLayout() {
                                 fontFamily: "SuezOne",
                             }}
                         >
-                            History
+                            {t("chat.header.history")}
                         </Text>
 
                         <RNInput
-                            placeholder="Search..."
+                            placeholder={t("chat.search.placeholder")}
                             style={{
                                 width: "90%",
                             }}
@@ -131,7 +133,7 @@ export default function ChatLayout() {
                                     fontSize: 16,
                                 }}
                             >
-                                New Chat
+                                {t("chat.header.newChat")}
                             </RNText>
                         </RNButton>
 
@@ -148,7 +150,7 @@ export default function ChatLayout() {
                                     fontWeight: "600",
                                 }}
                             >
-                                Chat History
+                                {t("chat.header.history")}
                             </RNText>
 
                             <FlatList

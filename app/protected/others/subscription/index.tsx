@@ -1,16 +1,18 @@
-import { LinearGradient } from "expo-linear-gradient";
-import { RNText } from "@/components/ui/text";
+import { PlanFeatures } from "@/components/common/subscription";
 import { Layout } from "@/components/ui/layout";
-import { View } from "react-native";
+import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { LinearGradient } from "expo-linear-gradient";
 import { Stack } from "expo-router";
-import { PlanFeatures } from "@/components/common/subscription";
+import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 
 export default function Screen() {
+    const { t } = useTranslation();
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Subscriptions" }} />
+            <Stack.Screen options={{ headerTitle: t("subscription.title") }} />
             <Layout noPadding>
                 <LinearGradient
                     colors={["#ffffff", "#5A92B133", "#5A92B160", "#5A92B133", "#ffffff"]}
@@ -32,7 +34,7 @@ export default function Screen() {
                         <FontAwesome5 name="crown" size={28} color={COLORS.background} />
                     </View>
                     <RNText variant="title" size="2xl" style={{ textAlign: "center" }}>
-                        Unlock Premium Features
+                        {t("subscription.hero.title")}
                     </RNText>
                     <RNText
                         style={{
@@ -41,8 +43,7 @@ export default function Screen() {
                             color: COLORS.secondaryText,
                         }}
                     >
-                        Get more points, unlock advanced features, and enjoy and enhanced
-                        expirience
+                        {t("subscription.hero.subtitle")}
                     </RNText>
                 </LinearGradient>
                 <View style={{ paddingHorizontal: 16 }}>
@@ -66,10 +67,10 @@ export default function Screen() {
                                     fontWeight: "500",
                                 }}
                             >
-                                Current Plan
+                                {t("subscription.currentPlan")}
                             </RNText>
                             <RNText variant="title" style={{ marginTop: 2 }} size="xl">
-                                Free Version
+                                {t("subscription.freeVersion")}
                             </RNText>
                         </View>
 
@@ -84,7 +85,7 @@ export default function Screen() {
                                     color: COLORS.secondaryText,
                                 }}
                             >
-                                Points Available
+                                {t("subscription.pointsAvailable")}
                             </RNText>
                             <RNText
                                 variant="title"
@@ -101,10 +102,10 @@ export default function Screen() {
                     </View>
 
                     <PlanFeatures
-                        title="Free Plan"
-                        description="Basic Features"
+                        title={t("subscription.plans.free.title")}
+                        description={t("subscription.plans.free.description")}
                         price="$0"
-                        billingCycle="forever"
+                        billingCycle={t("subscription.billing.forever")}
                         icon={
                             <FontAwesome5 name="gift" size={24} color={COLORS.background} />
                         }
@@ -119,10 +120,10 @@ export default function Screen() {
                     />
 
                     <PlanFeatures
-                        title="Premium Plan"
-                        description="All features unlocked"
+                        title={t("subscription.plans.premium.title")}
+                        description={t("subscription.plans.premium.description")}
                         price="$9.99"
-                        billingCycle="per month"
+                        billingCycle={t("subscription.billing.perMonth")}
                         icon={
                             <FontAwesome5 name="star" size={24} color={COLORS.background} />
                         }
@@ -136,10 +137,10 @@ export default function Screen() {
                         isPopular={true}
                     />
                     <PlanFeatures
-                        title="Pro Plan"
-                        description="For Power Users"
+                        title={t("subscription.plans.pro.title")}
+                        description={t("subscription.plans.pro.description")}
                         price="$19.99"
-                        billingCycle="per month"
+                        billingCycle={t("subscription.billing.perMonth")}
                         icon={
                             <FontAwesome5 name="rocket" size={24} color={COLORS.background} />
                         }

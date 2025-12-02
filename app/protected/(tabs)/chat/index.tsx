@@ -1,26 +1,28 @@
+import { useRouter } from "expo-router";
+import { useRef, useState } from "react";
 import {
-    View,
-    ScrollView,
     KeyboardAvoidingView,
     Platform,
+    ScrollView,
     TextInput,
+    View,
 } from "react-native";
-import { useState, useRef } from "react";
-import { useRouter } from "expo-router";
 
 import { COLORS } from "@/constants";
 import { useKeyboardOffset } from "@/hooks/useKeyboardOffset";
 import { useKeyboardVisibility } from "@/hooks/useKeyboardVisibility";
 
-import { RNText } from "@/components/ui/text";
+import { RNBannerAd } from "@/components/common/banner-ad";
+import { ChatInput } from "@/components/common/chat-input";
 import { RNButton } from "@/components/ui/button";
 import { ChatTemplateButton } from "@/components/ui/chat-template-button";
-import { ChatInput } from "@/components/common/chat-input";
-import { RNBannerAd } from "@/components/common/banner-ad";
+import { RNText } from "@/components/ui/text";
+import { useTranslation } from "react-i18next";
 
 const createChatId = () => `chat-${Date.now()}`;
 
 export default function NewChatScreen() {
+    const { t } = useTranslation();
     const router = useRouter();
     const keyboardOffset = useKeyboardOffset();
     const isKeyboardVisible = useKeyboardVisibility();
@@ -66,7 +68,7 @@ export default function NewChatScreen() {
                                 }}
                             >
                                 <View>
-                                    <RNText>Your Points</RNText>
+                                    <RNText>{t("home.header.points")}</RNText>
                                     <RNText size="2xl" variant="title">
                                         1,250
                                     </RNText>
@@ -82,7 +84,7 @@ export default function NewChatScreen() {
                                             router.push("/protected/(tabs)/reward");
                                         }}
                                     >
-                                        Reedem
+                                        {t("rewards.home.redeemNow")}
                                     </RNButton>
                                     <RNButton
                                         size="sm"
@@ -90,7 +92,7 @@ export default function NewChatScreen() {
                                             router.push("/protected/others/subscription");
                                         }}
                                     >
-                                        Premium
+                                        {t("rewards.home.upgrade")}
                                     </RNButton>
                                 </View>
                             </View>
@@ -98,14 +100,14 @@ export default function NewChatScreen() {
 
                         <View style={{ alignItems: "center", gap: 6 }}>
                             <RNText size="xl" variant="title">
-                                Welcome to OUI IMPACT
+                                {t("home.header.welcomeLong")}
                             </RNText>
 
                             <RNText
                                 size="sm"
                                 style={{ color: COLORS.muted, textAlign: "center" }}
                             >
-                                I'm here to help you with questions, creative tasks, and more.
+                                {t("chat.home.helperSubtitle")}
                             </RNText>
                         </View>
 
@@ -117,8 +119,8 @@ export default function NewChatScreen() {
                                 }}
                             >
                                 <ChatTemplateButton
-                                    title="Writing"
-                                    description="Emails, blog posts, descriptions, and more."
+                                    title={t("chat.templates.writing.title")}
+                                    description={t("chat.templates.writing.description")}
                                     onPress={() => {
                                         inputRef.current?.focus();
                                         setInputText("Help me write a professional email about ");
@@ -126,8 +128,8 @@ export default function NewChatScreen() {
                                 />
 
                                 <ChatTemplateButton
-                                    title="Creative"
-                                    description="Stories, ideas, poems, captions, and more."
+                                    title={t("chat.templates.creative.title")}
+                                    description={t("chat.templates.creative.description")}
                                     onPress={() => {
                                         inputRef.current?.focus();
                                         setInputText("Can you help me brainstorm some ideas for ");

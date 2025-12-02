@@ -1,9 +1,11 @@
-import { RNButton } from "@/components/ui/button";
-import { RNText } from "@/components/ui/text";
 import NoInternetSVG from "@/assets/svgs/no-internet.svg";
 import { BlurBG } from "@/components/ui/blur-bg";
+import { RNButton } from "@/components/ui/button";
+import { RNText } from "@/components/ui/text";
+import { useTranslation } from "react-i18next";
 
 export default function NotInternetScreen() {
+    const { t } = useTranslation();
     return (
         <BlurBG
             style={{
@@ -13,17 +15,15 @@ export default function NotInternetScreen() {
             centered
         >
             <NoInternetSVG height={100} />
-            <RNText size="xl" variant="title">
-                No Internet Connection
-            </RNText>
+            <RNText size="xl" variant="title">{t("auth.session.noInternetTitle")}</RNText>
             <RNText
                 size="md"
                 variant="secondary"
                 style={{ textAlign: "center", marginBottom: 12 }}
             >
-                Please check your connection and try again.
+                {t("auth.session.noInternetSubtitle")}
             </RNText>
-            <RNButton>TRY AGAIN</RNButton>
+            <RNButton>{t("auth.session.retry")}</RNButton>
         </BlurBG>
     );
 }

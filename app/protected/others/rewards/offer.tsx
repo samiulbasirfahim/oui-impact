@@ -6,6 +6,7 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 
 const redeemOptions = [
@@ -37,6 +38,7 @@ const redeemOptions = [
 ];
 
 export default function OfferScreen() {
+    const { t } = useTranslation();
     const [showModal, setShowModal] = useState(false);
 
     const onCloseModal = () => {
@@ -45,7 +47,7 @@ export default function OfferScreen() {
 
     return (
         <>
-            <Stack.Screen options={{ headerTitle: "Offers" }} />
+            <Stack.Screen options={{ headerTitle: t("rewards.offers.offers") }} />
             <DiscountConfirmationModal
                 open={showModal}
                 onConfirm={onCloseModal}
@@ -63,7 +65,7 @@ export default function OfferScreen() {
                         backgroundColor: COLORS.background,
                     }}
                 >
-                    Redeem Your Points
+                    {t("rewards.offers.redeem")}
                 </RNText>
 
                 <View
@@ -98,7 +100,7 @@ export default function OfferScreen() {
                                     20% off Partner App
                                 </RNText>
                                 <RNText variant="base" style={{ color: COLORS.secondaryText }}>
-                                    Cost 200 points
+                                    {t("rewards.offers.costPoints", { count: 200 })}
                                 </RNText>
                             </View>
 
@@ -109,7 +111,7 @@ export default function OfferScreen() {
                                         setShowModal(true);
                                     }}
                                 >
-                                    Redeem
+                                    {t("rewards.offers.redeemAction")}
                                 </RNButton>
                             </View>
                         </View>

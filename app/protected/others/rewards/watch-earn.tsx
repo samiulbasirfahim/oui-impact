@@ -7,14 +7,16 @@ import { ClaimButton, WatchButton } from "@/components/ui/watch-earn-buttons";
 import { COLORS } from "@/constants";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router, Stack } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 
 export default function Screen() {
+    const { t } = useTranslation();
     return (
         <>
             <Stack.Screen
                 options={{
-                    title: "Watch & Earn",
+                    title: t("rewards.watch.title"),
                 }}
             />
             <Layout>
@@ -27,7 +29,7 @@ export default function Screen() {
                             }}
                             size="sm"
                         >
-                            Featured
+                            {t("rewards.watch.featured")}
                         </RNButton>
                         <RNButton
                             size="sm"
@@ -48,7 +50,7 @@ export default function Screen() {
                         size="xl"
                         variant="title"
                     >
-                        Premium Brand Video
+                        {t("rewards.watch.premiumTitle")}
                     </RNText>
                     <RNText
                         style={{
@@ -56,7 +58,7 @@ export default function Screen() {
                             color: COLORS.backgroundSecondary,
                         }}
                     >
-                        Watch this 30-second video and earn bonus points!
+                        {t("rewards.watch.premiumSubtitle")}
                     </RNText>
 
                     <RNButton
@@ -80,7 +82,7 @@ export default function Screen() {
                                 fontWeight: "500",
                             }}
                         >
-                            Watch & Earn
+                            {t("rewards.watch.title")}
                         </RNText>
                     </RNButton>
                 </GradientBG>
@@ -119,14 +121,14 @@ export default function Screen() {
                         marginTop: 24,
                     }}
                 >
-                    Bonus Opportunities
+                    {t("rewards.watch.bonus")}
                 </RNText>
 
                 <ClaimButton
                     onPress={() => { }}
                     points={10}
-                    title="Daily Check-In Reward"
-                    description="Complete daily tasks"
+                    title={t("rewards.watch.dailyCheckIn")}
+                    description={t("rewards.watch.dailyTasks")}
                     icon={
                         <FontAwesome5
                             name="calendar-check"
@@ -134,16 +136,16 @@ export default function Screen() {
                             color={COLORS.primary}
                         />
                     }
-                    buttonTitle="Claim"
+                    buttonTitle={t("rewards.offers.confirm")}
                 />
 
                 <ClaimButton
                     onPress={() => { }}
                     points={50}
-                    title="Share with friends"
-                    description="Invite friends to join"
+                    title={t("rewards.watch.shareWithFriends")}
+                    description={t("rewards.watch.inviteFriends")}
                     icon={<FontAwesome5 name="share" size={24} color={COLORS.primary} />}
-                    buttonTitle="Claim"
+                    buttonTitle={t("rewards.offers.confirm")}
                 />
 
                 <View
@@ -163,10 +165,10 @@ export default function Screen() {
                         }}
                     >
                         <RNText variant="title" size="lg">
-                            Redeem Now
+                            {t("rewards.home.redeemNow")}
                         </RNText>
                         <RNText variant="secondary" size="md">
-                            Make offers, discounts or donations with your earned points
+                            {t("rewards.offers.redeem")}
                         </RNText>
                     </View>
 
@@ -175,14 +177,14 @@ export default function Screen() {
                             backgroundColor: COLORS.orange,
                         }}
                     >
-                        Redeem
+                        {t("rewards.offers.redeem")}
                     </RNButton>
                 </View>
 
                 <GradientButton
-                    title="Premium Upgrade"
-                    subtitle="Get 2x points on all videos!"
-                    buttonText="Upgrade"
+                    title={t("impact.dashboard.premium")}
+                    subtitle={t("rewards.home.upgrade")}
+                    buttonText={t("rewards.home.upgrade")}
                     onPress={() => {
                         router.push("/protected/others/subscription");
                     }}

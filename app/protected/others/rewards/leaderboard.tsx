@@ -4,6 +4,7 @@ import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Stack } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SceneMap, TabView } from "react-native-tab-view";
@@ -15,11 +16,12 @@ const renderSchene = SceneMap({
 });
 const routes = [
     { key: "today", title: "today" },
-    { key: "week", title: "Week" },
-    { key: "month", title: "Month" },
+    { key: "week", title: "week" },
+    { key: "month", title: "month" },
 ];
 
 export default function LeaderBoardScreen() {
+    const { t } = useTranslation();
     const [index, setIndex] = useState(1);
 
     const layout = useWindowDimensions();
@@ -28,11 +30,7 @@ export default function LeaderBoardScreen() {
 
     return (
         <>
-            <Stack.Screen
-                options={{
-                    title: "Leaderboard",
-                }}
-            />
+            <Stack.Screen options={{ title: t("rewards.leaderboard.title") }} />
             <SafeAreaView
                 edges={[]}
                 style={{
@@ -84,7 +82,7 @@ export default function LeaderBoardScreen() {
                                                         : COLORS.muted,
                                                 }}
                                             >
-                                                {route.title}
+                                                {t(`rewards.leaderboard.tabs.${route.title}`)}
                                             </RNText>
                                         </Pressable>
                                     );

@@ -113,12 +113,32 @@
             "title": "AI Assistant",
             "placeholder": "Ask me anything…",
             "quickPrompts": "Quick Prompts",
-            "done": "Done"
+            "done": "Done",
+            "helperSubtitle": "I'm here to help you with questions, creative tasks, and more."
         },
         "empty": {
             "title": "No Chats Yet",
             "subtitle": "Start a new conversation to see chats here.",
             "button": "Start Chat"
+        },
+        "reply": {
+            "initial": "Thanks for your message! How can I assist you today?",
+            "shortly": "Thanks! I'll get back to you shortly."
+        },
+        "header": {
+            "newChat": "New Chat",
+            "history": "Chat History"
+        },
+        "search": { "placeholder": "Search..." },
+        "templates": {
+            "writing": {
+                "title": "Writing",
+                "description": "Emails, blog posts, descriptions, and more."
+            },
+            "creative": {
+                "title": "Creative",
+                "description": "Stories, ideas, poems, captions, and more."
+            }
         }
     },
     "home": {
@@ -131,29 +151,47 @@
     "rewards": {
         "home": {
             "title": "Earn Rewards",
-            "redeem": "Redeem Your Points",
-            "redeemNow": "Redeem Now",
+            "redeem": "Redeem",
+            "redeemNow": "Redeem",
             "upgrade": "Upgrade"
         },
         "watch": {
             "title": "Watch & Earn",
             "checkIn": "Daily Check-in",
             "bonus": "Bonus Opportunities",
-            "watchMore": "Watch More"
+            "watchMore": "Watch More",
+            "featured": "Featured",
+            "premiumTitle": "Premium Brand Video",
+            "premiumSubtitle": "Watch this 30-second video and earn bonus points!",
+            "dailyCheckIn": "Daily Check-In Reward",
+            "dailyTasks": "Complete daily tasks",
+            "shareWithFriends": "Share with friends",
+            "inviteFriends": "Invite friends to join"
         },
         "offers": {
             "discounts": "Discounts",
             "offers": "Offers",
-            "redeem": "Redeem Your Points",
+            "redeem": "Redeem",
+            "charity": "Charity",
             "history": "Redemption History",
             "confirmTitle": "Confirm Redemption",
-            "confirm": "Confirm"
+            "confirm": "Confirm",
+            "redeemAction": "Redeem",
+            "costPoints": "Cost {{count}} points"
         },
         "ads": {
             "title": "Ads",
             "congrats": "Congratulations!",
             "earned": "You earned +5 points for watching this video!",
             "ok": "OK"
+        },
+        "leaderboard": {
+            "title": "Leaderboard",
+            "tabs": {
+                "today": "Today",
+                "week": "Week",
+                "month": "Month"
+            }
         }
     },
     "impact": {
@@ -164,8 +202,43 @@
             "recent": "Recent Impact",
             "amplify": "Amplify Your Impact",
             "premium": "Upgrade to Premium",
-            "share": "Share Your Impact"
+            "share": "Share"
         }
+    },
+    "subscription": {
+        "title": "Subscriptions",
+        "hero": {
+            "title": "Unlock Premium Features",
+            "subtitle": "Get more points, unlock advanced features, and enjoy an enhanced experience"
+        },
+        "popular": "POPULAR",
+        "currentPlan": "Current Plan",
+        "freeVersion": "Free Version",
+        "pointsAvailable": "Points Available",
+        "upgradeTo": "Upgrade to {{plan}}",
+        "billing": {
+            "forever": "forever",
+            "perMonth": "per month"
+        },
+        "plans": {
+            "free": { "title": "Free Plan", "description": "Basic Features" },
+            "premium": { "title": "Premium Plan", "description": "All features unlocked" },
+            "pro": { "title": "Pro Plan", "description": "For Power Users" }
+        }
+    },
+    
+    "status": {
+        "noRewards": {
+            "title": "No Rewards Yet",
+            "subtitle": "Earn rewards by completing actions.",
+            "button": "Earn Now"
+        }
+    },
+    "terms": {
+        "title": "Terms & Conditions"
+    },
+    "common": {
+        "lastUpdated": "Last updated: {{date}}"
     },
     "account": {
         "settings": {
@@ -216,5 +289,12 @@
                 "sale1111Bonus": "11.11 Sale Bonus"
             }
         }
+    }
+    ,
+    "tabs": {
+        "chat": "Chat",
+        "redeem": "Redeem",
+        "impact": "Impact",
+        "account": "Account"
     }
 }
