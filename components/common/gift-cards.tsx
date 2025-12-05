@@ -12,6 +12,7 @@ import { Image } from "expo-image";
 import { COLORS } from "@/constants";
 import { useState } from "react";
 import { GiftCardConfirmationModal } from "../ui/giftcard-confirmation-modal";
+import { useTranslation } from "react-i18next";
 
 export type GiftCardItem = {
     image: ImageSourcePropType;
@@ -47,6 +48,7 @@ const dummyDatas: GiftCardItem[] = [
 
 export function GiftCards() {
     const { width } = useWindowDimensions();
+    const { t } = useTranslation();
 
     const [selectedGiftCard, setSelectedGiftCard] = useState<GiftCardItem | null>(
         null,
@@ -95,6 +97,13 @@ export function GiftCards() {
 
     return (
         <>
+            <RNText
+                size="xl"
+                style={{ marginBottom: 8, marginTop: 16 }}
+                variant="title"
+            >
+                {t("giftCards.title", "Gift Cards")}
+            </RNText>
             <GiftCardConfirmationModal
                 points={selectedGiftCard?.points}
                 title={selectedGiftCard?.title}

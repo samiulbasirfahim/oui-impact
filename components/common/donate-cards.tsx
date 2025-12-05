@@ -1,94 +1,125 @@
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import { FlashList } from "@shopify/flash-list";
-import {
-    ImageSourcePropType,
-    Pressable,
-    StyleSheet,
-    useWindowDimensions,
-    View,
-} from "react-native";
+import { Pressable, StyleSheet, useWindowDimensions, View } from "react-native";
 import { RNText } from "../ui/text";
-import { Image } from "expo-image";
 import { COLORS } from "@/constants";
 import { useState } from "react";
 import { GiftCardConfirmationModal } from "../ui/giftcard-confirmation-modal";
 import Carousel from "react-native-reanimated-carousel";
+import { useTranslation } from "react-i18next";
+import Animated, {
+    Extrapolation,
+    interpolate,
+    useAnimatedStyle,
+    useSharedValue,
+} from "react-native-reanimated";
 
-export type GiftCardItem = {
-    image: ImageSourcePropType;
-    title: string;
-    subTitle: string;
+export type CharityCardItem = {
+    icon: keyof typeof FontAwesome6.glyphMap;
+    titleKey: string;
+    subTitleKey: string;
     points: number;
-    isPremium: boolean;
+    color: string;
+    conversion: {
+        amount: number;
+        unit: string;
+    };
 };
 
-const dummyDatas: GiftCardItem[] = [
+const charityCards: CharityCardItem[] = [
     {
-        image: require("@/assets/images/gift-card.png"),
-        title: "Amazon Gift Card",
-        subTitle: "Use this gift card on Amazon purchases",
-        points: 5000,
-        isPremium: false,
+        icon: "tree",
+        titleKey: "donate.oneTree.title",
+        subTitleKey: "donate.oneTree.subtitle",
+        points: 500,
+        color: "#21C463",
+        conversion: { amount: 5, unit: "trees" },
     },
     {
-        image: require("@/assets/images/gift-card.png"),
-        title: "iTunes Gift Card",
-        subTitle: "Use this gift card on iTunes purchases",
-        points: 7000,
-        isPremium: true,
+        icon: "readme",
+        titleKey: "donate.roomToRead.title",
+        subTitleKey: "donate.roomToRead.subtitle",
+        points: 600,
+        color: "#2F7BFF",
+        conversion: { amount: 3, unit: "books" },
     },
     {
-        image: require("@/assets/images/gift-card.png"),
-        title: "Google Play Gift Card",
-        subTitle: "Use this gift card on Google Play purchases",
-        points: 6000,
-        isPremium: false,
+        icon: "baby",
+        titleKey: "donate.baby2Baby.title",
+        subTitleKey: "donate.baby2Baby.subtitle",
+        points: 400,
+        color: "#FF4F8B",
+        conversion: { amount: 1, unit: "care kit" },
+    },
+    {
+        icon: "hand-holding-heart",
+        titleKey: "donate.feedingAmerica.title",
+        subTitleKey: "donate.feedingAmerica.subtitle",
+        points: 300,
+        color: "#A34CFF",
+        conversion: { amount: 10, unit: "meals" },
     },
 ];
 
-export function DonateCards() {
-    const { width } = useWindowDimensions();
+function getConversionLabel(item: CharityCardItem) {
+    return `${item.points} points = ${item.conversion.amount} ${item.conversion.unit}`;
+}
 
-    const [selectedGiftCard, setSelectedGiftCard] = useState<GiftCardItem | null>(
+export function DonateCards() {
+    const { t } = useTranslation();
+    const { width } = useWindowDimensions();
+    const [selectedCard, setSelectedCard] = useState<CharityCardItem | null>(
         null,
     );
 
-    const renderItem = ({
-        item,
-        index,
-    }: {
-        item: GiftCardItem;
-        index: number;
-    }) => {
-        const itemWidth = width * 0.6;
+    const progress = useSharedValue(0);
+    const CARD_WIDTH = width * 0.78;
+
+    const renderItem = ({ item }: { item: CharityCardItem; index: number }) => {
         return (
             <Pressable
-                onPress={() => {
-                    setSelectedGiftCard(item);
-                }}
-                style={[styles.giftCard, { width: itemWidth }]}
+                onPress={() => setSelectedCard(item)}
+                style={[
+                    styles.card,
+                    { width: CARD_WIDTH, backgroundColor: item.color, height: 240 },
+                ]}
             >
-                <Image
-                    source={item.image}
-                    style={[styles.giftCardImage, { width: itemWidth - 2, height: 150 }]}
-                />
-                <View style={styles.coinBadge}>
-                    <FontAwesome6 name="coins" size={15} color={COLORS.orange} />
-                    <RNText size="sm" style={{ color: COLORS.text }} variant="title">
-                        {item.points}
-                    </RNText>
+                <View>
+                    <View style={styles.iconContainer}>
+                        <FontAwesome6 name={item.icon} size={28} color={item.color} />
+                    </View>
+
+                    <View style={styles.textContainer}>
+                        <RNText size="lg" style={styles.title}>
+                            {t(item.titleKey)}
+                        </RNText>
+                        <RNText size="sm" style={styles.subtitle}>
+                            {t(item.subTitleKey)}
+                        </RNText>
+                    </View>
                 </View>
-                <View style={styles.giftCardBottom}>
-                    <RNText size="lg">{item.title}</RNText>
-                    <RNText
-                        size="sm"
-                        numberOfLines={1}
-                        style={{
-                            color: COLORS.secondaryText,
-                        }}
-                    >
-                        {item.subTitle}
+
+                <View style={styles.bottomContainer}>
+                    <RNText size="sm" style={styles.conversionLabel}>
+                        {getConversionLabel(item)}
                     </RNText>
+
+                    <Pressable
+                        onPress={() => setSelectedCard(item)}
+                        style={styles.redeemButton}
+                    >
+                        <RNText
+                            size="sm"
+                            style={{ color: COLORS.background }}
+                            variant="title"
+                        >
+                            {t("rewards.home.redeem", "Redeem")}
+                        </RNText>
+                        <FontAwesome6
+                            name="arrow-right"
+                            size={16}
+                            color={COLORS.background}
+                        />
+                    </Pressable>
                 </View>
             </Pressable>
         );
@@ -96,54 +127,134 @@ export function DonateCards() {
 
     return (
         <>
+            <RNText
+                size="xl"
+                style={{ marginBottom: 8, marginTop: 16 }}
+                variant="title"
+            >
+                {t("donateCards.title", "Donate Cards")}
+            </RNText>
+
             <GiftCardConfirmationModal
-                points={selectedGiftCard?.points}
-                title={selectedGiftCard?.title}
-                open={selectedGiftCard !== null}
-                onCancel={() => setSelectedGiftCard(null)}
-                onConfirm={() => setSelectedGiftCard(null)}
+                points={selectedCard?.points}
+                title={selectedCard?.titleKey ? t(selectedCard.titleKey) : ""}
+                open={selectedCard !== null}
+                onCancel={() => setSelectedCard(null)}
+                onConfirm={() => setSelectedCard(null)}
             />
+
             <Carousel
-                data={dummyDatas}
-                renderItem={renderItem}
                 width={width}
-                height={250}
+                height={240}
+                data={charityCards}
+                renderItem={renderItem}
                 loop={false}
+                pagingEnabled
+                snapEnabled
+                scrollAnimationDuration={500}
+                mode="parallax"
+                modeConfig={{ parallaxScrollingScale: 1, parallaxScrollingOffset: 70 }}
+                onProgressChange={(_, absoluteProgress) => {
+                    progress.value = absoluteProgress;
+                }}
             />
+
+            <View style={styles.paginationContainer}>
+                {charityCards.map((_, index) => (
+                    <AnimatedDot key={index} index={index} progress={progress} />
+                ))}
+            </View>
         </>
     );
 }
 
+function AnimatedDot({
+    index,
+    progress,
+}: {
+    index: number;
+    progress: Animated.SharedValue<number>;
+}) {
+    const animatedStyle = useAnimatedStyle(() => {
+        const width = interpolate(
+            progress.value,
+            [index - 1, index, index + 1],
+            [8, 24, 8],
+            Extrapolation.CLAMP,
+        );
+        const opacity = interpolate(
+            progress.value,
+            [index - 1, index, index + 1],
+            [0.3, 1, 0.3],
+            Extrapolation.CLAMP,
+        );
+        return { width, opacity };
+    });
+
+    return (
+        <Animated.View
+            style={[
+                {
+                    height: 8,
+                    borderRadius: 4,
+                    backgroundColor: COLORS.primary,
+                    marginHorizontal: 4,
+                },
+                animatedStyle,
+            ]}
+        />
+    );
+}
+
 const styles = StyleSheet.create({
-    giftCardContainer: {},
-
-    giftCard: {
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        borderWidth: 1,
-        borderRadius: 8,
-        overflow: "hidden",
-        borderColor: COLORS.muted + "33",
+    card: {
+        padding: 16,
+        borderRadius: 12,
+        justifyContent: "space-between",
     },
-
-    giftCardImage: {
-        resizeMode: "cover",
+    iconContainer: {
+        backgroundColor: "white",
+        alignSelf: "flex-start",
+        padding: 12,
+        borderRadius: 36,
+        marginBottom: 10,
     },
-    giftCardBottom: {
-        flexDirection: "column",
-        alignItems: "flex-start",
-        padding: 8,
+    textContainer: {
+        marginBottom: 6,
     },
-    coinBadge: {
+    title: {
+        color: "white",
+        fontWeight: "600",
+        marginBottom: 2,
+    },
+    subtitle: {
+        color: "white",
+        opacity: 0.9,
+        lineHeight: 18,
+    },
+    bottomContainer: {
         flexDirection: "row",
-        position: "absolute",
-        top: 4,
-        right: 4,
-        backgroundColor: COLORS.background,
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    conversionLabel: {
+        color: "white",
+        marginTop: 6,
+        opacity: 0.95,
+    },
+    redeemButton: {
+        backgroundColor: COLORS.text,
         borderRadius: 8,
-        padding: 8,
+        paddingHorizontal: 8,
         paddingVertical: 4,
+        flexDirection: "row",
+        gap: 6,
+        alignItems: "center",
+    },
+    paginationContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: 14,
         gap: 4,
     },
 });

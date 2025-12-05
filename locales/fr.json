@@ -341,5 +341,31 @@
   },
   "notifications": {
     "readAll": "Mark al Chnage IT"
+  },
+
+  "giftCards": {
+    "title": "Gift Cards - Chnage it"
+  },
+  "donateCards": {
+    "title": "Donate to Charities - Chnage it"
+  },
+
+  "donate": {
+    "oneTree": {
+      "title": "Un Arbre Planté",
+      "subtitle": "Planter des arbres pour lutter contre le changement climatique\net restaurer les écosystèmes"
+    },
+    "roomToRead": {
+      "title": "Room to Read",
+      "subtitle": "Financer l'éducation et la lecture des enfants\ndans les pays en développement"
+    },
+    "baby2Baby": {
+      "title": "Baby2Baby",
+      "subtitle": "Soutenir les nouveau-nés et enfants dans le besoin\navec les fournitures essentielles"
+    },
+    "feedingAmerica": {
+      "title": "Feeding America",
+      "subtitle": "Fournir des repas aux familles confrontées à la faim aux États-Unis"
+    }
   }
 }

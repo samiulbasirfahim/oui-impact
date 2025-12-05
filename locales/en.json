@@ -334,5 +334,31 @@
   },
   "notifications": {
     "readAll": "Mark all as read"
+  },
+  "giftCards": {
+    "title": "Gift Cards"
+  },
+
+  "donateCards": {
+    "title": "Donate to Charities"
+  },
+
+  "donate": {
+    "oneTree": {
+      "title": "One Tree Planted",
+      "subtitle": "Plant trees globally to combat climate change\nand restore ecosystems"
+    },
+    "roomToRead": {
+      "title": "Room to Read",
+      "subtitle": "Fund children's education and literacy\nprograms in developing countries"
+    },
+    "baby2Baby": {
+      "title": "Baby2Baby",
+      "subtitle": "Support newborns and children in need with\nessential supplies and care"
+    },
+    "feedingAmerica": {
+      "title": "Feeding America",
+      "subtitle": "Provide meals to families facing hunger across\nthe United States"
+    }
   }
 }
