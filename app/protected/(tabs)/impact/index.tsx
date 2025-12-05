@@ -107,7 +107,7 @@ export default function ImpactIndex() {
                             12L
                         </RNText>
                         <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
-                            {t("impact.dashboard.donated")}
+                            💧{t("impact.dashboard.waterDonated")}
                         </RNText>
                     </View>
 
@@ -120,7 +120,7 @@ export default function ImpactIndex() {
                             4
                         </RNText>
                         <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
-                            {t("impact.dashboard.donated")}
+                            🌲 {t("impact.dashboard.treeDonated")}
                         </RNText>
                     </View>
                 </View>
@@ -139,7 +139,7 @@ export default function ImpactIndex() {
                         {t("impact.dashboard.amplify")}
                     </RNText>
                 </View>
-                {false && (
+                {
                     <View
                         style={{
                             ...styles.statCard,
@@ -162,7 +162,7 @@ export default function ImpactIndex() {
                                 <BOOK width={22} height={22} />
                             </View>
                             <RNText variant="title" size="lg">
-                                Room to Read
+                                {t("impact.dashboard.roomToRead")}
                             </RNText>
                         </View>
 
@@ -172,8 +172,7 @@ export default function ImpactIndex() {
                                 color: COLORS.muted,
                             }}
                         >
-                            You're supporting Room to Read — helping children get access to
-                            books.
+                            {t("impact.dashboard.roomToReadDescription")}
                         </RNText>
 
                         <TouchableOpacity
@@ -202,9 +201,9 @@ export default function ImpactIndex() {
                             </GradientBG>
                         </TouchableOpacity>
                     </View>
-                )}
+                }
 
-                <View style={{ marginTop: 24, marginBottom: 12 }}>
+                <View style={{ marginTop: 24, marginBottom: 12, display: "none" }}>
                     <RNText
                         style={{
                             fontWeight: "600",
@@ -349,7 +348,7 @@ export default function ImpactIndex() {
                             textAlign: "center",
                         }}
                     >
-                        {t("impact.dashboard.premium")}
+                        {t("impact.dashboard.amplifyDescription")}
                     </RNText>
 
                     <RNText
@@ -359,7 +358,7 @@ export default function ImpactIndex() {
                         }}
                         size="sm"
                     >
-                        {t("impact.dashboard.share")}
+                        {t("impact.dashboard.amplifyDescriptionSecond")}
                     </RNText>
                     <RNButton
                         style={{
@@ -413,7 +412,7 @@ export default function ImpactIndex() {
                         }}
                         size="md"
                     >
-                        {t("home.header.points")}
+                        1,250 PTS - Silver Badge
                     </RNText>
                     <FontAwesome5 name="medal" size={24} color={"#9CA3AF"} />
                 </View>
@@ -476,7 +475,7 @@ export default function ImpactIndex() {
                         color: COLORS.muted,
                     }}
                 >
-                    {t("home.header.points")}
+                    {t("impact.dashboard.keepEarning")}
                 </RNText>
                 <GradientBG
                     style={{

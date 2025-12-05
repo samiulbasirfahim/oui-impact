@@ -60,7 +60,7 @@ export function OnboardingScreen({
                         }}
                     />
                 </View>
-                <View style={{ alignItems: "flex-start", gap: 12, flex: 1 }}>
+                <View style={{ alignItems: "center", gap: 12, flex: 1 }}>
                     {title && (
                         <RNText size="3xl" variant="title">
                             {title}

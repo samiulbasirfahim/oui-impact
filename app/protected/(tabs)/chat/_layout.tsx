@@ -37,20 +37,38 @@ export default function ChatLayout() {
 
                 headerTitle: "",
                 headerRight: () => (
-                    <Pressable
-                        onPress={() => {
-                            Keyboard.dismiss();
-                            navigation.openDrawer();
-                        }}
+                    <View
                         style={{
-                            marginRight: 16,
-                            padding: 6,
-                            backgroundColor: COLORS.muted + "22",
-                            borderRadius: 24,
+                            flexDirection: "row",
+                            gap: 8,
+                            alignItems: "center",
                         }}
                     >
-                        <RADIXDASHBOARD width={24} height={24} fill={COLORS.text} />
-                    </Pressable>
+                        <RNText
+                            style={{
+                                backgroundColor: COLORS.primary + "33",
+                                padding: 4,
+                                paddingHorizontal: 8,
+                                borderRadius: 8,
+                                fontWeight: "500",
+                            }}
+                        >
+                            Limit: 52
+                        </RNText>
+                        <Pressable
+                            onPress={() => {
+                                Keyboard.dismiss();
+                                navigation.openDrawer();
+                            }}
+                            style={{
+                                marginRight: 16,
+                                padding: 6,
+                                borderRadius: 24,
+                            }}
+                        >
+                            <RADIXDASHBOARD width={24} height={24} fill={COLORS.text} />
+                        </Pressable>
+                    </View>
                 ),
 
                 headerLeft: () => (

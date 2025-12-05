@@ -104,7 +104,7 @@ export default function NotificationScreen() {
                     }}
                 >
                     <RNButton onPress={markAllAsRead} size="sm">
-                        {t("account.settings.confirm")}
+                        {t("notifications.readAll")}
                     </RNButton>
                 </View>
 

@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "oui-impact",
@@ -47,6 +48,7 @@
         "react-native-portalize": "^1.0.7",
         "react-native-purchases": "^9.6.8",
         "react-native-reanimated": "~4.1.1",
+        "react-native-reanimated-carousel": "^4.0.3",
         "react-native-safe-area-context": "~5.6.0",
         "react-native-screens": "~4.16.0",
         "react-native-svg": "15.12.1",
@@ -1778,6 +1780,8 @@
     "react-native-purchases": ["react-native-purchases@9.6.8", "", { "dependencies": { "@revenuecat/purchases-js-hybrid-mappings": "17.21.0", "@revenuecat/purchases-typescript-internal": "17.21.0" }, "peerDependencies": { "react": ">= 16.6.3", "react-native": ">= 0.73.0", "react-native-web": "*" }, "optionalPeers": ["react-native-web"] }, "sha512-MAe9sDXZTTiBF03Sz87YRJBHpI+50MN7ZJnSKah4vEtl2BSvcDzPtp2vndIvwCraZ0DMdVNPYC6057Pqjq0GpA=="],
 
     "react-native-reanimated": ["react-native-reanimated@4.1.3", "", { "dependencies": { "react-native-is-edge-to-edge": "^1.2.1", "semver": "7.7.2" }, "peerDependencies": { "@babel/core": "^7.0.0-0", "react": "*", "react-native": "*", "react-native-worklets": ">=0.5.0" } }, "sha512-GP8wsi1u3nqvC1fMab/m8gfFwFyldawElCcUSBJQgfrXeLmsPPUOpDw44lbLeCpcwUuLa05WTVePdTEwCLTUZg=="],
+
+    "react-native-reanimated-carousel": ["react-native-reanimated-carousel@4.0.3", "", { "peerDependencies": { "react": ">=18.0.0", "react-native": ">=0.70.3", "react-native-gesture-handler": ">=2.9.0", "react-native-reanimated": ">=3.0.0" } }, "sha512-YZXlvZNghR5shFcI9hTA7h7bEhh97pfUSLZvLBAshpbkuYwJDKmQXejO/199T6hqGq0wCRwR0CWf2P4Vs6A4Fw=="],
 
     "react-native-safe-area-context": ["react-native-safe-area-context@5.6.2", "", { "peerDependencies": { "react": "*", "react-native": "*" } }, "sha512-4XGqMNj5qjUTYywJqpdWZ9IG8jgkS3h06sfVjfw5yZQZfWnRFXczi0GnYyFyCc2EBps/qFmoCH8fez//WumdVg=="],
 

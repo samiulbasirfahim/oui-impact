@@ -35,6 +35,7 @@ const redeemOptions = [
 export default function CharityScreen() {
     const { t } = useTranslation();
     const [showModal, setShowModal] = useState(false);
+    const [selectedPoints, setSelectedPoints] = useState(0);
 
     const onCloseModal = () => {
         setShowModal(false);
@@ -47,7 +48,7 @@ export default function CharityScreen() {
                 open={showModal}
                 onConfirm={onCloseModal}
                 onCancel={onCloseModal}
-                points={200}
+                points={selectedPoints}
             />
 
             <Layout>
@@ -104,6 +105,7 @@ export default function CharityScreen() {
                                     size="sm"
                                     onPress={() => {
                                         setShowModal(true);
+                                        setSelectedPoints(option.cost);
                                     }}
                                 >
                                     {t("rewards.offers.redeem")}

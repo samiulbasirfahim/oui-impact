@@ -16,17 +16,19 @@ export default function ProtectedLayout() {
             tabBarPosition="bottom"
             screenOptions={{
                 lazy: false,
-                swipeEnabled: true,
+                swipeEnabled: false,
+
                 tabBarStyle: {
                     paddingBottom: bottom,
                 },
+
                 tabBarIndicatorStyle: {
                     marginBottom: bottom,
                     height: 2,
                 },
+
                 // animationEnabled: true,
             }}
-            
             tabBar={CustomTabBar}
         >
             <Tabs.Screen name="chat" />

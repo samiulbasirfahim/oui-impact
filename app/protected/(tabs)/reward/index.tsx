@@ -1,5 +1,7 @@
 import BOOK from "@/assets/svgs/book.svg";
 import TREE from "@/assets/svgs/tree.svg";
+import { DonateCards } from "@/components/common/donate-cards";
+import { GiftCards } from "@/components/common/gift-cards";
 import { RNButton } from "@/components/ui/button";
 import { GradientBG } from "@/components/ui/gradient-bg";
 import { GradientButton } from "@/components/ui/gradient-button";
@@ -66,7 +68,7 @@ export default function Screen() {
                                         color: COLORS.background,
                                     }}
                                 >
-                                    {t("impact.dashboard.nextGoal")} {/* placeholder label */}
+                                    4 {t("rewards.home.tree")}
                                 </RNText>
                             </View>
 
@@ -79,7 +81,7 @@ export default function Screen() {
                                         color: COLORS.background,
                                     }}
                                 >
-                                    {t("impact.dashboard.share")} {/* placeholder label */}
+                                    5 {t("rewards.home.book")}
                                 </RNText>
                             </View>
                         </View>
@@ -93,6 +95,7 @@ export default function Screen() {
                             <FontAwesome5 name="coins" size={40} color={COLORS.background} />
                         </View>
                     </View>
+
                     <View
                         style={{
                             flexDirection: "row",
@@ -154,7 +157,7 @@ export default function Screen() {
                                 }}
                                 size="sm"
                             >
-                                {t("rewards.offers.history")}
+                                {t("rewards.offers.redirectLeaderBoard")}
                             </RNText>
                         </Link>
                     </View>
@@ -238,12 +241,14 @@ export default function Screen() {
                                     }}
                                     size="sm"
                                 >
-                                    {t("impact.dashboard.share")}
+                                    {t("rewards.offers.charity")}
                                 </RNText>
                             </TouchableOpacity>
                         </Link>
                     </View>
                 </View>
+
+                <GiftCards />
 
                 <View style={styles.shareCardContainer}>
                     <View
@@ -271,10 +276,10 @@ export default function Screen() {
                             }}
                         >
                             <RNText variant="title" size="lg">
-                                {t("account.settings.help")}
+                                {t("rewards.home.refer")}
                             </RNText>
                             <RNText variant="secondary" size="md">
-                                {t("rewards.home.upgrade")}
+                                {t("rewards.home.referDescription")}
                             </RNText>
                         </View>
                     </View>
@@ -323,6 +328,8 @@ export default function Screen() {
                     </View>
                 </View>
 
+                <DonateCards />
+
                 <GradientButton
                     title={t("impact.dashboard.premium")}
                     subtitle={t("rewards.home.upgrade")}
@@ -333,9 +340,9 @@ export default function Screen() {
                 />
 
                 <GradientButton
-                    title={t("account.settings.help")}
-                    subtitle={t("rewards.home.upgrade")}
-                    buttonText={t("rewards.home.upgrade")}
+                    title={t("rewards.home.referList")}
+                    subtitle={t("rewards.home.referDescription")}
+                    buttonText={t("rewards.home.view")}
                     onPress={() => {
                         router.push("/protected/others/share-earn");
                     }}

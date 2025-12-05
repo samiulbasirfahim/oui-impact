@@ -6,7 +6,7 @@ export default {
         slug: "oui-impact",
         version: "1.0.0",
         orientation: "portrait",
-        icon: "./assets/images/icon.png",
+        icon: "./assets/images/logo-big.png",
         scheme: "ouiimpact",
         userInterfaceStyle: "automatic",
         newArchEnabled: true,
@@ -20,9 +20,9 @@ export default {
         android: {
             adaptiveIcon: {
                 backgroundColor: "#E6F4FE",
-                foregroundImage: "./assets/images/android-icon-foreground.png",
-                backgroundImage: "./assets/images/android-icon-background.png",
-                monochromeImage: "./assets/images/android-icon-monochrome.png",
+                foregroundImage: "./assets/images/logo-big.png",
+                backgroundImage: "./assets/images/logo-big.png",
+                monochromeImage: "./assets/images/logo-big.png",
             },
             edgeToEdgeEnabled: true,
             predictiveBackGestureEnabled: false,
@@ -57,7 +57,7 @@ export default {
             [
                 "expo-splash-screen",
                 {
-                    image: "./assets/images/icon.png",
+                    image: "./assets/images/splash-icon.png",
                     imageWidth: 200,
                     resizeMode: "contain",
                     backgroundColor: "#FFFFFF",
