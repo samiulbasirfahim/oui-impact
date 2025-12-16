@@ -8,29 +8,16 @@ import { RNSwitch } from "@/components/ui/switch";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { useLanguage } from "@/hooks/useLanguages";
+import { useSettings } from "@/store/settings";
+import { UserSettings } from "@/type/settings";
 import { router, Stack } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 
-type States = {
-    pushNotifications: boolean;
-    rewardNotifications: boolean;
-    emailUpdates: boolean;
-    marketingEmails: boolean;
-};
-
 export default function Screen() {
     const { t } = useTranslation();
-
-    const { toggleLanguage, currentLanguage } = useLanguage();
-
-    const [form, setForm] = useState<States>({
-        pushNotifications: false,
-        rewardNotifications: true,
-        emailUpdates: false,
-        marketingEmails: false,
-    });
+    const { setSettings, getSettings, setLanguage } = useSettings();
 
     return (
         <>
@@ -47,40 +34,44 @@ export default function Screen() {
                 <RNSwitch
                     label={t("account.settings.push")}
                     subLabel={t("account.settings.pushDescription")}
-                    onToggle={(v) => setForm({ ...form, pushNotifications: v })}
-                    value={form.pushNotifications}
+                    onToggle={(v) => setSettings("pushNotifications", v)}
+                    value={getSettings("pushNotifications") ?? false}
                 />
 
                 <RNSwitch
                     label={t("account.settings.newReward")}
                     subLabel={t("account.settings.rewardDescription")}
-                    onToggle={(v) => setForm({ ...form, rewardNotifications: v })}
-                    value={form.rewardNotifications}
+                    onToggle={(v) => setSettings("rewardNotifications", v)}
+                    value={getSettings("rewardNotifications") ?? false}
                 />
 
                 <RNSwitch
                     label={t("account.settings.emailUpdates")}
                     subLabel={t("account.settings.emailUpdatesDescription")}
-                    onToggle={(v) => setForm({ ...form, emailUpdates: v })}
-                    value={form.emailUpdates}
+                    onToggle={(v) => setSettings("emailUpdates", v)}
+                    value={getSettings("emailUpdates") ?? false}
                 />
 
                 <RNSwitch
                     label={t("account.settings.marketing")}
                     subLabel={t("account.settings.marketingDescription")}
-                    onToggle={(v) => setForm({ ...form, marketingEmails: v })}
-                    value={form.marketingEmails}
+                    onToggle={(v) => setSettings("marketingEmails", v)}
+                    value={getSettings("marketingEmails") ?? false}
                 />
 
                 <RNSwitch
-                    label={currentLanguage === "fr" ? "Langue" : "Language"}
+                    label={getSettings("language") === "fr" ? "Langue" : "Language"}
                     subLabel={
-                        currentLanguage === "fr"
+                        getSettings("language") === "fr"
                             ? "Changer la langue en anglais"
                             : "Switch language to French"
                     }
-                    value={currentLanguage === "fr"}
-                    onToggle={toggleLanguage}
+                    onToggle={(v) => {
+                        const nextLanguage = v === true ? "fr" : "en";
+                        setSettings("language", nextLanguage);
+                        setLanguage(nextLanguage);
+                    }}
+                    value={getSettings("language") === "fr"}
                 />
 
                 <View

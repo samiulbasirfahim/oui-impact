@@ -6,10 +6,46 @@ import { COLORS } from "@/constants";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { Pressable, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { fetcher } from "@/lib/fetcher";
+import { useTokenStore } from "@/store/auth";
 
 export default function OTPScreen() {
     const { email } = useLocalSearchParams<{ email: string }>();
     const { t } = useTranslation();
+    const { setTokens } = useTokenStore();
+
+    const [code, setCode] = useState("");
+
+    const handleSubmit = () => {
+        if (code.length !== 6) {
+            return;
+        }
+
+        fetcher("/auth/verify-otp", {
+            method: "POST",
+            body: {
+                email,
+                code,
+            },
+        })
+            .then((res: any) => res.json())
+            .then((data: any) => {
+                if (data.token) {
+                    setTokens(data.token, data.token);
+                    router.push({
+                        pathname: "/public/auth/register/create-password",
+                        params: { email },
+                    });
+                }
+            })
+
+            .catch(() => { });
+    };
+
+    const handleResend = () => {
+
+    };
 
     return (
         <Layout>
@@ -23,7 +59,7 @@ export default function OTPScreen() {
 
             <OTPFields
                 label={t("auth.verifyEmail.button")}
-                numberOfDigits={6} // Your copy says 6-digit
+                numberOfDigits={6}
                 onChange={(v) => {
                     console.log("OTP Code:", v);
                 }}

@@ -154,6 +154,9 @@ export function DonateCards() {
                 scrollAnimationDuration={500}
                 mode="parallax"
                 modeConfig={{ parallaxScrollingScale: 1, parallaxScrollingOffset: 70 }}
+                onConfigurePanGesture={(panGesture) =>
+                    panGesture.activeOffsetX([-5, 5]).failOffsetY([-5, 5])
+                }
                 onProgressChange={(_, absoluteProgress) => {
                     progress.value = absoluteProgress;
                 }}

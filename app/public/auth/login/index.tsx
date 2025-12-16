@@ -10,6 +10,7 @@ import { Link, router, Stack } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useLogin } from "@/queries/useLogin";
 
 type FormState = {
     email?: string;
@@ -17,6 +18,8 @@ type FormState = {
 };
 
 export default function LoginScreen() {
+    const { mutate } = useLogin();
+
     const { t } = useTranslation();
 
     const [form, setForm] = useState<FormState>({});
@@ -29,6 +32,28 @@ export default function LoginScreen() {
             ...form,
             [name]: value,
         });
+    };
+
+    const handleSubmit = () => {
+        if (!form.email || !form.password) {
+            setError("Please fill all the fields");
+            return;
+        }
+
+        mutate(
+            {
+                email: form.email,
+                password: form.password,
+            },
+            {
+                onError: (err: any) => {
+                    setError(err?.message || "An error occurred");
+                },
+                onSuccess: () => {
+                    router.replace("/protected/chat");
+                },
+            },
+        );
     };
 
     return (
@@ -81,11 +106,7 @@ export default function LoginScreen() {
                 </Link>
                 <RNButton
                     onPress={() => {
-                        if (!form.email || !form.password) {
-                            setError("Please fill all the fields");
-                            return;
-                        }
-                        router.push("/public/auth/login");
+                        handleSubmit();
                     }}
                     style={{ marginTop: 12 }}
                 >

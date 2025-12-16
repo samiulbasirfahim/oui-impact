@@ -6,6 +6,8 @@ import { Layout } from "@/components/ui/layout";
 import { Seperator } from "@/components/ui/seperator";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { fetcher } from "@/lib/fetcher";
+import { useAuthStore } from "@/store/auth";
 import { Image } from "expo-image";
 import { Link, router, Stack } from "expo-router";
 import { useState } from "react";
@@ -18,7 +20,8 @@ type FormState = {
 };
 
 export default function RegisterScreen() {
-    const { t } = useTranslation(); // <-- added
+    const { t } = useTranslation();
+    const { updateUser } = useAuthStore();
     const [form, setForm] = useState<FormState>({});
     const [error, setError] = useState<string | null>(null);
 
@@ -28,6 +31,36 @@ export default function RegisterScreen() {
             ...form,
             [name]: value,
         });
+    };
+
+    const handleSubmit = () => {
+        if (!form.email) {
+            setError("Please fill all the fields");
+            return;
+        }
+        if (!form.checkBox) {
+            setError("Please agree to the terms");
+            return;
+        }
+
+        fetcher("/auth/register", {
+            method: "POST",
+            body: JSON.stringify({
+                email: form.email,
+            }),
+        })
+            .then((res: any) => {
+                updateUser({
+                    email: form.email,
+                });
+                router.push({
+                    pathname: "/public/auth/register/otp",
+                    params: { email: form.email },
+                });
+            })
+            .catch((err) => {
+                setError(err.message || "Something went wrong");
+            });
     };
 
     return (
@@ -78,24 +111,7 @@ export default function RegisterScreen() {
                     }}
                 />
 
-                <RNButton
-                    onPress={() => {
-                        if (!form.email) {
-                            setError("Please fill all the fields");
-                            return;
-                        }
-                        if (!form.checkBox) {
-                            setError("Please agree to the terms");
-                            return;
-                        }
-
-                        router.push({
-                            pathname: "/public/auth/register/otp",
-                            params: { email: form.email },
-                        });
-                    }}
-                    style={{ marginTop: 12 }}
-                >
+                <RNButton onPress={handleSubmit} style={{ marginTop: 12 }}>
                     {t("auth.createAccount.button")}
                 </RNButton>
 

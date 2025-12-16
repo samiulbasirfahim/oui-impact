@@ -1,8 +1,9 @@
 import { createMMKV } from "react-native-mmkv";
+import { StateStorage } from "zustand/middleware";
 
 export const storage = createMMKV({
     id: "app_storage",
-    readOnly: false
+    readOnly: false,
 });
 
 export function setItem(key: string, value: string | number | boolean) {
@@ -44,3 +45,9 @@ export function updateItem(
     const newValue = updater(prev);
     storage.set(key, newValue);
 }
+
+export const mmkvZustand: StateStorage = {
+    setItem: (name, value) => setItem(name, value),
+    getItem: (name) => getString(name),
+    removeItem: (name) => removeItem(name),
+};

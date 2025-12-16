@@ -1,5 +1,5 @@
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import Illustration from "@/assets/images/onboarding-4.png";
+import Illustration from "@/assets/images/logo.png";
 import { OnboardingScreen } from "@/components/common/onboarding-screen";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { router } from "expo-router";
