@@ -5,9 +5,12 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { RNText } from "../ui/text";
 import { COLORS } from "@/constants";
 import { useTranslation } from "react-i18next";
+import { useGoogleAuth } from "@/hooks/useGoogleLogin";
 
 export function SocialSignIn() {
     const { t } = useTranslation();
+
+    const { login: googleSignIn } = useGoogleAuth();
 
     return (
         <View style={{ width: "100%", gap: 8 }}>
@@ -24,6 +27,7 @@ export function SocialSignIn() {
                     flexDirection: "row",
                     gap: 8,
                 }}
+                onPress={googleSignIn}
             >
                 <GOOGLE width={30} height={31} />
                 <RNText>{t("auth.createAccount.google")}</RNText>

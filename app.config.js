@@ -34,6 +34,7 @@ export default {
         },
         plugins: [
             "expo-router",
+            "expo-web-browser",
             "react-native-localize",
             [
                 "expo-splash-screen",

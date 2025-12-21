@@ -43,13 +43,19 @@ export default function RegisterScreen() {
             return;
         }
 
-        fetcher("auth/register/", {
+        const body = JSON.stringify({
+            email: form.email,
+        });
+
+        console.log(body);
+        fetcher("/auth/register/", {
             method: "POST",
-            body: JSON.stringify({
+            body: {
                 email: form.email,
-            }),
+            },
         })
             .then((res: any) => {
+                console.log(res);
                 updateUser({
                     email: form.email,
                 });
@@ -60,7 +66,8 @@ export default function RegisterScreen() {
             })
             .catch((err) => {
                 if (err instanceof ApiError) {
-                    console.log(err.data);
+                    console.log("CACHED ERROR");
+                    console.log(err);
                 }
 
                 setError(err.message || "Something went wrong");

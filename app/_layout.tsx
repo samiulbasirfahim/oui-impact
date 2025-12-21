@@ -1,9 +1,10 @@
 import * as NavigationBar from "expo-navigation-bar";
 import { StatusBar } from "expo-status-bar";
+import * as ExpoNetwork from "expo-network";
 import { QueryClientProvider } from "@tanstack/react-query";
 
 import { useLoadFonts } from "@/hooks/useLoadFonts";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { I18nextProvider } from "react-i18next";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -37,6 +38,8 @@ export function RootLayout() {
     const fontLoaded = useLoadFonts();
     const [ready, setReady] = useState(false);
 
+    const netInfo = ExpoNetwork.useNetworkState();
+
     const language = useSettings((s) => s.userSettings?.language);
     const { mutateAsync: initAuth } = useInitAuth();
 
@@ -47,6 +50,13 @@ export function RootLayout() {
     }, [language]);
 
     useEffect(() => {
+        if (
+            netInfo.isConnected === false ||
+            netInfo.isInternetReachable === false
+        ) {
+            router.replace("/status/no-internet");
+        }
+
         async function prepare() {
             try {
                 await initAuth();

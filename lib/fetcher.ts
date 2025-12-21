@@ -28,9 +28,13 @@ export async function fetcher<T>(
     const { method = "GET", body, headers = {}, auth = false } = options;
 
     const finalHeaders: Record<string, string> = {
-        "Content-Type": "application/json",
+        Accept: "application/json",
         ...headers,
     };
+
+    if (body && !(body instanceof FormData)) {
+        finalHeaders["Content-Type"] = "application/json";
+    }
 
     if (auth) {
         const token = useTokenStore.getState().accessToken;
@@ -54,6 +58,7 @@ export async function fetcher<T>(
     }
 
     let data: any;
+    console.log(data);
     try {
         data = await res.json();
     } catch {
@@ -61,7 +66,7 @@ export async function fetcher<T>(
     }
 
     if (!res.ok) {
-        console.log("API ERROR: ", endpoint, "-->", res);
+        console.log("API ERROR: ", `${BASE_URL}${endpoint}`, "-->", res);
         throw new ApiError(res.status, data);
     }
 
