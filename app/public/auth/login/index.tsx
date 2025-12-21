@@ -11,6 +11,7 @@ import { useState } from "react";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useLogin } from "@/queries/useLogin";
+import { ApiError } from "@/lib/fetcher";
 
 type FormState = {
     email?: string;
@@ -47,7 +48,11 @@ export default function LoginScreen() {
             },
             {
                 onError: (err: any) => {
-                    setError(err?.message || "An error occurred");
+                    if (err instanceof ApiError) {
+                        setError(err.data.error || "An error occurred");
+                        console.log("LOGIN ERROR: ", err.data.error || "An error occurred");
+                    }
+                    // setError(err?.data || "An error occurred");
                 },
                 onSuccess: () => {
                     router.replace("/protected/chat");

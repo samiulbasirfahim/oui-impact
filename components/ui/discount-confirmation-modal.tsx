@@ -21,7 +21,10 @@ export function DiscountConfirmationModal({
             onCancel={onCancel}
             open={open}
             title={t("rewards.offers.confirmTitle")}
-            description={t("rewards.offers.confirmDescription", { points, discount: 200 / 10 })}
+            description={t("rewards.offers.confirmDescription", {
+                points,
+                discount: 200 / 10,
+            })}
         />
     );
 }

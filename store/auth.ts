@@ -10,6 +10,7 @@ interface AuthStoreState {
     updateUser: (user: Partial<User>) => void;
     init: () => User | null;
     setIsLoggedIn: (isLoggedIn: boolean) => void;
+    logOut: () => void;
 }
 
 export const useAuthStore = create<AuthStoreState>((set, get) => ({
@@ -31,12 +32,17 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
             user: { ...get().user, ...user } as User | null,
         });
     },
+    logOut() {
+        useTokenStore.getState().setTokens(null, null);
+        set({ isLoggedIn: false, user: null });
+        router.replace("/public/auth/login");
+    },
 }));
 
 export const useTokenStore = create<{
     accessToken: string | null;
     refreshToken: string | null;
-    setTokens: (accessToken: string, refreshToken: string) => void;
+    setTokens: (accessToken: string | null, refreshToken: string | null) => void;
 }>()(
     persist(
         (set) => ({

@@ -1,5 +1,6 @@
 import INFO from "@/assets/svgs/info.svg";
 import LOGOUT from "@/assets/svgs/logout.svg";
+import { LogOutModal } from "@/components/common/logout-modal";
 import { PointsCard } from "@/components/common/points-card";
 import { ProfileCard } from "@/components/common/profile-card";
 import { RNSettingButton } from "@/components/ui/button";
@@ -7,9 +8,7 @@ import { Layout } from "@/components/ui/layout";
 import { RNSwitch } from "@/components/ui/switch";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
-import { useLanguage } from "@/hooks/useLanguages";
 import { useSettings } from "@/store/settings";
-import { UserSettings } from "@/type/settings";
 import { router, Stack } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,6 +17,7 @@ import { View } from "react-native";
 export default function Screen() {
     const { t } = useTranslation();
     const { setSettings, getSettings, setLanguage } = useSettings();
+    const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false);
 
     return (
         <>
@@ -100,6 +100,14 @@ export default function Screen() {
                 <RNSettingButton
                     icon={<LOGOUT width={24} height={24} />}
                     title={t("account.settings.logout")}
+                    onPress={() => {
+                        setShowLogoutModal(true);
+                    }}
+                />
+
+                <LogOutModal
+                    isOpen={showLogoutModal}
+                    onClose={() => setShowLogoutModal(false)}
                 />
             </Layout>
         </>

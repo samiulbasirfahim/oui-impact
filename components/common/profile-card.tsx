@@ -3,8 +3,11 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { router } from "expo-router";
 import { Image, Pressable, View } from "react-native";
 import { RNText } from "../ui/text";
+import { useAuthStore } from "@/store/auth";
 
 export function ProfileCard() {
+    const { user } = useAuthStore();
+
     return (
         <View
             style={{
@@ -16,7 +19,12 @@ export function ProfileCard() {
         >
             <View>
                 <Image
-                    source={require("../../assets/images/placeholder-image.jpg")}
+                    source={{
+                        uri: user?.img
+                            ? user.img
+                            : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+                    }}
+                    resizeMode="contain"
                     style={{ width: 100, height: 100, borderRadius: 50 }}
                 />
             </View>
@@ -28,8 +36,14 @@ export function ProfileCard() {
                     maxWidth: "60%",
                 }}
             >
-                <RNText size="lg" variant="title">
-                    Samiul Basir Fahim
+                <RNText
+                    size="lg"
+                    variant="title"
+                    style={{
+                        marginBottom: 6,
+                    }}
+                >
+                    {user?.name && user.name.length > 0 ? user?.name : "Unnamed"}
                 </RNText>
                 <RNText
                     size="sm"
@@ -39,7 +53,7 @@ export function ProfileCard() {
                         color: COLORS.muted,
                     }}
                 >
-                    samiulbasirfahim.rxen@gmail.com
+                    {user?.email && user.email.length > 0 ? user?.email : "undefined"}
                 </RNText>
 
                 <RNText
@@ -47,7 +61,7 @@ export function ProfileCard() {
                     variant="base"
                     style={{ marginTop: 4, color: COLORS.muted, alignSelf: "center" }}
                 >
-                    1000 points
+                    {user?.my_points ?? 0} points
                 </RNText>
             </View>
             <Pressable

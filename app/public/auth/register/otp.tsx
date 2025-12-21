@@ -43,9 +43,7 @@ export default function OTPScreen() {
             .catch(() => { });
     };
 
-    const handleResend = () => {
-
-    };
+    const handleResend = () => { };
 
     return (
         <Layout>
@@ -61,7 +59,7 @@ export default function OTPScreen() {
                 label={t("auth.verifyEmail.button")}
                 numberOfDigits={6}
                 onChange={(v) => {
-                    console.log("OTP Code:", v);
+                    setCode(v);
                 }}
             />
 
@@ -75,7 +73,6 @@ export default function OTPScreen() {
             </RNButton>
 
             <View style={{ gap: 2, marginTop: 12 }}>
-                {/* Wrong email */}
                 <View
                     style={{
                         flexDirection: "row",
@@ -107,7 +104,6 @@ export default function OTPScreen() {
                     {t("auth.verifyEmail.or")}
                 </RNText>
 
-                {/* Redirect to Login */}
                 <RNText
                     style={{
                         alignSelf: "center",

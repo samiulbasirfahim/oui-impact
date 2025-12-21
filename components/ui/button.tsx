@@ -143,6 +143,9 @@ export function RNSettingButton({
                 alignItems: "center",
                 paddingHorizontal: 16,
             }}
+            onPress={() => {
+                console.log("Pressed");
+            }}
             activeOpacity={0.7}
             {...props}
         >

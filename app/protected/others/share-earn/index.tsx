@@ -4,6 +4,7 @@ import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import Octicons from "@expo/vector-icons/Octicons";
+import Feather from "@expo/vector-icons/Feather";
 import BottomSheet, {
     BottomSheetTextInput,
     BottomSheetView,
@@ -12,7 +13,7 @@ import BottomSheet, {
 import { FlashList } from "@shopify/flash-list";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import { Image, Pressable, Share, StyleSheet, View } from "react-native";
 
 export default function Screen() {
     const { t } = useTranslation();
@@ -75,10 +76,12 @@ export default function Screen() {
                             paddingHorizontal: 0,
                         }}
                         onPress={() => {
-                            alert("Link copied to clipboard!");
+                            Share.share({
+                                message: "www.example.com/referral-link",
+                            });
                         }}
                     >
-                        <Octicons name="copy" size={18} color={COLORS.primary} />
+                        <Feather name="share-2" size={18} color={COLORS.primary} />
                     </RNButton>
                 </View>
             </Layout>

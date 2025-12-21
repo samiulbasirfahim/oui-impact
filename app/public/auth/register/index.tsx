@@ -6,7 +6,7 @@ import { Layout } from "@/components/ui/layout";
 import { Seperator } from "@/components/ui/seperator";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
-import { fetcher } from "@/lib/fetcher";
+import { ApiError, fetcher } from "@/lib/fetcher";
 import { useAuthStore } from "@/store/auth";
 import { Image } from "expo-image";
 import { Link, router, Stack } from "expo-router";
@@ -43,7 +43,7 @@ export default function RegisterScreen() {
             return;
         }
 
-        fetcher("/auth/register", {
+        fetcher("auth/register/", {
             method: "POST",
             body: JSON.stringify({
                 email: form.email,
@@ -59,6 +59,10 @@ export default function RegisterScreen() {
                 });
             })
             .catch((err) => {
+                if (err instanceof ApiError) {
+                    console.log(err.data);
+                }
+
                 setError(err.message || "Something went wrong");
             });
     };
