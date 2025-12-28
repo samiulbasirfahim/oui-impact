@@ -4,6 +4,8 @@ import {
     KeyboardAvoidingView,
     Platform,
     Keyboard,
+    ActivityIndicator,
+    Text,
 } from "react-native";
 import { useState, useRef, useEffect } from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
@@ -14,87 +16,102 @@ import { useKeyboardOffset } from "@/hooks/useKeyboardOffset";
 import { MessageBubble } from "@/components/common/chat-bubble";
 import { ChatInput } from "@/components/common/chat-input";
 import { RNBannerAd } from "@/components/common/banner-ad";
-
-const formatTime = (d: Date): string =>
-    d.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-    });
+import { useMessageHistory, useSendMessage } from "@/queries/useChat";
 
 export default function ChatScreen() {
-    const { id, initialMessage } = useLocalSearchParams<{
-        id?: string;
-        initialMessage?: string;
-    }>();
+    const { id } = useLocalSearchParams<{ id?: string }>();
+    const chatId = id ? parseInt(id, 10) : 0;
+
     const keyboardOffset = useKeyboardOffset();
-
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [inputText, setInputText] = useState("");
-
     const scrollRef = useRef<ScrollView>(null);
-    const initialized = useRef(false);
+
+    const {
+        data: messageHistory = [],
+        refetch,
+        isLoading,
+        isError,
+    } = useMessageHistory(chatId);
+    const { mutate: sendMessage, isPending: isSendingMessage } = useSendMessage();
+
+    const [inputText, setInputText] = useState("");
 
     const scrollToBottom = () => {
         scrollRef.current?.scrollToEnd({ animated: true });
     };
 
+    const [tmpMessages, setTmpMessages] = useState<Message[]>([]);
+
     useEffect(() => {
-        if (!initialMessage || initialized.current) return;
-        initialized.current = true;
-
-        const userMsg: Message = {
-            id: Date.now().toString(),
-            text: initialMessage,
-            time: formatTime(new Date()),
-            isMe: true,
-        };
-
-        setMessages([userMsg]);
-
-        setTimeout(() => {
-            const reply: Message = {
-                id: (Date.now() + 1).toString(),
-                text: "Thanks for your message! How can I assist you today?",
-                time: formatTime(new Date()),
-                isMe: false,
-            };
-            setMessages((prev) => [...prev, reply]);
-        }, 1000);
-    }, [initialMessage]);
+        if (messageHistory.length !== tmpMessages.length) {
+            scrollToBottom();
+            setTmpMessages(messageHistory);
+        }
+    }, [messageHistory]);
 
     useEffect(() => {
         const event =
             Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
+
         const sub = Keyboard.addListener(event, () =>
             setTimeout(scrollToBottom, 100),
         );
+
         return () => sub.remove();
     }, []);
 
     const handleSend = () => {
         if (!inputText.trim()) return;
 
-        const msg: Message = {
-            id: Date.now().toString(),
-            text: inputText.trim(),
-            time: formatTime(new Date()),
-            isMe: true,
-        };
+        setTmpMessages((prev) => [
+            ...prev,
+            {
+                id: `temp-${Date.now()}`,
+                text: inputText.trim(),
+                time: new Date().toISOString(),
+                isMe: true,
+            },
+        ]);
 
-        setMessages((p) => [...p, msg]);
+        sendMessage(
+            { chatId, text: inputText.trim() },
+            {
+                onSuccess: (data) => {
+                    if (!data) return;
+
+                    if (data === null) return;
+                    if (typeof data !== "object") return;
+                    if (!("assistant_text" in data)) return;
+                    if (!("created_at" in data)) return;
+                    if (!("id" in data)) return;
+
+                    if (data.assistant_text) {
+                        setTmpMessages(
+                            (prev) =>
+                                [
+                                    ...prev,
+                                    {
+                                        id: data.id,
+                                        text: data.assistant_text || "",
+                                        time: data.created_at,
+                                        isMe: false,
+                                    },
+                                ] as any,
+                        );
+                    }
+                },
+            },
+        );
+
         setInputText("");
-
-        setTimeout(() => {
-            const reply: Message = {
-                id: (Date.now() + 1).toString(),
-                text: "Thanks! I'll get back to you shortly.",
-                time: formatTime(new Date()),
-                isMe: false,
-            };
-            setMessages((prev) => [...prev, reply]);
-        }, 1000);
     };
+
+    useEffect(() => {
+        if (!messageHistory?.length) return;
+
+        requestAnimationFrame(() => {
+            scrollRef.current?.scrollToEnd({ animated: true });
+        });
+    }, [messageHistory, tmpMessages]);
 
     return (
         <>
@@ -110,12 +127,37 @@ export default function ChatScreen() {
                         ref={scrollRef}
                         contentContainerStyle={{ flexGrow: 1, paddingBottom: 10 }}
                         onContentSizeChange={scrollToBottom}
-                        onLayout={scrollToBottom}
                     >
                         <View style={{ flex: 1, padding: 20, gap: 8 }}>
-                            {messages.map((msg) => (
-                                <MessageBubble key={msg.id} message={msg} />
-                            ))}
+                            {isLoading && (
+                                <ActivityIndicator size="large" color={COLORS.primary} />
+                            )}
+
+                            {isError && (
+                                <Text style={{ color: "red" }}>Failed to load messages</Text>
+                            )}
+
+                            {!isLoading && (
+                                <>
+                                    {tmpMessages.map((msg: Message) => (
+                                        <MessageBubble key={msg.id} message={msg} />
+                                    ))}
+
+                                    {isSendingMessage && (
+                                        <View
+                                            style={{
+                                                alignSelf: "flex-start",
+                                                backgroundColor: COLORS.muted + "22",
+                                                padding: 10,
+                                                borderRadius: 16,
+                                                maxWidth: "80%",
+                                            }}
+                                        >
+                                            <Text style={{ color: COLORS.muted }}>Typing...</Text>
+                                        </View>
+                                    )}
+                                </>
+                            )}
                         </View>
                     </ScrollView>
 
@@ -124,6 +166,7 @@ export default function ChatScreen() {
                         onChange={setInputText}
                         onSend={handleSend}
                     />
+
                     <RNBannerAd />
                 </KeyboardAvoidingView>
             </View>

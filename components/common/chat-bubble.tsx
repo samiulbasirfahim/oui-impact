@@ -2,8 +2,9 @@ import { View } from "react-native";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
 import { Message } from "@/type/message";
+import { formatTimeAMPM } from "@/lib/utils";
 
-export const MessageBubble = ({ message }: {message: Message}) => {
+export const MessageBubble = ({ message }: { message: Message }) => {
     const isMe = message.isMe;
 
     return (
@@ -25,7 +26,7 @@ export const MessageBubble = ({ message }: {message: Message}) => {
             </RNText>
 
             <RNText size="xs" style={{ marginTop: 2 }}>
-                {message.time}
+                {formatTimeAMPM(message.time)}
             </RNText>
         </View>
     );

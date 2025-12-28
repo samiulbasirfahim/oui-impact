@@ -8,7 +8,6 @@ import { Dimensions, Pressable, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ProtectedLayout() {
-    const { t } = useTranslation();
     const { bottom } = useSafeAreaInsets();
 
     return (
@@ -26,8 +25,6 @@ export default function ProtectedLayout() {
                     marginBottom: bottom,
                     height: 2,
                 },
-
-                // animationEnabled: true,
             }}
             tabBar={CustomTabBar}
         >

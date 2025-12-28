@@ -8,12 +8,13 @@ import { Pressable, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { fetcher } from "@/lib/fetcher";
-import { useTokenStore } from "@/store/auth";
 
 export default function OTPScreen() {
     const { email } = useLocalSearchParams<{ email: string }>();
     const { t } = useTranslation();
-    const { setTokens } = useTokenStore();
+
+    const [isPending, setIsPending] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const [code, setCode] = useState("");
 
@@ -22,25 +23,32 @@ export default function OTPScreen() {
             return;
         }
 
-        fetcher("/auth/verify-otp", {
+        setIsPending(true);
+
+        fetcher("/auth/verify-otp/", {
             method: "POST",
             body: {
                 email,
-                code,
+                otp: code,
             },
         })
-            .then((res: any) => res.json())
             .then((data: any) => {
-                if (data.token) {
-                    setTokens(data.token, data.token);
+                if (data.access) {
                     router.push({
                         pathname: "/public/auth/register/create-password",
-                        params: { email },
+                        params: { email, token: data.access },
                     });
+                } else {
+                    setError("Invalid code");
                 }
             })
 
-            .catch(() => { });
+            .catch(() => {
+                setError("Invalid code");
+            })
+            .finally(() => {
+                setIsPending(false);
+            });
     };
 
     const handleResend = () => { };
@@ -64,13 +72,22 @@ export default function OTPScreen() {
             />
 
             <RNButton
-                onPress={() => {
-                    router.push("/public/auth/register/create-password");
-                }}
+                disabled={code.length !== 6 || isPending}
+                loading={isPending}
+                onPress={handleSubmit}
                 style={{ marginTop: 12 }}
             >
                 {t("auth.verifyEmail.button")}
             </RNButton>
+
+            {error && (
+                <RNText
+                    variant="accent"
+                    style={{ marginLeft: 8, width: "100%", textAlign: "center" }}
+                >
+                    {error}
+                </RNText>
+            )}
 
             <View style={{ gap: 2, marginTop: 12 }}>
                 <View

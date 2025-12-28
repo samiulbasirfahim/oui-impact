@@ -1,371 +1,376 @@
 {
-  "auth": {
-    "root": {
-      "title": "Bienvenue sur OUI IMPACT",
-      "subtitle": "Connectez-vous ou créez votre compte pour continuer",
-      "button1": "Se connecter",
-      "button2": "Créer un compte"
+    "auth": {
+        "root": {
+            "title": "Bienvenue sur OUI IMPACT",
+            "subtitle": "Connectez-vous ou créez votre compte pour continuer",
+            "button1": "Se connecter",
+            "button2": "Créer un compte"
+        },
+        "createAccount": {
+            "title": "Créer votre compte",
+            "subtitle": "Entrez votre email pour commencer",
+            "email": "Adresse email",
+            "button": "Créer un compte",
+            "loginRedirect": "Déjà un compte ? Connexion",
+            "google": "Continuer avec Google",
+            "facebook": "Continuer avec Facebook",
+            "apple": "Continuer avec Apple"
+        },
+        "verifyEmail": {
+            "title": "Vérifier votre email",
+            "sent": "Code à 6 chiffres envoyé",
+            "enterCode": "Entrez-le ci-dessous",
+            "button": "Vérifier",
+            "wrongEmail": "Mauvais email ? Envoyer sur un autre email",
+            "or": "OU",
+            "loginRedirect": "Vous possédez déjà un compte ? Connectez-vous"
+        },
+        "createPassword": {
+            "title": "Créer votre mot de passe",
+            "subtitle": "Sécurisez votre compte",
+            "password": "Mot de passe",
+            "rule1": "8 caractères min",
+            "rule2": "Majuscules + minuscules",
+            "rule3": "Chiffres ou symboles",
+            "rule4": "Les mots de passe correspondent",
+            "button": "Continuer"
+        },
+        "login": {
+            "title": "Connexion",
+            "subtitle": "Hello !",
+            "email": "Email",
+            "password": "Mot de passe",
+            "forgot": "Mot de passe oublié ?",
+            "registerRedirect": "Pas de compte ? Créer un compte"
+        },
+        "reset": {
+            "request": {
+                "title": "Réinitialiser votre mot de passe",
+                "subtitle": "Entrez votre email pour recevoir un code",
+                "button": "Continuer"
+            },
+            "enterCode": {
+                "title": "Entrer le code",
+                "button": "Vérifier",
+                "resend": "Renvoyer le code"
+            },
+            "newPassword": {
+                "title": "Nouveau mot de passe",
+                "confirm": "Confirmer",
+                "button": "Continuer"
+            },
+            "success": {
+                "title": "Mot de passe réinitialisé !",
+                "subtitle": "Redirection en cours."
+            }
+        },
+        "userInfo": {
+            "title": "Profil",
+            "subtitle": "Pour personnaliser un peu",
+            "fullName": "Nom complet",
+            "phone": "Numéro de téléphone",
+            "country": "Pays/Région",
+            "gender": "Sexe",
+            "dob": "Date de naissance",
+            "button": "Valider",
+            "male": "Homme",
+            "female": "Femme"
+        },
+        "session": {
+            "expiredTitle": "Session expirée",
+            "expiredSubtitle": "Votre session a expiré. Veuillez vous reconnecter.",
+            "loginButton": "Se reconnecter",
+            "noInternetTitle": "Pas de connexion Internet",
+            "noInternetSubtitle": "Vérifiez votre connexion puis réessayez.",
+            "retry": "Réessayer"
+        }
     },
-    "createAccount": {
-      "title": "Créer votre compte",
-      "subtitle": "Entrez votre email pour commencer",
-      "email": "Adresse email",
-      "button": "Créer un compte",
-      "loginRedirect": "Déjà un compte ? Connexion",
-      "google": "Continuer avec Google",
-      "facebook": "Continuer avec Facebook",
-      "apple": "Continuer avec Apple"
+    "onboarding": {
+        "screen1": {
+            "title": "Bienvenue sur Oui Impact",
+            "subtitle": "Votre assistant IA a impact et qui vous récompense. Parlez, apprenez et faites la différence. »",
+            "skip": "Passer",
+            "terms": "En continuant, vous acceptez les termes et conditions"
+        },
+        "screen2": {
+            "title": "Gagnez des récompenses rapidement",
+            "subtitle": "Chaque action rapporte des Oui Points et soutient des causes."
+        },
+        "screen3": {
+            "title": "Petites actions, grand impact",
+            "subtitle": "Votre engagement finance des projets sociaux et écolos. Ensemble, on avance."
+        },
+        "screen4": {
+            "title": "Prêt à commencer ?",
+            "subtitle": "Gérez vos gains, suivez votre impact, rejoignez une communauté engagée.",
+            "cta1": "Gérez",
+            "cta2": "Gagnez",
+            "cta3": "Progressez"
+        }
     },
-    "verifyEmail": {
-      "title": "Vérifier votre email",
-      "sent": "Code à 6 chiffres envoyé",
-      "enterCode": "Entrez-le ci-dessous",
-      "button": "Vérifier",
-      "wrongEmail": "Mauvais email ? Envoyer sur un autre email",
-      "or": "OU",
-      "loginRedirect": "Vous possédez déjà un compte ? Connectez-vous"
+    "chat": {
+        "home": {
+            "title": "Assistant IA",
+            "placeholder": "Posez-moi toutes les questions que vous souhaitez…",
+            "quickPrompts": "Quelques Idées",
+            "done": "Terminé",
+            "helperSubtitle": "Je suis là pour vous aider avec vos questions et tâches créatives."
+        },
+        "empty": {
+            "title": "Aucune conversation",
+            "subtitle": "Commencez une nouvelle conversation.",
+            "button": "Nouvelle conversation"
+        },
+        "reply": {
+            "initial": "Merci pour votre message ! Comment puis-je vous aider aujourd'hui ?",
+            "shortly": "Merci ! Je reviens vers vous rapidement."
+        },
+        "header": {
+            "newChat": "Nouvelle discussion",
+            "history": "Historique des chats"
+        },
+        "search": {
+            "placeholder": "Rechercher..."
+        },
+        "templates": {
+            "writing": {
+                "title": "Rédaction",
+                "description": "E-mails, articles, descriptions, et plus."
+            },
+            "creative": {
+                "title": "Créatif",
+                "description": "Histoires, idées, poèmes, légendes, et plus."
+            }
+        }
     },
-    "createPassword": {
-      "title": "Créer votre mot de passe",
-      "subtitle": "Sécurisez votre compte",
-      "password": "Mot de passe",
-      "rule1": "8 caractères min",
-      "rule2": "Majuscules + minuscules",
-      "rule3": "Chiffres ou symboles",
-      "rule4": "Les mots de passe correspondent",
-      "button": "Continuer"
-    },
-    "login": {
-      "title": "Connexion",
-      "subtitle": "Hello !",
-      "email": "Email",
-      "password": "Mot de passe",
-      "forgot": "Mot de passe oublié ?",
-      "registerRedirect": "Pas de compte ? Créer un compte"
-    },
-    "reset": {
-      "request": {
-        "title": "Réinitialiser votre mot de passe",
-        "subtitle": "Entrez votre email pour recevoir un code",
-        "button": "Continuer"
-      },
-      "enterCode": {
-        "title": "Entrer le code",
-        "button": "Vérifier",
-        "resend": "Renvoyer le code"
-      },
-      "newPassword": {
-        "title": "Nouveau mot de passe",
-        "confirm": "Confirmer",
-        "button": "Continuer"
-      },
-      "success": {
-        "title": "Mot de passe réinitialisé !",
-        "subtitle": "Redirection en cours."
-      }
-    },
-    "userInfo": {
-      "title": "Profil",
-      "subtitle": "Pour personnaliser un peu",
-      "fullName": "Nom complet",
-      "phone": "Numéro de téléphone",
-      "country": "Pays/Région",
-      "gender": "Sexe",
-      "dob": "Date de naissance",
-      "button": "Valider",
-      "male": "Homme",
-      "female": "Femme"
-    },
-    "session": {
-      "expiredTitle": "Session expirée",
-      "expiredSubtitle": "Votre session a expiré. Veuillez vous reconnecter.",
-      "loginButton": "Se reconnecter",
-      "noInternetTitle": "Pas de connexion Internet",
-      "noInternetSubtitle": "Vérifiez votre connexion puis réessayez.",
-      "retry": "Réessayer"
-    }
-  },
-  "onboarding": {
-    "screen1": {
-      "title": "Bienvenue sur Oui Impact",
-      "subtitle": "Votre assistant IA a impact et qui vous récompense. Parlez, apprenez et faites la différence. »",
-      "skip": "Passer",
-      "terms": "En continuant, vous acceptez les termes et conditions"
-    },
-    "screen2": {
-      "title": "Gagnez des récompenses rapidement",
-      "subtitle": "Chaque action rapporte des Oui Points et soutient des causes."
-    },
-    "screen3": {
-      "title": "Petites actions, grand impact",
-      "subtitle": "Votre engagement finance des projets sociaux et écolos. Ensemble, on avance."
-    },
-    "screen4": {
-      "title": "Prêt à commencer ?",
-      "subtitle": "Gérez vos gains, suivez votre impact, rejoignez une communauté engagée.",
-      "cta1": "Gérez",
-      "cta2": "Gagnez",
-      "cta3": "Progressez"
-    }
-  },
-  "chat": {
     "home": {
-      "title": "Assistant IA",
-      "placeholder": "Posez-moi toutes les questions que vous souhaitez…",
-      "quickPrompts": "Quelques Idées",
-      "done": "Terminé",
-      "helperSubtitle": "Je suis là pour vous aider avec vos questions et tâches créatives."
+        "header": {
+            "welcomeShort": "Bienvenue",
+            "welcomeLong": "Bienvenue sur Oui Impact",
+            "points": "Vos points"
+        }
     },
-    "empty": {
-      "title": "Aucune conversation",
-      "subtitle": "Commencez une nouvelle conversation.",
-      "button": "Nouvelle conversation"
+    "rewards": {
+        "home": {
+            "title": "Gagner des recompenses",
+            "redeem": "Racheter",
+            "redeemNow": "Racheter",
+            "upgrade": "Premium",
+            "view": "View",
+            "refer": "Share With Friends",
+            "referDescription": "Earn More with Friends",
+            "referList": "Show your referlist",
+            "tree": "Tree",
+            "book": "Book"
+        },
+        "watch": {
+            "title": "Regarder & Gagner",
+            "checkIn": "Check-in quotidien",
+            "bonus": "Bonus",
+            "watchMore": "Regarder plus",
+            "featured": "À la une",
+            "premiumTitle": "Vidéo de marque premium",
+            "premiumSubtitle": "Regardez cette vidéo de 30 secondes et gagnez des points !",
+            "dailyCheckIn": "Récompense de check-in quotidien",
+            "dailyTasks": "Complétez les tâches quotidiennes",
+            "shareWithFriends": "Partager avec des amis",
+            "inviteFriends": "Invitez des amis à rejoindre",
+            "durationSeconds": "{{seconds}} secondes",
+            "available": "Disponible",
+            "notAvailable": "Non disponible",
+            "watchButton": "Regarder"
+        },
+        "offers": {
+            "history": "History",
+            "discounts": "Réductions",
+            "offers": "Offres",
+            "redeem": "Utilisez",
+            "charity": "Association",
+            "redirectLeaderBoard": "Classement",
+            "confirmTitle": "Confirmer l'utilisation",
+            "confirm": "Confirmer",
+            "confirmDescription": "Vous êtes sur le point d'utiliser {{points}} points pour {{discount}}% de réduction sur l'application partenaire",
+            "confirmGiftCardDescription": "You are about to redeem {{points}} points for {{title}}",
+            "redeemAction": "Utiliser",
+            "costPoints": "Coût {{count}} points"
+        },
+        "ads": {
+            "title": "Publicité",
+            "congrats": "Bravo !",
+            "earned": "Vous avez gagné +5 points !",
+            "ok": "OK"
+        },
+        "leaderboard": {
+            "title": "Classement",
+            "tabs": {
+                "today": "Aujourd'hui",
+                "week": "Semaine",
+                "month": "Mois"
+            }
+        }
     },
-    "reply": {
-      "initial": "Merci pour votre message ! Comment puis-je vous aider aujourd'hui ?",
-      "shortly": "Merci ! Je reviens vers vous rapidement."
+    "subscription": {
+        "title": "Abonnements",
+        "hero": {
+            "title": "Débloquez les fonctionnalités Premium",
+            "subtitle": "Gagnez plus de points, débloquez des fonctions avancées et profitez d'une meilleure expérience"
+        },
+        "popular": "POPULAIRE",
+        "currentPlan": "Offre actuelle",
+        "freeVersion": "Version gratuite",
+        "pointsAvailable": "Points disponibles",
+        "upgradeTo": "Passer à {{plan}}",
+        "billing": {
+            "forever": "à vie",
+            "perMonth": "par mois"
+        },
+        "plans": {
+            "free": {
+                "title": "Offre Gratuite",
+                "description": "Fonctionnalités de base"
+            },
+            "premium": {
+                "title": "Offre Premium",
+                "description": "Toutes les fonctionnalités déverrouillées"
+            },
+            "pro": {
+                "title": "Offre Pro",
+                "description": "Pour utilisateurs avancés"
+            }
+        }
     },
-    "header": {
-      "newChat": "Nouvelle discussion",
-      "history": "Historique des chats"
+    "status": {
+        "noRewards": {
+            "title": "Aucune récompense",
+            "subtitle": "Gagnez des récompenses en complétant des actions.",
+            "button": "Gagner maintenant"
+        }
     },
-    "search": {
-      "placeholder": "Rechercher..."
+    "terms": {
+        "title": "Conditions Générales",
+        "heading": "Conditions Générales",
+        "lastUpdated": "Dernière mise à jour : {{date}}"
     },
-    "templates": {
-      "writing": {
-        "title": "Rédaction",
-        "description": "E-mails, articles, descriptions, et plus."
-      },
-      "creative": {
-        "title": "Créatif",
-        "description": "Histoires, idées, poèmes, légendes, et plus."
-      }
+    "common": {
+        "lastUpdated": "Dernière mise à jour : {{date}}",
+        "cancel": "Annuler",
+        "confirm": "Confirmer"
+    },
+    "impact": {
+        "dashboard": {
+            "title": "Votre impact",
+            "donated": "Ensemble, vous avez donné",
+            "nextGoal": "Objectif suivant",
+            "recent": "Impact récent",
+            "amplify": "Amplifiez votre impact",
+            "amplifyDescription": "Amplifiez description, Please change it.",
+            "amplifyDescriptionSecond": "Amplifiez description second, Please change it.",
+            "premium": "Passer Premium",
+            "share": "Partager",
+            "treeDonated": "Tree Donated",
+            "waterDonated": "Water Donated",
+            "roomToRead": "Room to read",
+            "roomToReadDescription": "You're Supporting Room to Read - Helping Childrean get access to Books",
+            "keepEarning": "Keep Earning Points change it in franch"
+        }
+    },
+    "account": {
+        "settings": {
+            "title": "Réglages",
+            "pointsHistory": "Historique des points",
+            "notifications": "Notifications",
+            "pushDescription": "Recevoir les notifications de l’application",
+            "rewardDescription": "Recevoir les alertes de récompenses",
+            "emailUpdatesDescription": "Recevoir les mises à jour par e-mail",
+            "marketingDescription": "Offres promotionnelles",
+            "logout": "Se déconnecter",
+            "push": "Notifications push",
+            "newReward": "Alerte nouvelle récompense",
+            "emailUpdates": "Emails",
+            "marketing": "Marketing",
+            "language": "Langue",
+            "darkMode": "Mode sombre",
+            "gdpr": "Contrôle du compte & RGPD",
+            "help": "Aide & Support",
+            "confirm": "Confirmer",
+            "cancel": "Annuler"
+        },
+        "editProfile": {
+            "title": "Modifier le profil",
+            "save": "Enregistrer"
+        },
+        "pointsHistory": {
+            "title": "Historique des points",
+            "all": "Tous",
+            "earned": "Gagnés",
+            "pending": "En attente",
+            "redeemed": "Utilisés",
+            "recent": "Activité récente",
+            "total": "Total des points",
+            "thisMonth": "Ce mois-ci",
+            "description": "Consultez l’historique de vos points et voyez comment vous les avez gagnés et utilisés",
+            "items": {
+                "purchaseReward": "Récompense d'achat",
+                "reviewReward": "Récompense d'avis",
+                "dailyCheckinBonus": "Bonus de check-in quotidien",
+                "redeemedCoupon": "Bon utilisé",
+                "referralReward": "Récompense de parrainage",
+                "redeemedGiftCard": "Carte cadeau utilisée",
+                "appEventParticipation": "Participation à un événement",
+                "dailyLoginBonus": "Bonus de connexion quotidienne",
+                "redeemedPoints": "Points utilisés",
+                "surveyReward": "Récompense de sondage",
+                "sale1111Bonus": "Bonus promo 11.11"
+            }
+        },
+        "helpSupport": {
+            "title": "Aide & Support",
+            "heading": "Aide & Support",
+            "lastUpdated": "Dernière mise à jour : {{date}}"
+        }
+    },
+    "tabs": {
+        "chat": "Chat",
+        "redeem": "Utiliser",
+        "impact": "Impact",
+        "account": "Compte"
+    },
+    "shareEarn": {
+        "title": "Gagnez des récompenses en parrainant",
+        "referralLink": "Votre lien de parrainage",
+        "searchPlaceholder": "Rechercher des amis...",
+        "invitedFriends": "Amis invités",
+        "points": "{{count}} Points"
+    },
+    "notifications": {
+        "readAll": "Mark al Chnage IT"
+    },
+    "giftCards": {
+        "title": "Gift Cards - Chnage it"
+    },
+    "donateCards": {
+        "title": "Donate to Charities - Chnage it"
+    },
+    "donate": {
+        "oneTree": {
+            "title": "Un Arbre Planté",
+            "subtitle": "Planter des arbres pour lutter contre le changement climatique\net restaurer les écosystèmes"
+        },
+        "roomToRead": {
+            "title": "Room to Read",
+            "subtitle": "Financer l'éducation et la lecture des enfants\ndans les pays en développement"
+        },
+        "baby2Baby": {
+            "title": "Baby2Baby",
+            "subtitle": "Soutenir les nouveau-nés et enfants dans le besoin\navec les fournitures essentielles"
+        },
+        "feedingAmerica": {
+            "title": "Feeding America",
+            "subtitle": "Fournir des repas aux familles confrontées à la faim aux États-Unis"
+        }
+    },
+    "logout": {
+        "title": "Se déconnecter",
+        "description": "Êtes-vous sûr de vouloir vous déconnecter de votre compte ?"
     }
-  },
-  "home": {
-    "header": {
-      "welcomeShort": "Bienvenue",
-      "welcomeLong": "Bienvenue sur Oui Impact",
-      "points": "Vos points"
-    }
-  },
-  "rewards": {
-    "home": {
-      "title": "Gagner des recompenses",
-      "redeem": "Racheter",
-      "redeemNow": "Racheter",
-      "upgrade": "Premium",
-      "view": "View",
-      "refer": "Share With Friends",
-      "referDescription": "Earn More with Friends",
-      "referList": "Show your referlist",
-      "tree": "Tree",
-      "book": "Book"
-    },
-    "watch": {
-      "title": "Regarder & Gagner",
-      "checkIn": "Check-in quotidien",
-      "bonus": "Bonus",
-      "watchMore": "Regarder plus",
-      "featured": "À la une",
-      "premiumTitle": "Vidéo de marque premium",
-      "premiumSubtitle": "Regardez cette vidéo de 30 secondes et gagnez des points !",
-      "dailyCheckIn": "Récompense de check-in quotidien",
-      "dailyTasks": "Complétez les tâches quotidiennes",
-      "shareWithFriends": "Partager avec des amis",
-      "inviteFriends": "Invitez des amis à rejoindre",
-      "durationSeconds": "{{seconds}} secondes",
-      "available": "Disponible",
-      "notAvailable": "Non disponible",
-      "watchButton": "Regarder"
-    },
-    "offers": {
-      "discounts": "Réductions",
-      "offers": "Offres",
-      "redeem": "Utilisez",
-      "charity": "Association",
-      "redirectLeaderBoard": "Classement",
-      "confirmTitle": "Confirmer l'utilisation",
-      "confirm": "Confirmer",
-      "confirmDescription": "Vous êtes sur le point d'utiliser {{points}} points pour {{discount}}% de réduction sur l'application partenaire",
-      "confirmGiftCardDescription": "You are about to redeem {{points}} points for {{title}}",
-      "redeemAction": "Utiliser",
-      "costPoints": "Coût {{count}} points"
-    },
-    "ads": {
-      "title": "Publicité",
-      "congrats": "Bravo !",
-      "earned": "Vous avez gagné +5 points !",
-      "ok": "OK"
-    },
-    "leaderboard": {
-      "title": "Classement",
-      "tabs": {
-        "today": "Aujourd'hui",
-        "week": "Semaine",
-        "month": "Mois"
-      }
-    }
-  },
-  "subscription": {
-    "title": "Abonnements",
-    "hero": {
-      "title": "Débloquez les fonctionnalités Premium",
-      "subtitle": "Gagnez plus de points, débloquez des fonctions avancées et profitez d'une meilleure expérience"
-    },
-    "popular": "POPULAIRE",
-    "currentPlan": "Offre actuelle",
-    "freeVersion": "Version gratuite",
-    "pointsAvailable": "Points disponibles",
-    "upgradeTo": "Passer à {{plan}}",
-    "billing": {
-      "forever": "à vie",
-      "perMonth": "par mois"
-    },
-    "plans": {
-      "free": {
-        "title": "Offre Gratuite",
-        "description": "Fonctionnalités de base"
-      },
-      "premium": {
-        "title": "Offre Premium",
-        "description": "Toutes les fonctionnalités déverrouillées"
-      },
-      "pro": {
-        "title": "Offre Pro",
-        "description": "Pour utilisateurs avancés"
-      }
-    }
-  },
-  "status": {
-    "noRewards": {
-      "title": "Aucune récompense",
-      "subtitle": "Gagnez des récompenses en complétant des actions.",
-      "button": "Gagner maintenant"
-    }
-  },
-  "terms": {
-    "title": "Conditions Générales",
-    "heading": "Conditions Générales",
-    "lastUpdated": "Dernière mise à jour : {{date}}"
-  },
-  "common": {
-    "lastUpdated": "Dernière mise à jour : {{date}}"
-  },
-  "impact": {
-    "dashboard": {
-      "title": "Votre impact",
-      "donated": "Ensemble, vous avez donné",
-      "nextGoal": "Objectif suivant",
-      "recent": "Impact récent",
-      "amplify": "Amplifiez votre impact",
-      "amplifyDescription": "Amplifiez description, Please change it.",
-      "amplifyDescriptionSecond": "Amplifiez description second, Please change it.",
-      "premium": "Passer Premium",
-      "share": "Partager",
-      "treeDonated": "Tree Donated",
-      "waterDonated": "Water Donated",
-      "roomToRead": "Room to read",
-      "roomToReadDescription": "You're Supporting Room to Read - Helping Childrean get access to Books",
-      "keepEarning": "Keep Earning Points change it in franch"
-    }
-  },
-  "account": {
-    "settings": {
-      "title": "Réglages",
-      "pointsHistory": "Historique des points",
-      "notifications": "Notifications",
-      "pushDescription": "Recevoir les notifications de l’application",
-      "rewardDescription": "Recevoir les alertes de récompenses",
-      "emailUpdatesDescription": "Recevoir les mises à jour par e-mail",
-      "marketingDescription": "Offres promotionnelles",
-      "logout": "Se déconnecter",
-      "push": "Notifications push",
-      "newReward": "Alerte nouvelle récompense",
-      "emailUpdates": "Emails",
-      "marketing": "Marketing",
-      "language": "Langue",
-      "darkMode": "Mode sombre",
-      "gdpr": "Contrôle du compte & RGPD",
-      "help": "Aide & Support",
-      "confirm": "Confirmer",
-      "cancel": "Annuler"
-    },
-    "editProfile": {
-      "title": "Modifier le profil",
-      "save": "Enregistrer"
-    },
-    "pointsHistory": {
-      "title": "Historique des points",
-      "all": "Tous",
-      "earned": "Gagnés",
-      "pending": "En attente",
-      "redeemed": "Utilisés",
-      "recent": "Activité récente",
-      "total": "Total des points",
-      "thisMonth": "Ce mois-ci",
-      "description": "Consultez l’historique de vos points et voyez comment vous les avez gagnés et utilisés",
-      "items": {
-        "purchaseReward": "Récompense d'achat",
-        "reviewReward": "Récompense d'avis",
-        "dailyCheckinBonus": "Bonus de check-in quotidien",
-        "redeemedCoupon": "Bon utilisé",
-        "referralReward": "Récompense de parrainage",
-        "redeemedGiftCard": "Carte cadeau utilisée",
-        "appEventParticipation": "Participation à un événement",
-        "dailyLoginBonus": "Bonus de connexion quotidienne",
-        "redeemedPoints": "Points utilisés",
-        "surveyReward": "Récompense de sondage",
-        "sale1111Bonus": "Bonus promo 11.11"
-      }
-    },
-    "helpSupport": {
-      "title": "Aide & Support",
-      "heading": "Aide & Support",
-      "lastUpdated": "Dernière mise à jour : {{date}}"
-    }
-  },
-  "tabs": {
-    "chat": "Chat",
-    "redeem": "Utiliser",
-    "impact": "Impact",
-    "account": "Compte"
-  },
-  "shareEarn": {
-    "title": "Gagnez des récompenses en parrainant",
-    "referralLink": "Votre lien de parrainage",
-    "searchPlaceholder": "Rechercher des amis...",
-    "invitedFriends": "Amis invités",
-    "points": "{{count}} Points"
-  },
-  "notifications": {
-    "readAll": "Mark al Chnage IT"
-  },
-
-  "giftCards": {
-    "title": "Gift Cards - Chnage it"
-  },
-  "donateCards": {
-    "title": "Donate to Charities - Chnage it"
-  },
-
-  "donate": {
-    "oneTree": {
-      "title": "Un Arbre Planté",
-      "subtitle": "Planter des arbres pour lutter contre le changement climatique\net restaurer les écosystèmes"
-    },
-    "roomToRead": {
-      "title": "Room to Read",
-      "subtitle": "Financer l'éducation et la lecture des enfants\ndans les pays en développement"
-    },
-    "baby2Baby": {
-      "title": "Baby2Baby",
-      "subtitle": "Soutenir les nouveau-nés et enfants dans le besoin\navec les fournitures essentielles"
-    },
-    "feedingAmerica": {
-      "title": "Feeding America",
-      "subtitle": "Fournir des repas aux familles confrontées à la faim aux États-Unis"
-    }
-  }
 }

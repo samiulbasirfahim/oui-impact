@@ -3,6 +3,7 @@ import { RNButton } from "../ui/button";
 import { RNModal } from "../ui/modal";
 import { RNText } from "../ui/text";
 import { useAuthStore } from "@/store/auth";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     onClose: () => void;
@@ -11,10 +12,10 @@ type Props = {
 
 export function LogOutModal({ onClose, isOpen }: Props) {
     const { logOut } = useAuthStore();
+    const { t } = useTranslation();
 
     const onConfirm = () => {
         logOut();
-
         onClose();
     };
 
@@ -28,9 +29,10 @@ export function LogOutModal({ onClose, isOpen }: Props) {
                     marginBottom: 12,
                 }}
             >
-                Log Out
+                {t("logout.title")}
             </RNText>
-            <RNText>Are you sure you want to log out of your account?</RNText>
+
+            <RNText style={{ textAlign: "center" }}>{t("logout.description")}</RNText>
 
             <View
                 style={{
@@ -40,22 +42,12 @@ export function LogOutModal({ onClose, isOpen }: Props) {
                     gap: 12,
                 }}
             >
-                <RNButton
-                    style={{
-                        flex: 1,
-                    }}
-                    variant="outline"
-                    onPress={onClose}
-                >
-                    Cancel
+                <RNButton style={{ flex: 1 }} variant="outline" onPress={onClose}>
+                    {t("common.cancel")}
                 </RNButton>
-                <RNButton
-                    style={{
-                        flex: 1,
-                    }}
-                    onPress={onConfirm}
-                >
-                    Confirm
+
+                <RNButton style={{ flex: 1 }} onPress={onConfirm}>
+                    {t("common.confirm")}
                 </RNButton>
             </View>
         </RNModal>

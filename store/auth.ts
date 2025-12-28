@@ -3,6 +3,7 @@ import { router } from "expo-router";
 import type { User } from "@/type/user";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { mmkvZustand } from "./mmkv";
+import Purchases from "react-native-purchases";
 
 interface AuthStoreState {
     isLoggedIn: boolean;
@@ -11,6 +12,7 @@ interface AuthStoreState {
     init: () => User | null;
     setIsLoggedIn: (isLoggedIn: boolean) => void;
     logOut: () => void;
+    addPoints: (points: number) => void;
 }
 
 export const useAuthStore = create<AuthStoreState>((set, get) => ({
@@ -19,7 +21,6 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 
     init() {
         const token = useTokenStore.getState().accessToken;
-
         return null;
     },
 
@@ -33,9 +34,22 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
         });
     },
     logOut() {
+        Purchases.logOut();
         useTokenStore.getState().setTokens(null, null);
         set({ isLoggedIn: false, user: null });
         router.replace("/public/auth/login");
+    },
+
+    addPoints(points: number) {
+        const currentUser = get().user;
+        if (currentUser) {
+            set({
+                user: {
+                    ...currentUser,
+                    my_points: currentUser.my_points + points,
+                },
+            });
+        }
     },
 }));
 

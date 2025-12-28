@@ -39,7 +39,7 @@ export function RedeemptionHistory() {
             <View style={styles.labelContainer}>
                 <MaterialCommunityIcons name="history" size={24} color={COLORS.text} />
                 <RNText variant="subtitle" size="lg">
-                    {t("rewards.offers.history")}
+                    {t("rewards.offers.history", "History")}
                 </RNText>
             </View>
 

@@ -24,6 +24,7 @@ export default function RegisterScreen() {
     const { updateUser } = useAuthStore();
     const [form, setForm] = useState<FormState>({});
     const [error, setError] = useState<string | null>(null);
+    const [isPending, setIsPending] = useState(false);
 
     const handleChange = (name: keyof FormState, value: string) => {
         setError(null);
@@ -43,11 +44,9 @@ export default function RegisterScreen() {
             return;
         }
 
-        const body = JSON.stringify({
-            email: form.email,
-        });
+        setIsPending(true);
+        setError(null);
 
-        console.log(body);
         fetcher("/auth/register/", {
             method: "POST",
             body: {
@@ -71,6 +70,9 @@ export default function RegisterScreen() {
                 }
 
                 setError(err.message || "Something went wrong");
+            })
+            .finally(() => {
+                setIsPending(false);
             });
     };
 
@@ -122,7 +124,11 @@ export default function RegisterScreen() {
                     }}
                 />
 
-                <RNButton onPress={handleSubmit} style={{ marginTop: 12 }}>
+                <RNButton
+                    onPress={handleSubmit}
+                    style={{ marginTop: 12 }}
+                    loading={isPending}
+                >
                     {t("auth.createAccount.button")}
                 </RNButton>
 

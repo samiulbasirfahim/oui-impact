@@ -1,4 +1,8 @@
+import { AD_UNIT_IDS } from "@/constants";
+import { fetcher } from "@/lib/fetcher";
 import { getNumber, getString, setItem } from "@/lib/mmkv";
+import { useAuthStore } from "@/store/auth";
+import { usePointsConfigStore } from "@/store/points-config";
 import { useNavigation } from "expo-router";
 import { useEffect, useRef } from "react";
 import {
@@ -7,14 +11,12 @@ import {
     TestIds,
 } from "react-native-google-mobile-ads";
 
-// const adUnitId = __DEV__
-//     ? TestIds.INTERSTITIAL
-//     : AD_UNIT_IDS.INTERSTITIAL || TestIds.INTERSTITIAL;
-
-const adUnitId = TestIds.INTERSTITIAL;
+const adUnitId = __DEV__
+    ? TestIds.INTERSTITIAL
+    : AD_UNIT_IDS.INTERSTITIAL || TestIds.INTERSTITIAL;
 
 type DailyCounter = {
-    date: string; // YYYY-MM-DD
+    date: string;
     count: number;
 };
 
@@ -23,124 +25,116 @@ const STORAGE_KEYS = {
     lastAdTime: "ads:lastAdTime",
 };
 
-const MAX_ADS_PER_DAY = 10;
-const MIN_AD_INTERVAL_MS = 4 * 60 * 1000; // 4 minutes
-
 function todayStr() {
-    const d = new Date();
-    return d.toISOString().slice(0, 10);
+    return new Date().toISOString().slice(0, 10);
 }
 
 function getDailyCounter(): DailyCounter {
     const raw = getString(STORAGE_KEYS.dailyCounter);
     const today = todayStr();
+
     if (!raw) return { date: today, count: 0 };
+
     try {
         const parsed = JSON.parse(raw) as DailyCounter;
-        if (parsed.date !== today) {
-            return { date: today, count: 0 };
-        }
-        return parsed;
+        return parsed.date === today ? parsed : { date: today, count: 0 };
     } catch {
         return { date: today, count: 0 };
     }
 }
 
-function incrementDailyCounter() {
-    const c = getDailyCounter();
-    const next = { date: todayStr(), count: c.count + 1 };
-    setItem(STORAGE_KEYS.dailyCounter, JSON.stringify(next));
+function updateDailyCounter() {
+    const current = getDailyCounter();
+    setItem(
+        STORAGE_KEYS.dailyCounter,
+        JSON.stringify({ date: todayStr(), count: current.count + 1 }),
+    );
 }
 
-function getLastAdTime(): number {
+function getLastAdTime() {
     return getNumber(STORAGE_KEYS.lastAdTime) ?? 0;
 }
 
-function setLastAdTime(time: number): void {
+function setLastAdTime(time: number) {
     setItem(STORAGE_KEYS.lastAdTime, time);
 }
 
-function canShowAd(): boolean {
-    const daily = getDailyCounter();
-    if (daily.count >= MAX_ADS_PER_DAY) {
-        return false;
-    }
-    
-    const lastAdTime = getLastAdTime();
-    const now = Date.now();
-    const timeSinceLastAd = now - lastAdTime;
-    
-    return timeSinceLastAd >= MIN_AD_INTERVAL_MS;
-}
-
 export function useLoadInterstitialAds() {
-    const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-        requestNonPersonalizedAdsOnly: true,
-    });
-
-    const firstLoad = useRef(false);
+    const { getPointsConfig } = usePointsConfigStore();
+    const { addPoints } = useAuthStore();
     const navigation = useNavigation();
+    const firstLoad = useRef(true);
 
-    // Show ad on initial mount
-    useEffect(() => {
+    const interstitial = useRef(
+        InterstitialAd.createForAdRequest(adUnitId, {
+            requestNonPersonalizedAdsOnly: true,
+        }),
+    ).current;
+
+    function canShowAd() {
+        const config = getPointsConfig();
         const daily = getDailyCounter();
-        if (daily.count < MAX_ADS_PER_DAY) {
-            const loadedListener = interstitial.addAdEventListener(
-                AdEventType.LOADED,
-                () => {
-                    interstitial.show();
-                    incrementDailyCounter();
-                    setLastAdTime(Date.now());
-                }
-            );
-            const errorListener = interstitial.addAdEventListener(
-                AdEventType.ERROR,
-                () => {
-                    // swallow
-                }
-            );
-            interstitial.load();
 
-            return () => {
-                loadedListener();
-                errorListener();
-            };
-        }
+        if (daily.count >= (config?.max_intersihal_ads_earn ?? 5)) return false;
+
+        const intervalMs = (config?.intersitial_interval_earn ?? 5) * 60 * 1000;
+
+        return Date.now() - getLastAdTime() >= intervalMs;
+    }
+
+    function rewardUser() {
+        const ptn = getPointsConfig()?.per_intersihal_ads_earn ?? 5;
+        fetcher("/history/update/points/", {
+            method: "POST",
+            auth: true,
+            body: {
+                points: getPointsConfig()?.per_intersihal_ads_earn ?? 5,
+                title: "Watched an interstitial ad",
+                description: "-",
+            },
+        }).then(() => {
+            addPoints(ptn);
+        });
+    }
+
+    function loadAndShowAd() {
+        if (!canShowAd()) return;
+        interstitial.load();
+    }
+
+    useEffect(() => {
+        const onLoaded = interstitial.addAdEventListener(AdEventType.LOADED, () =>
+            interstitial.show(),
+        );
+
+        const onOpened = interstitial.addAdEventListener(AdEventType.OPENED, () => {
+            updateDailyCounter();
+            setLastAdTime(Date.now());
+            rewardUser();
+        });
+
+        const onError = interstitial.addAdEventListener(
+            AdEventType.ERROR,
+            () => { },
+        );
+
+        return () => {
+            onLoaded();
+            onOpened();
+            onError();
+        };
     }, []);
 
-    // Show ad on navigation change
     useEffect(() => {
         const unsubscribe = navigation.addListener("state", () => {
-            if (firstLoad.current === false) {
-                firstLoad.current = true;
+            if (firstLoad.current) {
+                firstLoad.current = false;
                 return;
             }
-
-            if (!canShowAd()) {
-                return;
-            }
-
-            const loadedListener = interstitial.addAdEventListener(
-                AdEventType.LOADED,
-                () => {
-                    interstitial.show();
-                    incrementDailyCounter();
-                    setLastAdTime(Date.now());
-                }
-            );
-            const errorListener = interstitial.addAdEventListener(
-                AdEventType.ERROR,
-                () => {
-                    // swallow
-                }
-            );
-            interstitial.load();
-
-            return () => {
-                loadedListener();
-                errorListener();
-            };
+            loadAndShowAd();
         });
+
+        console.log("Points Config", getPointsConfig());
 
         return unsubscribe;
     }, [navigation]);

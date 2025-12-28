@@ -31,7 +31,7 @@ export function Layout({ children, style, ...props }: Props) {
                 stickyHeaderIndices={props.stickyHeaderIndices}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
-                keyboardDismissMode="interactive"
+                keyboardDismissMode="on-drag"
                 bottomOffset={20}
                 contentContainerStyle={[
                     {

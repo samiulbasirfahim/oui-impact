@@ -1,7 +1,5 @@
+import { BASE_URL } from "@/constants/uri";
 import { useTokenStore } from "@/store/auth";
-
-export const BASE_URL =
-    "https://walleyed-manipulatively-katelynn.ngrok-free.dev/api";
 
 export class ApiError extends Error {
     public status: number;
@@ -19,6 +17,7 @@ type Options = {
     body?: any;
     headers?: Record<string, string>;
     auth?: boolean;
+    dontParseJson?: boolean;
 };
 
 export async function fetcher<T>(
@@ -46,11 +45,17 @@ export async function fetcher<T>(
 
     let res: any;
 
+    console.log("Body", body);
+
     try {
-        res = await fetch(`${BASE_URL}${endpoint}`, {
+        res = await fetch(`${BASE_URL}/api${endpoint}`, {
             method,
             headers: finalHeaders,
-            body: body ? JSON.stringify(body) : undefined,
+            body: body
+                ? options.dontParseJson
+                    ? body
+                    : JSON.stringify(body)
+                : undefined,
             credentials: "include",
         });
     } catch (err) {

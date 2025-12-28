@@ -2,11 +2,12 @@ import * as NavigationBar from "expo-navigation-bar";
 import { StatusBar } from "expo-status-bar";
 import * as ExpoNetwork from "expo-network";
 import { QueryClientProvider } from "@tanstack/react-query";
+import Purchases, { LOG_LEVEL } from "react-native-purchases";
 
 import { useLoadFonts } from "@/hooks/useLoadFonts";
 import { router, Stack } from "expo-router";
 import { I18nextProvider } from "react-i18next";
-import { Platform } from "react-native";
+import { LogBox, Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { Host } from "react-native-portalize";
@@ -17,6 +18,7 @@ import { queryClient } from "@/lib/reactQuery";
 
 import * as SplashScreen from "expo-splash-screen";
 import { useInitAuth } from "@/queries/useLogin";
+import { usePointsValue } from "@/queries/usePoints";
 
 SplashScreen.setOptions({
     duration: 0,
@@ -26,6 +28,7 @@ SplashScreen.setOptions({
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayoutWrapper() {
+    LogBox.ignoreAllLogs(true);
     return (
         <QueryClientProvider client={queryClient}>
             <StatusBar style="dark" />
@@ -42,6 +45,21 @@ export function RootLayout() {
 
     const language = useSettings((s) => s.userSettings?.language);
     const { mutateAsync: initAuth } = useInitAuth();
+
+    const { mutateAsync: fetchPointsConfig } = usePointsValue();
+
+    useEffect(() => {
+        Purchases.setLogLevel(LOG_LEVEL.DEBUG);
+        if (Platform.OS === "ios") {
+            Purchases.configure({
+                apiKey: "test_nHckVzCypfSmgaaZZCQIzPhZDrp",
+            });
+        } else if (Platform.OS === "android") {
+            Purchases.configure({
+                apiKey: "test_nHckVzCypfSmgaaZZCQIzPhZDrp",
+            });
+        }
+    }, []);
 
     useEffect(() => {
         if (language) {
@@ -60,6 +78,10 @@ export function RootLayout() {
         async function prepare() {
             try {
                 await initAuth();
+                console.log("Auth initialized on app load");
+                await fetchPointsConfig().then(d => {
+                    console.log("Points config fetched on app load:", d);
+                });
             } catch (e) {
                 //  ignore errors
             } finally {

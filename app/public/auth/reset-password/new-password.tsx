@@ -3,22 +3,34 @@ import { RNCheckbox } from "@/components/ui/checkbox";
 import { RNInput } from "@/components/ui/input";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useAuthStore, useTokenStore } from "@/store/auth";
+import { fetcher } from "@/lib/fetcher";
 
 type FormData = {
     password: string;
     confirmPassword: string;
 };
 
-export default function EmailScreen() {
+export default function NewPasswordScreen() {
     const { t } = useTranslation();
+
+    const { email, token } = useLocalSearchParams<{
+        email: string;
+        token: string;
+    }>();
+
     const [formData, setFormData] = useState<FormData>({
         password: "",
         confirmPassword: "",
     });
+
+    const { setTokens } = useTokenStore();
+    const { updateUser, setIsLoggedIn } = useAuthStore();
+    const [isPending, setIsPending] = useState(false);
 
     const handleChange = (field: keyof FormData, value: string) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
@@ -37,6 +49,41 @@ export default function EmailScreen() {
                 formData.password.length > 0,
         };
     }, [formData.password, formData.confirmPassword]);
+
+    const isFormValid = useMemo(() => {
+        return Object.values(passwordStatus).every(Boolean);
+    }, [passwordStatus]);
+
+    const handleSubmit = async () => {
+        if (!isFormValid || isPending) return;
+
+        setIsPending(true);
+
+        try {
+            const data: any = await fetcher("/auth/change-password/", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                body: {
+                    email,
+                    new_password: formData.password,
+                },
+            });
+
+            setTokens(data.access, data.refresh);
+            updateUser(data.user);
+            setIsLoggedIn(true);
+
+            if (router.canDismiss()) {
+                router.dismissAll();
+            }
+            router.replace("/protected/chat");
+        } catch (err) {
+        } finally {
+            setIsPending(false);
+        }
+    };
 
     return (
         <Layout>
@@ -92,9 +139,9 @@ export default function EmailScreen() {
 
             {/* Save Button */}
             <RNButton
-                onPress={() => {
-                    router.push("/public/auth/login");
-                }}
+                onPress={handleSubmit}
+                disabled={!isFormValid}
+                loading={isPending}
                 style={{ marginTop: 12 }}
             >
                 {t("auth.reset.newPassword.button")}

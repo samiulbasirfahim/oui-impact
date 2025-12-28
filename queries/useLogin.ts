@@ -2,14 +2,19 @@ import { fetcher } from "@/lib/fetcher";
 import { useAuthStore, useTokenStore } from "@/store/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
+import Purchases from "react-native-purchases";
 
 export function useLogin() {
     const { setTokens } = useTokenStore();
     const { updateUser, setIsLoggedIn } = useAuthStore();
 
     return useMutation({
-        mutationFn: ({ email, password }: { email: string; password: string }) =>
-            fetcher("/auth/login/", { method: "POST", body: { email, password } }),
+        mutationFn: ({ email, password }: { email: string; password: string }) => {
+            return fetcher("/auth/login/", {
+                method: "POST",
+                body: { email, password },
+            });
+        },
         onSuccess: (data: any) => {
             setTokens(data.access, data.refresh);
             updateUser(data.user);
@@ -19,7 +24,7 @@ export function useLogin() {
         onError: () => {
             setIsLoggedIn(false);
             setTokens(null, null);
-        }
+        },
     });
 }
 
@@ -35,11 +40,14 @@ export function useInitAuth() {
             return fetcher("/auth/me/", { method: "GET", auth: true });
         },
         onSuccess: (data: any) => {
-            updateUser(data.user);
-            const new_access_token = data.access || accessToken;
-            const new_refresh_token = data.refresh || refreshToken;
-            useTokenStore.getState().setTokens(new_access_token, new_refresh_token);
-            setIsLoggedIn(true);
+            if (data.user.email) {
+                updateUser(data.user);
+                const new_access_token = data.access || accessToken;
+                const new_refresh_token = data.refresh || refreshToken;
+                useTokenStore.getState().setTokens(new_access_token, new_refresh_token);
+                Purchases.logIn(data.user.email);
+                setIsLoggedIn(true);
+            }
         },
         onError: () => {
             setIsLoggedIn(false);

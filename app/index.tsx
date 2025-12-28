@@ -6,7 +6,7 @@ export default function Index() {
 
     return (
         <Redirect
-            href={isLoggedIn ? "/protected/(tabs)/chat" : "/public/auth/login"}
+            href={isLoggedIn ? "/protected/(tabs)/chat" : "/public/onboarding/first"}
         />
     );
     // return (

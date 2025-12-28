@@ -12,6 +12,7 @@ import {
 //     ? TestIds.BANNER
 //     : AD_UNIT_IDS.BANNER || TestIds.BANNER;
 //
+
 const adUnitId = TestIds.BANNER;
 
 export function RNBannerAd() {

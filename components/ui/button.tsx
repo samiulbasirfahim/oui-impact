@@ -107,7 +107,7 @@ export function RNButton({
             {loading ? (
                 <ActivityIndicator
                     color={textColors[variant]}
-                    size={size === "sm" ? "small" : "large"}
+                    size={size === "sm" ? "small" : "small"}
                 />
             ) : nowrap ? (
                 <>{children}</>

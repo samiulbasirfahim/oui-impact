@@ -16,6 +16,7 @@ type PlanFeaturesProps = {
     icon: React.ReactNode;
     isPopular?: boolean;
     isCurrentPlan?: boolean;
+    onPurchaseButtonPress?: () => void;
 };
 
 export function PlanFeatures({
@@ -27,6 +28,7 @@ export function PlanFeatures({
     icon,
     isPopular = false,
     isCurrentPlan = false,
+    onPurchaseButtonPress,
 }: PlanFeaturesProps) {
     const Wrapper = isPopular ? GradientBG : View;
     const { t } = useTranslation();
@@ -192,7 +194,9 @@ export function PlanFeatures({
                         style={{
                             backgroundColor: isPopular ? COLORS.background : COLORS.text,
                         }}
+                        onPress={onPurchaseButtonPress}
                         nowrap
+                        disabled={price === "$0"}
                     >
                         <RNText
                             variant="title"
@@ -200,7 +204,9 @@ export function PlanFeatures({
                                 color: isPopular ? COLORS.primary : COLORS.background,
                             }}
                         >
-                            {t("subscription.upgradeTo", { plan: title })}
+                            {price === "$0"
+                                ? "Free Plan"
+                                : t("subscription.upgradeTo", { plan: title })}
                         </RNText>
                     </RNButton>
                 )}

@@ -2,14 +2,65 @@ import { PlanFeatures } from "@/components/common/subscription";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { useUpdateProfile } from "@/queries/useUpdateUser";
+import { useAuthStore } from "@/store/auth";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { LinearGradient } from "expo-linear-gradient";
 import { Stack } from "expo-router";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
+import Purchases from "react-native-purchases";
 
 export default function Screen() {
     const { t } = useTranslation();
+
+    const currentPlan = useAuthStore((state) => state.user?.plan || "free");
+
+    const { user, updateUser } = useAuthStore();
+
+    const { mutateAsync: updateProfile } = useUpdateProfile();
+
+    const handleUpgrade = async (planId: "premium" | "pro") => {
+        try {
+            if (user?.email) {
+                await Purchases.logIn(user?.email);
+            }
+
+            const offerings = await Purchases.getOfferings();
+
+            if (!offerings.current) return null;
+
+            const pkg = offerings.current.availablePackages.find((p) => {
+                return p.identifier === planId;
+            });
+
+            if (pkg) {
+                const { customerInfo } = await Purchases.purchasePackage(pkg);
+
+                if (
+                    planId === "premium" &&
+                    customerInfo.entitlements.active["premium_access"]
+                ) {
+                    updateUser({
+                        plan: "premium",
+                    });
+                    console.log("Upgraded to Premium plan");
+                } else if (
+                    planId === "pro" &&
+                    customerInfo.entitlements.active["pro_access"]
+                ) {
+                    updateUser({
+                        plan: "pro",
+                    });
+                    console.log("Upgraded to Pro plan");
+                }
+            }
+        } catch (error) {
+            console.log("Failed to upgrade plan: ", error);
+        }
+    };
+
     return (
         <>
             <Stack.Screen options={{ headerTitle: t("subscription.title") }} />
@@ -70,7 +121,14 @@ export default function Screen() {
                                 {t("subscription.currentPlan")}
                             </RNText>
                             <RNText variant="title" style={{ marginTop: 2 }} size="xl">
-                                {t("subscription.freeVersion")}
+                                {
+                                    //t("subscription.freeVersion")
+                                    currentPlan === "free"
+                                        ? "Free Plan"
+                                        : currentPlan === "premium"
+                                            ? "Premium Plan"
+                                            : "Pro Plan"
+                                }
                             </RNText>
                         </View>
 
@@ -96,7 +154,7 @@ export default function Screen() {
                                     fontWeight: "600",
                                 }}
                             >
-                                1,200
+                                {user?.my_points || 0}
                             </RNText>
                         </View>
                     </View>
@@ -116,7 +174,7 @@ export default function Screen() {
                             { title: "Priority  support", included: false },
                             { title: "Advanced analytics", included: false },
                         ]}
-                        isCurrentPlan={true}
+                        isCurrentPlan={currentPlan === "free"}
                     />
 
                     <PlanFeatures
@@ -135,12 +193,15 @@ export default function Screen() {
                             { title: "Export capabilities", included: true },
                         ]}
                         isPopular={true}
+                        isCurrentPlan={currentPlan === "premium"}
+                        onPurchaseButtonPress={() => handleUpgrade("premium")}
                     />
                     <PlanFeatures
                         title={t("subscription.plans.pro.title")}
                         description={t("subscription.plans.pro.description")}
                         price="$19.99"
                         billingCycle={t("subscription.billing.perMonth")}
+                        isCurrentPlan={currentPlan === "pro"}
                         icon={
                             <FontAwesome5 name="rocket" size={24} color={COLORS.background} />
                         }
@@ -151,6 +212,7 @@ export default function Screen() {
                             { title: "Team collaboration", included: true },
                             { title: "API Access", included: true },
                         ]}
+                        onPurchaseButtonPress={() => handleUpgrade("pro")}
                     />
                 </View>
             </Layout>

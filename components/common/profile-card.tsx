@@ -24,8 +24,13 @@ export function ProfileCard() {
                             ? user.img
                             : "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
                     }}
-                    resizeMode="contain"
-                    style={{ width: 100, height: 100, borderRadius: 50 }}
+                    resizeMode="cover"
+                    style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: 50,
+                        backgroundColor: COLORS.muted,
+                    }}
                 />
             </View>
             <View
@@ -33,7 +38,7 @@ export function ProfileCard() {
                     marginLeft: 8,
                     justifyContent: "center",
                     flex: 1,
-                    maxWidth: "60%",
+                    maxWidth: "55%",
                 }}
             >
                 <RNText
@@ -50,6 +55,8 @@ export function ProfileCard() {
                     variant="base"
                     style={{
                         flex: 1,
+                        width: "100%",
+                        textAlign: "left",
                         color: COLORS.muted,
                     }}
                 >

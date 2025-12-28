@@ -3,7 +3,7 @@ export type User = {
     email: string;
     name: string;
     img: string | null;
-    gender: string | null;
+    gender: "male" | "female" | null;
     date_of_birth: string | null;
     country: string | null;
     is_buy: boolean;
@@ -12,6 +12,7 @@ export type User = {
     is_verified: boolean;
     social_auth_provider: string | null;
     referral_code: string;
+    phone: string | null;
 };
 
 export type AuthData = {

@@ -1,37 +1,50 @@
 import AVATAR from "@/assets/svgs/avatar.svg";
 import EDIT from "@/assets/svgs/edit.svg";
+import { useUpdateProfile } from "@/queries/useUpdateUser";
 import { RNCountryPicker } from "@/components/common/country-picker";
 import { COLORS } from "@/constants";
-
 import { RNDatePicker } from "@/components/common/date-picker";
 import { RNPicker } from "@/components/common/picker";
 import { RNButton } from "@/components/ui/button";
 import { RNInput } from "@/components/ui/input";
 import { Layout } from "@/components/ui/layout";
 import { imagePicker } from "@/lib/imagePicker";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Pressable, View } from "react-native";
+import { useAuthStore } from "@/store/auth";
+import { parseISODate } from "@/lib/utils";
+import type { User } from "@/type/user";
 
-type FormData = {
-    fullName?: string;
-    country?: string;
+type FormData = Partial<User> & {
     countryFlag?: string;
     countryCode?: string;
-    phoneNumber?: string;
-    gender?: "male" | "female";
-    dateOfBirth?: Date;
-    avatarUri?: string;
 };
 
 export default function Screen() {
     const { t } = useTranslation();
-    const [formData, setFormData] = useState<FormData>({});
+    const { user } = useAuthStore();
 
-    const handleInputChange = (field: keyof FormData, value: any) => {
-        setFormData((prevData) => ({
-            ...prevData,
+    const [formData, setFormData] = useState<FormData>({
+        name: user?.name ?? "",
+        country: user?.country ?? "",
+        phone: user?.phone ?? "",
+        gender: user?.gender ?? undefined,
+        img: user?.img ?? undefined,
+        date_of_birth: user?.date_of_birth ?? undefined,
+    });
+
+    const [imgUri, setImgUri] = useState<string | null>(null);
+
+    const { mutate: updateProfile, isPending } = useUpdateProfile();
+
+    const handleInputChange = <K extends keyof FormData>(
+        field: K,
+        value: FormData[K],
+    ) => {
+        setFormData((prev) => ({
+            ...prev,
             [field]: value,
         }));
     };
@@ -41,13 +54,11 @@ export default function Screen() {
             <Stack.Screen options={{ headerTitle: t("account.editProfile.title") }} />
             <Layout>
                 <Pressable
-                    onPress={() => {
+                    onPress={() =>
                         imagePicker((uri) => {
-                            if (uri) {
-                                handleInputChange("avatarUri", uri);
-                            }
-                        });
-                    }}
+                            if (uri) setImgUri(uri);
+                        })
+                    }
                     style={{
                         alignSelf: "center",
                         width: 100,
@@ -58,44 +69,23 @@ export default function Screen() {
                         marginTop: 16,
                     }}
                 >
-                    {formData.avatarUri ? (
+                    {formData.img ? (
                         <Image
-                            source={{
-                                uri: formData.avatarUri,
-                            }}
-                            style={{
-                                borderRadius: 50,
-                                width: 100,
-                                height: 100,
-                            }}
+                            source={{ uri: formData.img }}
+                            style={{ width: 100, height: 100, borderRadius: 50 }}
                         />
                     ) : (
-                        <>
-                            <AVATAR
-                                width={100}
-                                height={100}
-                                style={{
-                                    borderRadius: 50,
-                                    width: 100,
-                                    height: 100,
-                                }}
-                            />
-                        </>
+                        <AVATAR width={100} height={100} />
                     )}
-                    <View
-                        style={{
-                            position: "absolute",
-                            bottom: 0,
-                            right: 0,
-                        }}
-                    >
+                    <View style={{ position: "absolute", bottom: 0, right: 0 }}>
                         <EDIT width={30} height={30} />
                     </View>
                 </Pressable>
 
                 <RNInput
                     label={t("auth.userInfo.fullName")}
-                    onChangeText={(t) => handleInputChange("fullName", t)}
+                    value={formData.name}
+                    onChangeText={(t) => handleInputChange("name", t)}
                 />
 
                 <RNCountryPicker
@@ -112,46 +102,53 @@ export default function Screen() {
 
                 <RNInput
                     label={t("auth.userInfo.phone")}
-                    value={formData.phoneNumber}
+                    value={formData.phone ?? ""}
                     prefix={formData.countryCode}
-                    onChangeText={(t) => handleInputChange("fullName", t)}
+                    onChangeText={(t) => handleInputChange("phone", t)}
                     keyboardType="phone-pad"
                     key={formData.countryCode}
                 />
 
                 <RNPicker
                     items={[
-                        {
-                            value: "male",
-                            label: t("auth.userInfo.male"),
-                        },
-                        {
-                            value: "female",
-                            label: t("auth.userInfo.female"),
-                        },
+                        { value: "male", label: t("auth.userInfo.male") },
+                        { value: "female", label: t("auth.userInfo.female") },
                     ]}
-                    label={t("auth.userInfo.gender")}
-                    value={
-                        formData.gender
-                            ? formData.gender === "male"
-                                ? t("auth.userInfo.male")
-                                : t("auth.userInfo.female")
-                            : ""
-                    }
-                    onSelectItem={(item) => {
-                        console.log("Selected gender:", item);
-                        handleInputChange("gender", item);
-                    }}
                     key={formData.gender}
+                    label={t("auth.userInfo.gender")}
+                    value={formData.gender ?? ""}
+                    onSelectItem={(item) =>
+                        handleInputChange("gender", item as User["gender"])
+                    }
                 />
 
                 <RNDatePicker
-                    onChangeDate={(date) => handleInputChange("dateOfBirth", date)}
                     label={t("auth.userInfo.dob")}
-                    value={formData.dateOfBirth}
+                    value={
+                        formData.date_of_birth
+                            ? parseISODate(formData.date_of_birth)
+                            : undefined
+                    }
+                    onChangeDate={(date) =>
+                        handleInputChange("date_of_birth", date.toISOString().split("T")[0])
+                    }
                 />
 
-                <RNButton>{t("account.editProfile.save")}</RNButton>
+                <RNButton
+                    loading={isPending}
+                    onPress={() =>
+                        updateProfile(
+                            { ...formData, img: imgUri },
+                            {
+                                onSuccess: () => {
+                                    router.canGoBack() && router.back();
+                                },
+                            },
+                        )
+                    }
+                >
+                    {t("account.editProfile.save")}
+                </RNButton>
             </Layout>
         </>
     );

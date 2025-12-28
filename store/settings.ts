@@ -38,8 +38,10 @@ export const useSettings = create<SettignsState>()(
             },
 
             setLanguage(language) {
+                get().setSettings("language", language);
                 i18n.changeLanguage(language);
             },
+
             initLanguage() {
                 i18n.changeLanguage(get().userSettings?.language ?? "en");
             },

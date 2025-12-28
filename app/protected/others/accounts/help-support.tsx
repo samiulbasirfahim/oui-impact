@@ -1,38 +1,17 @@
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { useHelpsNSupports } from "@/queries/useHelpsNSupports";
 import { Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 export default function HelpSupport() {
     const { t } = useTranslation();
-    const data = [
-        {
-            question: "How to reset my password?",
-            answer:
-                "To reset your password, go to the login screen and click on 'Forgot Password'. Follow the instructions sent to your registered email address.",
-        },
-        {
-            question: "How to contact customer support?",
-            answer: "You can contact our customer support by emailing",
-        },
-        {
-            question: "Where can I find the privacy policy?",
-            answer:
-                "Our privacy policy can be found at the bottom of our website or within the app under 'Settings' > 'Privacy Policy'.",
-        },
-        {
-            question: "How to update my account information?",
-            answer:
-                "To update your account information, navigate to 'Account Settings' in the app and make the necessary changes.",
-        },
-        {
-            question: "What should I do if I encounter a bug?",
-            answer:
-                "If you encounter a bug, please report it to our support team with detailed information about the issue and steps to reproduce it.",
-        },
-    ];
+    const { data, isLoading } = useHelpsNSupports();
+
+    const helpItems = data?.data ?? [];
+    const lastUpdated = data?.lastUpdated;
 
     return (
         <>
@@ -41,56 +20,81 @@ export default function HelpSupport() {
                     title: t("account.helpSupport.title"),
                 }}
             />
+
             <Layout noPadding>
+                {/* Header */}
                 <View style={styles.labelContainer}>
                     <RNText
                         variant="title"
                         size="3xl"
-                        style={{
-                            color: COLORS.text + "DD",
-                        }}
+                        style={{ color: COLORS.text + "DD" }}
                     >
                         {t("account.helpSupport.heading")}
                     </RNText>
-                    <RNText
-                        style={{
-                            marginTop: 8,
-                            color: COLORS.text + "AA",
-                        }}
-                    >
-                        {t("account.helpSupport.lastUpdated", { date: "June 2024" })}
-                    </RNText>
-                </View>
 
-                {data.map((item, index) => (
-                    <View
-                        key={index}
-                        style={{
-                            borderBottomColor: COLORS.muted + "33",
-                            borderBottomWidth: index === data.length - 1 ? 0 : 1,
-                            padding: 16,
-                        }}
-                    >
-                        <RNText
-                            variant="title"
-                            size="lg"
-                            style={{
-                                color: COLORS.text + "DD",
-                            }}
-                        >
-                            {index + 1}. {item.question}
-                        </RNText>
+                    {lastUpdated && (
                         <RNText
                             style={{
                                 marginTop: 8,
                                 color: COLORS.text + "AA",
-                                lineHeight: 20,
                             }}
                         >
-                            {item.answer}
+                            {t("account.helpSupport.lastUpdated", {
+                                date: lastUpdated,
+                            })}
                         </RNText>
+                    )}
+                </View>
+
+                {/* Loading */}
+                {isLoading && (
+                    <View style={styles.loader}>
+                        <ActivityIndicator size="large" color={COLORS.primary} />
                     </View>
-                ))}
+                )}
+
+                {/* Content */}
+                {!isLoading &&
+                    helpItems.map((item, index) => (
+                        <View
+                            key={item.id}
+                            style={{
+                                borderBottomColor: COLORS.muted + "33",
+                                borderBottomWidth: index === helpItems.length - 1 ? 0 : 1,
+                                padding: 16,
+                            }}
+                        >
+                            <RNText
+                                variant="title"
+                                size="lg"
+                                style={{ color: COLORS.text + "DD" }}
+                            >
+                                {index + 1}. {item.question}
+                            </RNText>
+
+                            <RNText
+                                style={{
+                                    marginTop: 8,
+                                    color: COLORS.text + "AA",
+                                    lineHeight: 20,
+                                }}
+                            >
+                                {item.answer}
+                            </RNText>
+                        </View>
+                    ))}
+
+                {/* Empty state */}
+                {!isLoading && helpItems.length === 0 && (
+                    <RNText
+                        style={{
+                            padding: 16,
+                            color: COLORS.text + "AA",
+                        }}
+                    >
+                        No help articles available.
+                    </RNText>
+                )}
             </Layout>
         </>
     );
@@ -102,5 +106,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         padding: 16,
         paddingVertical: 24,
+    },
+    loader: {
+        paddingVertical: 40,
+        alignItems: "center",
+        justifyContent: "center",
     },
 });

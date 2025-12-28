@@ -5,35 +5,42 @@ import { GradientBG } from "@/components/ui/gradient-bg";
 import { RNInput } from "@/components/ui/input";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { useChatHistory } from "@/queries/useChat";
 import Feather from "@expo/vector-icons/Feather";
 import { router, usePathname } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { useTranslation } from "react-i18next";
 import { FlatList, Keyboard, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useMemo, useState } from "react";
 
 export default function ChatLayout() {
     const { t } = useTranslation();
-    const chatList = [
-        { id: "1", name: "General" },
-        { id: "2", name: "Random" },
-        { id: "3", name: "Tech Talk" },
-    ];
+
+    const { data, isLoading, isError } = useChatHistory();
+    const chatList = data;
 
     const { top } = useSafeAreaInsets();
-
     const pathname = usePathname();
+
+    const [searchText, setSearchText] = useState("");
+
+    const filteredChatList = useMemo(() => {
+        if (!chatList || !searchText.trim()) return chatList;
+
+        const q = searchText.toLowerCase();
+        return chatList.filter((item) => item.title.toLowerCase().includes(q));
+    }, [chatList, searchText]);
 
     return (
         <Drawer
             screenOptions={({ navigation }) => ({
                 drawerPosition: "left",
                 headerStyle: {
-                    height: 120,
+                    height: 100,
                 },
                 drawerType: "slide",
                 swipeEdgeWidth: 140,
-                drawerHideStatusBarOnOpen: true,
 
                 headerTitle: "",
                 headerRight: () => (
@@ -124,10 +131,12 @@ export default function ChatLayout() {
 
                         <RNInput
                             placeholder={t("chat.search.placeholder")}
+                            value={searchText}
+                            onChangeText={setSearchText}
                             style={{
                                 width: "90%",
                             }}
-                            placeholderTextColor={COLORS.muted}
+                            placeholderTextColor={COLORS.text}
                         />
 
                         <RNButton
@@ -172,11 +181,12 @@ export default function ChatLayout() {
                             </RNText>
 
                             <FlatList
-                                data={chatList}
-                                keyExtractor={(item) => item.id}
+                                data={filteredChatList}
+                                keyExtractor={(item) => item.id.toString()}
                                 renderItem={({ item }) => {
                                     const selected_id = pathname.split("/").pop();
-                                    const Wrapper = item.id === selected_id ? GradientBG : View;
+                                    const Wrapper =
+                                        item.id.toString() === selected_id ? GradientBG : View;
                                     return (
                                         <Pressable
                                             onPress={() => {
@@ -190,7 +200,7 @@ export default function ChatLayout() {
                                                     marginTop: 6,
                                                 }}
                                             >
-                                                <RNText>{item.name}</RNText>
+                                                <RNText>{item.title}</RNText>
                                             </Wrapper>
                                         </Pressable>
                                     );

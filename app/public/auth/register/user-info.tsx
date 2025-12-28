@@ -12,37 +12,42 @@ import { Image, Pressable, View } from "react-native";
 import { imagePicker } from "@/lib/imagePicker";
 import { COLORS } from "@/constants";
 import { useTranslation } from "react-i18next";
+import { useUpdateProfile } from "@/queries/useUpdateUser";
+import type { User } from "@/type/user";
 
-type FormData = {
-    fullName?: string;
-    country?: string;
+type FormData = Partial<User> & {
     countryFlag?: string;
     countryCode?: string;
-    phoneNumber?: string;
-    gender?: "male" | "female";
-    dateOfBirth?: Date;
-    avatarUri?: string;
 };
 
 export default function UserInfoScreen() {
     const [formData, setFormData] = useState<FormData>({});
     const { t } = useTranslation();
 
-    const handleInputChange = (field: keyof FormData, value: any) => {
-        setFormData((prevData) => ({
-            ...prevData,
+    const [imgUri, setImgUri] = useState<string | null>(null);
+
+    const { mutate: updateProfile, isPending } = useUpdateProfile();
+
+    const handleInputChange = <K extends keyof FormData>(
+        field: K,
+        value: FormData[K],
+    ) => {
+        setFormData((prev) => ({
+            ...prev,
             [field]: value,
         }));
     };
 
+    const handleSubmit = () => {
+        updateProfile({ ...formData, img: imgUri });
+    };
+
     return (
         <Layout>
-            {/* TITLE */}
             <RNText style={{ alignSelf: "center" }} size="2xl" variant="title">
                 {t("auth.userInfo.title")}
             </RNText>
 
-            {/* SUBTITLE */}
             <RNText
                 style={{
                     alignSelf: "center",
@@ -54,13 +59,13 @@ export default function UserInfoScreen() {
                 {t("auth.userInfo.subtitle")}
             </RNText>
 
-            {/* AVATAR PICKER */}
+            {/* AVATAR */}
             <Pressable
-                onPress={() => {
+                onPress={() =>
                     imagePicker((uri) => {
-                        if (uri) handleInputChange("avatarUri", uri);
-                    });
-                }}
+                        if (uri) setImgUri(uri);
+                    })
+                }
                 style={{
                     alignSelf: "center",
                     width: 100,
@@ -71,34 +76,16 @@ export default function UserInfoScreen() {
                     marginTop: 20,
                 }}
             >
-                {formData.avatarUri ? (
+                {formData.img ? (
                     <Image
-                        source={{ uri: formData.avatarUri }}
-                        style={{
-                            borderRadius: 50,
-                            width: 100,
-                            height: 100,
-                        }}
+                        source={{ uri: formData.img }}
+                        style={{ width: 100, height: 100, borderRadius: 50 }}
                     />
                 ) : (
-                    <AVATAR
-                        width={100}
-                        height={100}
-                        style={{
-                            borderRadius: 50,
-                            width: 100,
-                            height: 100,
-                        }}
-                    />
+                    <AVATAR width={100} height={100} />
                 )}
 
-                <View
-                    style={{
-                        position: "absolute",
-                        bottom: 0,
-                        right: 0,
-                    }}
-                >
+                <View style={{ position: "absolute", bottom: 0, right: 0 }}>
                     <EDIT width={30} height={30} />
                 </View>
             </Pressable>
@@ -106,16 +93,14 @@ export default function UserInfoScreen() {
             {/* FULL NAME */}
             <RNInput
                 label={t("auth.userInfo.fullName")}
-                onChangeText={(t) => handleInputChange("fullName", t)}
+                onChangeText={(t) => handleInputChange("name", t)}
             />
 
-            {/* COUNTRY PICKER */}
             <RNCountryPicker
                 value={
                     (formData.countryFlag ? formData.countryFlag + "    " : "") +
                     (formData.country ?? "")
                 }
-                label={t("auth.userInfo.country")}
                 onSelectCountry={(country) => {
                     handleInputChange("country", country.name["en"]);
                     handleInputChange("countryFlag", country.flag);
@@ -123,49 +108,47 @@ export default function UserInfoScreen() {
                 }}
             />
 
-            {/* PHONE INPUT */}
+            {/* PHONE */}
             <RNInput
                 label={t("auth.userInfo.phone")}
-                value={formData.phoneNumber}
+                value={formData.phone ?? ""}
                 prefix={formData.countryCode}
-                onChangeText={(t) => handleInputChange("phoneNumber", t)}
+                onChangeText={(t) => handleInputChange("phone", t)}
                 keyboardType="phone-pad"
                 key={formData.countryCode}
             />
 
-            {/* GENDER PICKER */}
+            {/* GENDER */}
             <RNPicker
                 items={[
-                    {
-                        value: "male",
-                        label: t("auth.userInfo.male"),
-                    },
-                    {
-                        value: "female",
-                        label: t("auth.userInfo.female"),
-                    },
+                    { value: "male", label: t("auth.userInfo.male") },
+                    { value: "female", label: t("auth.userInfo.female") },
                 ]}
                 label={t("auth.userInfo.gender")}
-                value={
-                    formData.gender
-                        ? formData.gender === "male"
-                            ? t("auth.userInfo.male")
-                            : t("auth.userInfo.female")
-                        : ""
+                value={formData.gender ?? ""}
+                onSelectItem={(item) =>
+                    handleInputChange("gender", item as User["gender"])
                 }
-                onSelectItem={(item) => handleInputChange("gender", item)}
-                key={formData.gender}
             />
 
             {/* DOB */}
             <RNDatePicker
-                onChangeDate={(date) => handleInputChange("dateOfBirth", date)}
                 label={t("auth.userInfo.dob")}
-                value={formData.dateOfBirth}
+                value={
+                    formData.date_of_birth ? new Date(formData.date_of_birth) : undefined
+                }
+                onChangeDate={(date) =>
+                    handleInputChange("date_of_birth", date.toISOString().split("T")[0])
+                }
             />
 
-            {/* SUBMIT */}
-            <RNButton style={{ marginTop: 16 }}>{t("auth.userInfo.button")}</RNButton>
+            <RNButton
+                onPress={handleSubmit}
+                loading={isPending}
+                style={{ marginTop: 16 }}
+            >
+                {t("auth.userInfo.button")}
+            </RNButton>
         </Layout>
     );
 }
