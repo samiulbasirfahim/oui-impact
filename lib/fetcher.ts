@@ -71,7 +71,7 @@ export async function fetcher<T>(
     }
 
     if (!res.ok) {
-        console.log("API ERROR: ", `${BASE_URL}${endpoint}`, "-->", res);
+        console.log("API ERROR: ", `${BASE_URL}${endpoint}`, "-->", data);
         throw new ApiError(res.status, data);
     }
 

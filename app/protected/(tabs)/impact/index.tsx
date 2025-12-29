@@ -5,6 +5,8 @@ import { GradientBG } from "@/components/ui/gradient-bg";
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { useImpact } from "@/queries/useImpact";
+import { useAuthStore } from "@/store/auth";
 import { IMPACT } from "@/type/recent-impact";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -13,8 +15,15 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { router, Stack } from "expo-router";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+    ActivityIndicator,
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+} from "react-native";
 
 const MOCK_IMPACT_DATA: IMPACT[] = [
     {
@@ -56,6 +65,38 @@ const MOCK_IMPACT_DATA: IMPACT[] = [
 
 export default function ImpactIndex() {
     const { t } = useTranslation();
+
+    const { user } = useAuthStore();
+    const { data, isLoading } = useImpact();
+
+    const badge = useMemo(() => {
+        const point = Number(user?.my_points) || 0;
+        console.log("User Points:", point);
+        if (point >= 10000) return "Diamond";
+        if (point >= 5000) return "Platinum";
+        if (point >= 1000) return "Gold";
+        if (point >= 500) return "Silver";
+        return "Bronze";
+    }, [user?.my_points]);
+
+    if (isLoading) {
+        return (
+            <Layout>
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <ActivityIndicator size="large" color={COLORS.primary} />
+                </View>
+            </Layout>
+        );
+    }
+
+    const impactData = (data as any)[0];
+
     return (
         <>
             <Stack.Screen options={{ title: t("impact.dashboard.title") }} />
@@ -104,7 +145,7 @@ export default function ImpactIndex() {
                             variant="title"
                             style={{ color: COLORS.secondary }}
                         >
-                            12L
+                            {impactData.waterDonated}L
                         </RNText>
                         <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
                             💧{t("impact.dashboard.waterDonated")}
@@ -117,7 +158,7 @@ export default function ImpactIndex() {
                             variant="title"
                             style={{ color: COLORS.primary }}
                         >
-                            4
+                            {impactData.treesPlant}
                         </RNText>
                         <RNText style={{ color: COLORS.muted, fontStyle: "normal" }}>
                             🌲 {t("impact.dashboard.treeDonated")}
@@ -126,7 +167,7 @@ export default function ImpactIndex() {
                 </View>
 
                 <View style={styles.progressContainer}>
-                    <TreeGoalProgress percent={20} />
+                    <TreeGoalProgress percent={impactData.next_goal} />
                     <RNText size="xl" style={{ fontWeight: "500" }}>
                         {t("impact.dashboard.nextGoal")}
                     </RNText>
@@ -412,9 +453,25 @@ export default function ImpactIndex() {
                         }}
                         size="md"
                     >
-                        1,250 PTS - Silver Badge
+                        {user?.my_points} PTS - {badge} Badge
                     </RNText>
-                    <FontAwesome5 name="medal" size={24} color={"#9CA3AF"} />
+                    <FontAwesome5
+                        name="medal"
+                        size={24}
+                        color={
+                            badge === "Bronze"
+                                ? "#CD7F32"
+                                : badge === "Silver"
+                                    ? "#C0C0C0"
+                                    : badge === "Gold"
+                                        ? "#FFD700"
+                                        : badge === "Platinum"
+                                            ? "#E5E4E2"
+                                            : badge === "Diamond"
+                                                ? "#B9F2FF"
+                                                : "#CD7F32"
+                        }
+                    />
                 </View>
 
                 <View

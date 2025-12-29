@@ -1,13 +1,14 @@
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { pickLocalizedText } from "@/lib/utils";
 import { useHelpsNSupports } from "@/queries/useHelpsNSupports";
 import { Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 export default function HelpSupport() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { data, isLoading } = useHelpsNSupports();
 
     const helpItems = data?.data ?? [];
@@ -46,43 +47,35 @@ export default function HelpSupport() {
                     )}
                 </View>
 
-                {/* Loading */}
                 {isLoading && (
                     <View style={styles.loader}>
                         <ActivityIndicator size="large" color={COLORS.primary} />
                     </View>
                 )}
 
-                {/* Content */}
                 {!isLoading &&
-                    helpItems.map((item, index) => (
-                        <View
-                            key={item.id}
-                            style={{
-                                borderBottomColor: COLORS.muted + "33",
-                                borderBottomWidth: index === helpItems.length - 1 ? 0 : 1,
-                                padding: 16,
-                            }}
-                        >
-                            <RNText
-                                variant="title"
-                                size="lg"
-                                style={{ color: COLORS.text + "DD" }}
-                            >
-                                {index + 1}. {item.question}
-                            </RNText>
+                    helpItems.map((item, index) => {
+                        const { question, answer } = pickLocalizedText(item, i18n.language);
 
-                            <RNText
+                        return (
+                            <View
+                                key={item.id}
                                 style={{
-                                    marginTop: 8,
-                                    color: COLORS.text + "AA",
-                                    lineHeight: 20,
+                                    borderBottomColor: COLORS.muted + "33",
+                                    borderBottomWidth: index === helpItems.length - 1 ? 0 : 1,
+                                    padding: 16,
                                 }}
                             >
-                                {item.answer}
-                            </RNText>
-                        </View>
-                    ))}
+                                <RNText variant="title" size="lg">
+                                    {index + 1}. {question}
+                                </RNText>
+
+                                <RNText style={{ marginTop: 8, lineHeight: 20 }}>
+                                    {answer}
+                                </RNText>
+                            </View>
+                        );
+                    })}
 
                 {/* Empty state */}
                 {!isLoading && helpItems.length === 0 && (

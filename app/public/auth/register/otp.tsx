@@ -128,7 +128,7 @@ export default function OTPScreen() {
                     }}
                 >
                     <Link href={"/public/auth/login"} asChild>
-                        <RNText style={{ color: COLORS.primary }}>
+                        <RNText style={{ color: COLORS.primary, textAlign: "center" }}>
                             {t("auth.verifyEmail.loginRedirect")}
                         </RNText>
                     </Link>

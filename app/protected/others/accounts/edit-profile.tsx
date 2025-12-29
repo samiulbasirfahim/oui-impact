@@ -71,7 +71,7 @@ export default function Screen() {
                 >
                     {formData.img ? (
                         <Image
-                            source={{ uri: formData.img }}
+                            source={{ uri: imgUri ?? formData.img }}
                             style={{ width: 100, height: 100, borderRadius: 50 }}
                         />
                     ) : (
@@ -116,7 +116,13 @@ export default function Screen() {
                     ]}
                     key={formData.gender}
                     label={t("auth.userInfo.gender")}
-                    value={formData.gender ?? ""}
+                    value={
+                        formData.gender
+                            ? formData.gender === "male"
+                                ? t("auth.userInfo.male")
+                                : t("auth.userInfo.female")
+                            : ""
+                    }
                     onSelectItem={(item) =>
                         handleInputChange("gender", item as User["gender"])
                     }

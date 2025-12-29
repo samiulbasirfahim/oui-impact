@@ -26,21 +26,29 @@ export default function RegisterScreen() {
     const [error, setError] = useState<string | null>(null);
     const [isPending, setIsPending] = useState(false);
 
-    const handleChange = (name: keyof FormState, value: string) => {
+    const handleChange = <K extends keyof FormState>(
+        name: K,
+        value: FormState[K],
+    ) => {
         setError(null);
-        setForm({
-            ...form,
+        setForm((prev) => ({
+            ...prev,
             [name]: value,
-        });
+        }));
     };
-
     const handleSubmit = () => {
         if (!form.email) {
             setError("Please fill all the fields");
             return;
         }
+
+        if (!/\S+@\S+\.\S+/.test(form.email)) {
+            setError("Please enter a valid email address");
+            return;
+        }
+
         if (!form.checkBox) {
-            setError("Please agree to the terms");
+            setError("Please accept the terms and conditions");
             return;
         }
 
@@ -65,11 +73,10 @@ export default function RegisterScreen() {
             })
             .catch((err) => {
                 if (err instanceof ApiError) {
-                    console.log("CACHED ERROR");
-                    console.log(err);
+                    setError(err.data.message || "Something went wrong");
+                } else {
+                    setError("Something went wrong");
                 }
-
-                setError(err.message || "Something went wrong");
             })
             .finally(() => {
                 setIsPending(false);
@@ -117,7 +124,7 @@ export default function RegisterScreen() {
                     label={t("onboarding.screen1.terms")}
                     value={form.checkBox}
                     onChange={(checked) =>
-                        handleChange("checkBox", checked ? "true" : "false")
+                        handleChange("checkBox", checked ? true : false)
                     }
                     onPressLabel={() => {
                         router.push("/public/terms-conditions");

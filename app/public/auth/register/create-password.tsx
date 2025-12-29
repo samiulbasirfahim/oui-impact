@@ -105,7 +105,7 @@ export default function CreatePasswordScreen() {
 
             {/* Confirm Password */}
             <RNInput
-                label={t("auth.createPassword.confirm")}
+                label={t("auth.createPassword.password")}
                 secureTextEntry
                 value={formData.confirmPassword}
                 onChangeText={(text) => handleChange("confirmPassword", text)}

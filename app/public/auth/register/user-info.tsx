@@ -14,16 +14,18 @@ import { COLORS } from "@/constants";
 import { useTranslation } from "react-i18next";
 import { useUpdateProfile } from "@/queries/useUpdateUser";
 import type { User } from "@/type/user";
+import { router } from "expo-router";
 
 type FormData = Partial<User> & {
+    name?: string;
     countryFlag?: string;
     countryCode?: string;
 };
 
 export default function UserInfoScreen() {
-    const [formData, setFormData] = useState<FormData>({});
     const { t } = useTranslation();
 
+    const [formData, setFormData] = useState<FormData>({});
     const [imgUri, setImgUri] = useState<string | null>(null);
 
     const { mutate: updateProfile, isPending } = useUpdateProfile();
@@ -39,7 +41,18 @@ export default function UserInfoScreen() {
     };
 
     const handleSubmit = () => {
-        updateProfile({ ...formData, img: imgUri });
+        updateProfile(
+            {
+                ...formData,
+                ...(imgUri ? { img: imgUri } : {}),
+            },
+            {
+                onSuccess: () => {
+                    router.canDismiss() && router.dismissAll();
+                    router.replace("/protected/chat");
+                },
+            },
+        );
     };
 
     return (
@@ -76,9 +89,9 @@ export default function UserInfoScreen() {
                     marginTop: 20,
                 }}
             >
-                {formData.img ? (
+                {imgUri ? (
                     <Image
-                        source={{ uri: formData.img }}
+                        source={{ uri: imgUri }}
                         style={{ width: 100, height: 100, borderRadius: 50 }}
                     />
                 ) : (
@@ -90,7 +103,6 @@ export default function UserInfoScreen() {
                 </View>
             </Pressable>
 
-            {/* FULL NAME */}
             <RNInput
                 label={t("auth.userInfo.fullName")}
                 onChangeText={(t) => handleInputChange("name", t)}
@@ -108,7 +120,6 @@ export default function UserInfoScreen() {
                 }}
             />
 
-            {/* PHONE */}
             <RNInput
                 label={t("auth.userInfo.phone")}
                 value={formData.phone ?? ""}
@@ -118,20 +129,25 @@ export default function UserInfoScreen() {
                 key={formData.countryCode}
             />
 
-            {/* GENDER */}
             <RNPicker
                 items={[
                     { value: "male", label: t("auth.userInfo.male") },
                     { value: "female", label: t("auth.userInfo.female") },
                 ]}
+                key={formData.gender}
                 label={t("auth.userInfo.gender")}
-                value={formData.gender ?? ""}
+                value={
+                    formData.gender
+                        ? formData.gender === "male"
+                            ? t("auth.userInfo.male")
+                            : t("auth.userInfo.female")
+                        : ""
+                }
                 onSelectItem={(item) =>
                     handleInputChange("gender", item as User["gender"])
                 }
             />
 
-            {/* DOB */}
             <RNDatePicker
                 label={t("auth.userInfo.dob")}
                 value={

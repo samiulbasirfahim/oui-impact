@@ -1,3 +1,4 @@
+import { FaqItem } from "@/type/faq";
 import { Image } from "react-native";
 
 export const minutesToMillis = (minutes: number) => minutes * 60 * 1000;
@@ -32,3 +33,12 @@ export const refetchImage = async (uri: string) => {
         await Image.prefetch(uri);
     }
 };
+
+export function pickLocalizedText(item: FaqItem, lang: string) {
+    const isFr = lang.startsWith("fr");
+
+    return {
+        question: isFr && item.question_fr ? item.question_fr : item.question,
+        answer: isFr && item.answer_fr ? item.answer_fr : item.answer,
+    };
+}

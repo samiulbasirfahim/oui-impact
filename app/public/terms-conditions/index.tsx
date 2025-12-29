@@ -1,13 +1,14 @@
 import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { COLORS } from "@/constants";
+import { pickLocalizedText } from "@/lib/utils";
 import { useTermsNConditions } from "@/queries/useTermsNCondition";
 import { Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 export default function HelpSupport() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { data, isLoading } = useTermsNConditions();
 
     const terms = data?.data ?? [];
@@ -54,34 +55,28 @@ export default function HelpSupport() {
 
                 {/* Content */}
                 {!isLoading &&
-                    terms.map((item, index) => (
-                        <View
-                            key={item.id}
-                            style={{
-                                borderBottomColor: COLORS.muted + "33",
-                                borderBottomWidth: index === terms.length - 1 ? 0 : 1,
-                                padding: 16,
-                            }}
-                        >
-                            <RNText
-                                variant="title"
-                                size="lg"
-                                style={{ color: COLORS.text + "DD" }}
-                            >
-                                {index + 1}. {item.question}
-                            </RNText>
+                    terms.map((item, index) => {
+                        const { question, answer } = pickLocalizedText(item, i18n.language);
 
-                            <RNText
+                        return (
+                            <View
+                                key={item.id}
                                 style={{
-                                    marginTop: 8,
-                                    color: COLORS.text + "AA",
-                                    lineHeight: 20,
+                                    borderBottomColor: COLORS.muted + "33",
+                                    borderBottomWidth: index === terms.length - 1 ? 0 : 1,
+                                    padding: 16,
                                 }}
                             >
-                                {item.answer}
-                            </RNText>
-                        </View>
-                    ))}
+                                <RNText variant="title" size="lg">
+                                    {index + 1}. {question}
+                                </RNText>
+
+                                <RNText style={{ marginTop: 8, lineHeight: 20 }}>
+                                    {answer}
+                                </RNText>
+                            </View>
+                        );
+                    })}
 
                 {/* Empty state */}
                 {!isLoading && terms.length === 0 && (
