@@ -79,7 +79,7 @@ export function RootLayout() {
             try {
                 await initAuth();
                 console.log("Auth initialized on app load");
-                await fetchPointsConfig().then(d => {
+                await fetchPointsConfig().then((d) => {
                     console.log("Points config fetched on app load:", d);
                 });
             } catch (e) {

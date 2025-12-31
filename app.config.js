@@ -1,9 +1,10 @@
 import "dotenv/config";
 
 export default {
+    owner: "samiulbasirfahim",
     expo: {
         name: "oui-impact",
-        slug: "oui-impact",
+        slug: "ouiimpact",
         version: "1.0.0",
         orientation: "portrait",
         icon: "./assets/images/logo-big.png",
@@ -72,7 +73,7 @@ export default {
 
         extra: {
             eas: {
-                projectId: "4b97af7a-0aa2-433e-a9f8-f391bf177f38",
+                projectId: "36440337-07af-4220-a8cf-9b44c9e98aa5",
             },
         },
         "react-native-google-mobile-ads": {
