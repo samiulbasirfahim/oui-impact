@@ -12,13 +12,18 @@ export default {
         userInterfaceStyle: "automatic",
         newArchEnabled: true,
         ios: {
+            googleServicesFile: "./GoogleService-Info.plist",
             supportsTablet: true,
             bundleIdentifier: "com.ouidogood.ouiimpact",
+            entitlements: {
+                "com.apple.developer.applesignin": ["Default"],
+            },
             infoPlist: {
                 ITSAppUsesNonExemptEncryption: false,
             },
         },
         android: {
+            googleServicesFile: "./google-services.json",
             adaptiveIcon: {
                 backgroundColor: "#E6F4FE",
                 foregroundImage: "./assets/images/logo-big.png",
@@ -37,6 +42,22 @@ export default {
             "expo-router",
             "expo-web-browser",
             "react-native-localize",
+            "@react-native-firebase/app",
+            "@react-native-firebase/auth",
+            [
+                "expo-build-properties",
+                {
+                    android: {
+                        compileSdkVersion: 35,
+                        targetSdkVersion: 35,
+                        buildToolsVersion: "35.0.0",
+                    },
+                    ios: {
+                        deploymentTarget: "15.1",
+                        useFrameworks: "static",
+                    },
+                },
+            ],
             [
                 "expo-splash-screen",
                 {

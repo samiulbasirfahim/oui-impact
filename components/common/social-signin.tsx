@@ -5,16 +5,27 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { RNText } from "../ui/text";
 import { COLORS } from "@/constants";
 import { useTranslation } from "react-i18next";
-import { useGoogleAuth } from "@/hooks/useGoogleLogin";
+import { useState } from "react";
+import { useAppleSignIn } from "@/hooks/social-signin-apple";
+import { useGoogleSignIn } from "@/hooks/social-signin-google";
 
 export function SocialSignIn() {
     const { t } = useTranslation();
 
-    const { login: googleSignIn } = useGoogleAuth();
+    const [loadingStates, setLoadingStates] = useState({
+        google: false,
+        facebook: false,
+        apple: false,
+    });
+
+    const disabled =
+        loadingStates.google || loadingStates.facebook || loadingStates.apple;
+
+    const { signInWithApple, appleAuthSupported } = useAppleSignIn();
+    const { signInWithGoogle } = useGoogleSignIn();
 
     return (
         <View style={{ width: "100%", gap: 8 }}>
-            {/* Google */}
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={{
@@ -27,13 +38,17 @@ export function SocialSignIn() {
                     flexDirection: "row",
                     gap: 8,
                 }}
-                onPress={googleSignIn}
+                disabled={disabled}
+                onPress={async () => {
+                    setLoadingStates((prev) => ({ ...prev, google: true }));
+                    await signInWithGoogle();
+                    setLoadingStates((prev) => ({ ...prev, google: false }));
+                }}
             >
                 <GOOGLE width={30} height={31} />
                 <RNText>{t("auth.createAccount.google")}</RNText>
             </TouchableOpacity>
 
-            {/* Facebook */}
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={{
@@ -53,23 +68,30 @@ export function SocialSignIn() {
             </TouchableOpacity>
 
             {/* Apple */}
-            <TouchableOpacity
-                activeOpacity={0.7}
-                style={{
-                    paddingVertical: 10,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    borderRadius: 12,
-                    gap: 8,
-                    flexDirection: "row",
-                    backgroundColor: "black",
-                }}
-            >
-                <AntDesign name="apple" size={24} color="white" />
-                <RNText style={{ color: "white" }}>
-                    {t("auth.createAccount.apple")}
-                </RNText>
-            </TouchableOpacity>
+            {appleAuthSupported() && (
+                <TouchableOpacity
+                    activeOpacity={0.7}
+                    style={{
+                        paddingVertical: 10,
+                        alignItems: "center",
+                        justifyContent: "center",
+                        borderRadius: 12,
+                        gap: 8,
+                        flexDirection: "row",
+                        backgroundColor: "black",
+                    }}
+                    onPress={async () => {
+                        setLoadingStates((prev) => ({ ...prev, apple: true }));
+                        await signInWithApple();
+                        setLoadingStates((prev) => ({ ...prev, apple: false }));
+                    }}
+                >
+                    <AntDesign name="apple" size={24} color="white" />
+                    <RNText style={{ color: "white" }}>
+                        {t("auth.createAccount.apple")}
+                    </RNText>
+                </TouchableOpacity>
+            )}
         </View>
     );
 }

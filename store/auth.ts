@@ -4,6 +4,7 @@ import type { User } from "@/type/user";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { mmkvZustand } from "./mmkv";
 import Purchases from "react-native-purchases";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 interface AuthStoreState {
     isLoggedIn: boolean;
@@ -35,6 +36,7 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
     },
     logOut() {
         Purchases.logOut();
+        GoogleSignin.signOut();
         useTokenStore.getState().setTokens(null, null);
         set({ isLoggedIn: false, user: null });
         router.replace("/public/auth/login");
