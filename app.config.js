@@ -48,6 +48,7 @@ export default {
                 "react-native-fbsdk-next",
                 {
                     appID: "3853793298089513",
+                    displayName: "Oui Impact",
                     clientToken: "3992cad7a23309299be32f185badfa67",
                     clientToken: "3992cad7a23309299be32f185badfa67",
                     scheme: "fb3853793298089513",

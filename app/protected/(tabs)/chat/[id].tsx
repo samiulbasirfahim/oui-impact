@@ -27,7 +27,6 @@ export default function ChatScreen() {
 
     const {
         data: messageHistory = [],
-        refetch,
         isLoading,
         isError,
     } = useMessageHistory(chatId);
@@ -46,7 +45,7 @@ export default function ChatScreen() {
             scrollToBottom();
             setTmpMessages(messageHistory);
         }
-    }, [messageHistory]);
+    }, [messageHistory, chatId]);
 
     useEffect(() => {
         const event =

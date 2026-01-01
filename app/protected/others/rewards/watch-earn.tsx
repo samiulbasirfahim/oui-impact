@@ -5,6 +5,7 @@ import { Layout } from "@/components/ui/layout";
 import { RNText } from "@/components/ui/text";
 import { ClaimButton, WatchButton } from "@/components/ui/watch-earn-buttons";
 import { COLORS } from "@/constants";
+import { useVideoAd } from "@/hooks/video-ad";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router, Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
@@ -12,6 +13,17 @@ import { StyleSheet, View } from "react-native";
 
 export default function Screen() {
     const { t } = useTranslation();
+    const { showAd, isLoaded } = useVideoAd();
+
+    const rewardUser = (
+        points: number,
+        title: string = "",
+        description: string = "",
+    ) => {
+        console.log(`User rewarded with ${points} points for ${title}`);
+        console.log(description);
+    };
+
     return (
         <>
             <Stack.Screen
@@ -64,6 +76,16 @@ export default function Screen() {
                     <RNButton
                         nowrap
                         variant="outline"
+                        onPress={() => {
+                            showAd("random", () => {
+                                rewardUser(
+                                    50,
+                                    t("rewards.watch.premiumTitle"),
+                                    t("rewards.watch.premiumSubtitle"),
+                                );
+                            });
+                        }}
+                        disabled={!isLoaded.random}
                         style={{
                             marginTop: 20,
                             backgroundColor: COLORS.background,
@@ -88,27 +110,51 @@ export default function Screen() {
                 </GradientBG>
 
                 <WatchButton
-                    onPress={() => { }}
                     points={20}
-                    isAvailable={true}
+                    isAvailable={isLoaded.technology}
+                    onPress={() => {
+                        showAd("technology", () => {
+                            rewardUser(
+                                20,
+                                "Tech Product Review",
+                                "Watched a review of the latest tech products.",
+                            );
+                        });
+                    }}
                     duration={15}
                     category="Technology"
                     title="Tech Product Review"
                 />
 
                 <WatchButton
-                    onPress={() => { }}
+                    isAvailable={isLoaded.fashion}
+                    onPress={() => {
+                        showAd("fashion", () => {
+                            rewardUser(
+                                20,
+                                "Fashion Trends 2024",
+                                "Watched the latest fashion trends for 2024.",
+                            );
+                        });
+                    }}
                     points={20}
-                    isAvailable={false}
                     duration={20}
                     category="Lifestyle"
                     title="Fashion Trends 2024"
                 />
 
                 <WatchButton
-                    onPress={() => { }}
+                    isAvailable={isLoaded.food}
+                    onPress={() => {
+                        showAd("food", () => {
+                            rewardUser(
+                                20,
+                                "Cooking Tutorial",
+                                "Watched a step-by-step cooking tutorial.",
+                            );
+                        });
+                    }}
                     points={20}
-                    isAvailable={true}
                     duration={25}
                     category="Food"
                     title="Cooking Tutorial"

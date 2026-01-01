@@ -3,7 +3,7 @@ import { usePointsConfigStore } from "@/store/points-config";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useAddPoints() {
-    useMutation({
+    return useMutation({
         mutationFn: ({
             points,
             title,

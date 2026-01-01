@@ -32,6 +32,7 @@ export function Layout({ children, style, ...props }: Props) {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
                 keyboardDismissMode="on-drag"
+                keyboardShouldPersistTaps="handled"
                 bottomOffset={20}
                 contentContainerStyle={[
                     {

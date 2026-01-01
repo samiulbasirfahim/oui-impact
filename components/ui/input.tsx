@@ -167,7 +167,7 @@ export function RNInput({
                             right: 10,
                             top: eyeIconTopOffset,
                             transform: [{ translateY: -15 }],
-                            padding: 6
+                            padding: 6,
                         }}
                         onPress={() => setShowPassword((prev) => !prev)}
                         activeOpacity={0.7}

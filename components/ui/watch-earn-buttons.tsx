@@ -55,7 +55,8 @@ export function WatchButton({
                             color: COLORS.secondaryText,
                         }}
                     >
-                        {t("rewards.watch.durationSeconds", { seconds: duration })} - {category}
+                        {t("rewards.watch.durationSeconds", { seconds: duration })} -{" "}
+                        {category}
                     </RNText>
                 </View>
                 <View style={{ alignItems: "center", flexDirection: "row", gap: 12 }}>
@@ -79,12 +80,16 @@ export function WatchButton({
                             color: isAvailable ? COLORS.secondaryText : COLORS.accent,
                         }}
                     >
-                        {isAvailable ? t("rewards.watch.available") : t("rewards.watch.notAvailable")}
+                        {isAvailable
+                            ? t("rewards.watch.available")
+                            : t("rewards.watch.notAvailable")}
                     </RNText>
                 </View>
             </View>
 
-            <RNButton size="sm">{t("rewards.watch.watchButton")}</RNButton>
+            <RNButton onPress={onPress} disabled={disabled || !isAvailable} size="sm">
+                {t("rewards.watch.watchButton")}
+            </RNButton>
         </View>
     );
 }
@@ -121,7 +126,14 @@ export function ClaimButton({
 }: ClaimButtonProps) {
     return (
         <View style={claimButtonStyles.container}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 12, maxWidth: "55%" }}>
+            <View
+                style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 12,
+                    maxWidth: "55%",
+                }}
+            >
                 <View style={claimButtonStyles.iconContainer}>{icon}</View>
                 <View>
                     <RNText variant="title">{title}</RNText>

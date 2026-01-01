@@ -39,6 +39,7 @@ export default function NewChatScreen() {
     const { data: messageHistory } = useMessageHistory(chatId);
 
     const handleSend = () => {
+        setInputText(inputText.trim());
         if (!inputText.trim()) return;
         setTmpMessages([
             {
@@ -74,19 +75,17 @@ export default function NewChatScreen() {
                 },
             },
         );
+
+        setInputText("");
     };
 
     useEffect(() => {
         if (messageHistory && messageHistory.length > 0) {
-            router.replace({
-                pathname: "/protected/(tabs)/chat/[id]",
-                params: {
-                    id: chatId?.toString() || "",
-                },
-            });
+            router.replace(`/protected/chat/${chatId}`);
 
             setTimeout(() => {
                 setTmpMessages([]);
+                setChatId(null);
             }, 200);
         }
     }, [messageHistory]);

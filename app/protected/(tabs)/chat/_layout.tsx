@@ -29,6 +29,7 @@ export default function ChatLayout() {
         if (!chatList || !searchText.trim()) return chatList;
 
         const q = searchText.toLowerCase();
+        console.log("Filtering chat list with query:", q);
         return chatList.filter((item) => item.title.toLowerCase().includes(q));
     }, [chatList, searchText]);
 
