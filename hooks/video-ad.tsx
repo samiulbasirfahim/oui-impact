@@ -113,7 +113,6 @@ export function useVideoAd() {
             const cleanup = setupAdListeners(key, ad);
             cleanups.push(cleanup);
 
-            // Initial load
             console.log(`[RewardedAd] Initial load for ${key}`);
             ad.load();
         });
