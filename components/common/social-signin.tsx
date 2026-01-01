@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { useAppleSignIn } from "@/hooks/social-signin-apple";
 import { useGoogleSignIn } from "@/hooks/social-signin-google";
+import { useFacebookSignIn } from "@/hooks/social-signin-facebook";
 
 export function SocialSignIn() {
     const { t } = useTranslation();
@@ -23,6 +24,7 @@ export function SocialSignIn() {
 
     const { signInWithApple, appleAuthSupported } = useAppleSignIn();
     const { signInWithGoogle } = useGoogleSignIn();
+    const { signInWithFacebook } = useFacebookSignIn();
 
     return (
         <View style={{ width: "100%", gap: 8 }}>
@@ -59,6 +61,12 @@ export function SocialSignIn() {
                     gap: 8,
                     flexDirection: "row",
                     backgroundColor: "#3b5998",
+                }}
+                disabled={disabled}
+                onPress={async () => {
+                    setLoadingStates((prev) => ({ ...prev, facebook: true }));
+                    await signInWithFacebook();
+                    setLoadingStates((prev) => ({ ...prev, facebook: false }));
                 }}
             >
                 <FontAwesome5 name="facebook" size={24} color="white" />

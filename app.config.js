@@ -45,6 +45,21 @@ export default {
             "@react-native-firebase/app",
             "@react-native-firebase/auth",
             [
+                "react-native-fbsdk-next",
+                {
+                    appID: "3853793298089513",
+                    clientToken: "3992cad7a23309299be32f185badfa67",
+                    clientToken: "3992cad7a23309299be32f185badfa67",
+                    scheme: "fb3853793298089513",
+                    advertiserIDCollectionEnabled: false,
+                    autoLogAppEventsEnabled: false,
+                    isAutoInitEnabled: true,
+                    iosUserTrackingPermission:
+                        "This identfier will be used to sign you in",
+                },
+            ],
+
+            [
                 "expo-build-properties",
                 {
                     android: {
@@ -75,15 +90,6 @@ export default {
                 {
                     androidAppId: process.env.ADMOB_ANDROID_APP_ID,
                     iosAppId: process.env.ADMOB_IOS_APP_ID,
-                },
-            ],
-            [
-                "expo-splash-screen",
-                {
-                    image: "./assets/images/splash-icon.png",
-                    imageWidth: 200,
-                    resizeMode: "contain",
-                    backgroundColor: "#FFFFFF",
                 },
             ],
         ],

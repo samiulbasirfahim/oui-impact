@@ -1,62 +1,70 @@
 {
-    "project_info": {
-        "project_number": "14864997724",
-        "project_id": "fir-test-project-98244",
-        "storage_bucket": "fir-test-project-98244.firebasestorage.app"
-    },
-    "client": [
-        {
-            "client_info": {
-                "mobilesdk_app_id": "1:14864997724:android:8b71eee33e2100bfb8b599",
-                "android_client_info": {
-                    "package_name": "com.ouidogood.ouiimpact"
-                }
-            },
-            "oauth_client": [
-                {
-                    "client_id": "14864997724-1pjob22f5s5geuv6a7dom1160levm9q8.apps.googleusercontent.com",
-                    "client_type": 1,
-                    "android_info": {
-                        "package_name": "com.ouidogood.ouiimpact",
-                        "certificate_hash": "deeed6231a3b1a98550b7aa2e16bbfdf809f6d8a"
-                    }
-                },
-                {
-                    "client_id": "14864997724-uefqmr26ll5ib8eg70dcgu07i9vq3bi3.apps.googleusercontent.com",
-                    "client_type": 1,
-                    "android_info": {
-                        "package_name": "com.ouidogood.ouiimpact",
-                        "certificate_hash": "8d3f221b02abed75864f4330ea835ab486d55c58"
-                    }
-                },
-                {
-                    "client_id": "14864997724-fkqiblgkinbikhnn5eo0v209dogcmars.apps.googleusercontent.com",
-                    "client_type": 3
-                }
-            ],
-            "api_key": [
-                {
-                    "current_key": "AIzaSyCrDx6tBUoCxiUNg_lpGUmgtuvEzWTXBYc"
-                }
-            ],
-            "services": {
-                "appinvite_service": {
-                    "other_platform_oauth_client": [
-                        {
-                            "client_id": "14864997724-fkqiblgkinbikhnn5eo0v209dogcmars.apps.googleusercontent.com",
-                            "client_type": 3
-                        },
-                        {
-                            "client_id": "14864997724-ml4jh9o0jbvpqi9p6c0f8o0605j6ehli.apps.googleusercontent.com",
-                            "client_type": 2,
-                            "ios_info": {
-                                "bundle_id": "com.ouidogood.ouiimpact"
-                            }
-                        }
-                    ]
-                }
-            }
+  "project_info": {
+    "project_number": "14864997724",
+    "project_id": "fir-test-project-98244",
+    "storage_bucket": "fir-test-project-98244.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14864997724:android:8b71eee33e2100bfb8b599",
+        "android_client_info": {
+          "package_name": "com.ouidogood.ouiimpact"
         }
-    ],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "14864997724-1pjob22f5s5geuv6a7dom1160levm9q8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ouidogood.ouiimpact",
+            "certificate_hash": "deeed6231a3b1a98550b7aa2e16bbfdf809f6d8a"
+          }
+        },
+        {
+          "client_id": "14864997724-pkj3utat3ds5m424kcpdloblg9f8kfiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ouidogood.ouiimpact",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "14864997724-uefqmr26ll5ib8eg70dcgu07i9vq3bi3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ouidogood.ouiimpact",
+            "certificate_hash": "8d3f221b02abed75864f4330ea835ab486d55c58"
+          }
+        },
+        {
+          "client_id": "14864997724-fkqiblgkinbikhnn5eo0v209dogcmars.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrDx6tBUoCxiUNg_lpGUmgtuvEzWTXBYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14864997724-fkqiblgkinbikhnn5eo0v209dogcmars.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "14864997724-ml4jh9o0jbvpqi9p6c0f8o0605j6ehli.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ouidogood.ouiimpact"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }
